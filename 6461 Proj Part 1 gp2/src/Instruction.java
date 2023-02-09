@@ -178,7 +178,7 @@ public class Instruction {
     This function can return real address based on the input instruction.
      */
     public int realAddress(String iRegister, String address){
-        return stringToInt((String)simulator_memory.memoryArray[Integer.parseInt(address) + getIRegVal(Integer.parseInt(iRegister))][1]);
+        return parseInt((String)simulator_memory.memoryArray[Integer.parseInt(address) + getIRegVal(Integer.parseInt(iRegister))][1]);
     }
 
     public void derectLDR(int registerNumber, int iRegister, int address){
