@@ -23,6 +23,8 @@ public class CPU {
     Register GPR2 = new Register(16);
     Register GPR3 = new Register(16);
     
+    Memory main_Memory = new Memory();
+    
 
     
     // Constructor
@@ -103,8 +105,24 @@ public class CPU {
             X1.setRegisterValue(value);
         }else if("X2".equals(register)){
             X2.setRegisterValue(value);
-        }else{
+        }else if("X3".equals(register)){
             X3.setRegisterValue(value);
-        }
+        }else if("GPR0".equals(register)){
+            GPR0.setRegisterValue(value);
+        }else if("GPR1".equals(register)){
+            GPR1.setRegisterValue(value);
+        }else if("GPR2".equals(register)){
+            GPR2.setRegisterValue(value);
+        }else{
+            GPR3.setRegisterValue(value);
+        } 
+    }
+    
+    public int[] getMemoryValue(int row){
+        return main_Memory.getMemoryValue(row);
+    }
+    
+    public void setMemoryValue(int row, int[] value){
+        main_Memory.setMemoryValue(row, value);
     }
 }
