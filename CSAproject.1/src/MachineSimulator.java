@@ -1105,7 +1105,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             // TODO add your handling code here:
-            main_CPU.loadIntoMemory();
+            main_CPU.loadFileIntoMemory();
         } catch (IOException ex) {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }

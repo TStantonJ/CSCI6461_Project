@@ -130,18 +130,27 @@ public class CPU {
         main_Memory.setMemoryValue(row, value);
     }
     
-    public void loadIntoMemory() throws FileNotFoundException, IOException{
+    public void loadFileIntoMemory() throws FileNotFoundException, IOException{
         //File file = new File("src/IPL.txt");
         //Scanner sc = new Scanner(file);
         FileInputStream fstream = new FileInputStream("src/IPL.txt");
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        
+        
         String strLine;
         while ((strLine = br.readLine()) != null)   {
-           String[] tokens = strLine.split(" ");
-           setMemoryValue(hexToInt(tokens[0]),hexToBinaryArray(tokens[1]));
-           //System.out.println(Arrays.toString(hexToBinaryArray(tokens[1])));
-           //System.out.println(hexToInt(tokens[0]));
+            String[] tokens = strLine.split(" ");
+            int row = hexToInt(tokens[0]);
+            int[] value = hexToBinaryArray(tokens[1]);
+
+            if (row == 0){
+                
+            }else{
+                setMemoryValue(row,value);
+            }
+            //System.out.println(Arrays.toString(hexToBinaryArray(tokens[1])));
+            //System.out.println(hexToInt(tokens[0]));
         }
     }
     
