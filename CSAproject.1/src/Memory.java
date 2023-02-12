@@ -17,11 +17,21 @@ public class Memory {
         this.memory_value = new int[2048][16];
     }
     
+     /* 
+    Function to get a value stored in Memory    
+    IN: Int representing the row the value is stored in
+    OUT: Int array with the stored value
+    */
     public int[] getMemoryValue(int row){
         // Return 16 bit value stored at given row
        return Arrays.copyOfRange(this.memory_value[row],0,16);
     }
     
+     /* 
+    Function to set a value in Memory
+    IN: Int representing the row to store the value, Int array of the value
+    OUT: N/A
+    */
     public void setMemoryValue(int row, int[] value){
         System.arraycopy(value, 0, this.memory_value[row], 0, 16);
     }

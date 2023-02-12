@@ -21,6 +21,7 @@ public class MachineSimulator extends javax.swing.JFrame {
 
     CPU main_CPU;
     int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    boolean run_check = false;
     /**
      * Creates new form newQuiz
      */
@@ -37,15 +38,25 @@ public class MachineSimulator extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent evt) {
             //...Perform a task...
             //System.out.println(Arrays.toString(in_button_array));
-            System.out.println(Arrays.toString(main_CPU.getMemoryValue(0)));
-            System.out.println(Arrays.toString(main_CPU.getMemoryValue(10)));
-            System.out.println(Arrays.toString(main_CPU.getMemoryValue(32)));
-            System.out.println();
-            update_registers();
-            int[] pc_var = {1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0};
-            //main_CPU.setRegisterValue("PC",pc_var);
-            main_CPU.setMemoryValue(1,pc_var);
+            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(0)));
+            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(10)));
+            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(32)));
+            //System.out.println();
             
+            // Update Registers for display
+            update_registers();
+            
+            // Check if machine is set to run
+            if (run_check){
+                main_CPU.execute("single");
+                
+                // If running, check if halt flag is raised
+                if (main_CPU.getRegisterValue("HLT")[0] == 0){
+                    run_check = false;
+                    int [] msg = new int[]{1};
+                    main_CPU.setRegisterValue("HLT",msg);
+                }
+            }
         }
     };
     
@@ -175,18 +186,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jTextField4.setText("jTextField4");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIGPR3(evt);
-            }
-        });
 
         jTextField5.setText("jTextField5");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIXR1(evt);
-            }
-        });
 
         jTextField6.setText("jTextField6");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
@@ -266,6 +267,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton4.setLabel("Store");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
         jButton5.setLabel("15");
@@ -422,6 +428,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jToggleButton2.setLabel("Run");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
 
         jToggleButton3.setLabel("Halt");
 
@@ -932,6 +943,7 @@ public class MachineSimulator extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        main_CPU.execute("single");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void update_regIXR3(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIXR3
@@ -944,11 +956,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         main_CPU.getRegisterValue("X2");
     }//GEN-LAST:event_update_regIXR2
 
-    private void update_regIXR1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIXR1
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X1");
-    }//GEN-LAST:event_update_regIXR1
-
     private void update_regIGPR1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIGPR1
         // TODO add your handling code here:
         main_CPU.getRegisterValue("X1");
@@ -958,11 +965,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         // TODO add your handling code here:
         main_CPU.getRegisterValue("X2");
     }//GEN-LAST:event_update_regIGPR2
-
-    private void update_regIGPR3(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIGPR3
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X3");
-    }//GEN-LAST:event_update_regIGPR3
 
     private void update_regPC(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regPC
         // TODO add your handling code here:
@@ -1110,6 +1112,20 @@ public class MachineSimulator extends javax.swing.JFrame {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+        if (run_check == false){
+            run_check = true;
+        }else{
+            run_check = false;
+        }
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     
     public void update_registers(){
