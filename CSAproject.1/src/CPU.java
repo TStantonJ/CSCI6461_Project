@@ -450,7 +450,13 @@ public class CPU {
     */
     public void setRegisterValue(String register, int[] value){
         if ("PC".equals(register)){
-            PC.setRegisterValue(value);
+            if (binaryToInt(value)< 10){
+                // If pc tries to be set to before 10, set it to 10
+                int[] tmp_val = {0,0,0,0,0,0,0,0,1,0,1,0};
+                PC.setRegisterValue(tmp_val);
+            }else{
+                PC.setRegisterValue(value);
+            }
         }else if("CC".equals(register)){
             CC.setRegisterValue(value);
         }else if("IR".equals(register)){
@@ -476,6 +482,7 @@ public class CPU {
         }else{
             GPR3.setRegisterValue(value);
         } 
+        
     }
     
      /* 

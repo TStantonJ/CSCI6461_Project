@@ -33,6 +33,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     public MachineSimulator() {
         initComponents();
         main_CPU = new CPU();
+        int[] tmp_val = {0,0,0,0,0,0,0,0,1,0,1,0};
+        main_CPU.setRegisterValue("PC",tmp_val);
         new Timer(delay, taskPerformer).start();
     }
     
