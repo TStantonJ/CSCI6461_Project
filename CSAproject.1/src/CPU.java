@@ -140,7 +140,8 @@ public class CPU {
         while ((strLine = br.readLine()) != null)   {
            String[] tokens = strLine.split(" ");
            setMemoryValue(hexToInt(tokens[0]),hexToBinaryArray(tokens[1]));
-           System.out.println(Arrays.toString(getMemoryValue(hexToInt(tokens[0]))));
+           //System.out.println(Arrays.toString(hexToBinaryArray(tokens[1])));
+           //System.out.println(hexToInt(tokens[0]));
         }
     }
     
@@ -169,8 +170,11 @@ public class CPU {
         hex = hex.replaceAll("E", "1110");
         hex = hex.replaceAll("F", "1111");
         
+        char[] arr = hex.toCharArray();
+       
+        
         for (int i = 0; i < hex.length(); i++) {
-            ret_val[i] = hex.charAt(i);
+            ret_val[i] = Character.getNumericValue(hex.charAt(i));
         }
         return ret_val;
     }

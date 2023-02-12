@@ -37,7 +37,10 @@ public class MachineSimulator extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent evt) {
             //...Perform a task...
             //System.out.println(Arrays.toString(in_button_array));
-            System.out.println(Arrays.toString(main_CPU.getMemoryValue(1)));
+            System.out.println(Arrays.toString(main_CPU.getMemoryValue(0)));
+            System.out.println(Arrays.toString(main_CPU.getMemoryValue(10)));
+            System.out.println(Arrays.toString(main_CPU.getMemoryValue(32)));
+            System.out.println();
             update_registers();
             int[] pc_var = {1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0};
             //main_CPU.setRegisterValue("PC",pc_var);
