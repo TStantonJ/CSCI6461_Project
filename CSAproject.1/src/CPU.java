@@ -58,7 +58,7 @@ public class CPU {
             int[] cur_PC = getRegisterValue("PC");
             int trans_PC = binaryToInt(cur_PC);
             trans_PC = trans_PC+1;
-            int[] new_PC = intToBinaryArray(Integer.toBinaryString(trans_PC));
+            int[] new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
             setRegisterValue("PC", new_PC);
             
             //System.out.println(Arrays.toString(instruction_address));
@@ -429,6 +429,8 @@ public class CPU {
             ret_value = X1.getRegisterValue();
         }else if("X2".equals(register)){
             ret_value = X2.getRegisterValue();
+        }else if("X3".equals(register)){
+            ret_value = X3.getRegisterValue();
         }else if("GPR0".equals(register)){
             ret_value = GPR0.getRegisterValue();
         }else if("GPR1".equals(register)){
@@ -518,7 +520,7 @@ public class CPU {
             String[] tokens = strLine.split(" ");
             // Get address and load into MAR
             int row = hexToInt(tokens[0]);
-            int[] row_binary = hexToBinaryArray(tokens[0]);
+            int[] row_binary = hexToBinaryArrayShort(tokens[0]);
             setRegisterValue("MAR",row_binary);
             
             // Get value and load into MBR
@@ -588,7 +590,7 @@ public class CPU {
         char[] arr = hex.toCharArray();
        
         
-        for (int i = 0; i < hex.length(); i++) {
+        for (int i = 0; i < (hex.length()); i++) {
             ret_val[i] = Character.getNumericValue(hex.charAt(i));
         }
         return ret_val;
@@ -610,6 +612,61 @@ public class CPU {
                 ret_val[i] = 0;
             }else{
                 ret_val[i] = Character.getNumericValue(int_value.charAt(i-(16 - arr.length)));
+            }
+            
+        }
+        return ret_val;
+    }
+    
+     /* 
+    Function to convert a binary int value to binary array value specifically for the MAR
+    IN: String containing the int value to be converted
+    OUT: Int array containing the converted value
+    */
+    public int[] hexToBinaryArrayShort(String hex){
+        int[] ret_val = new int[12];
+        hex = hex.replaceAll("0", "0000");
+        hex = hex.replaceAll("1", "0001");
+        hex = hex.replaceAll("2", "0010");
+        hex = hex.replaceAll("3", "0011");
+        hex = hex.replaceAll("4", "0100");
+        hex = hex.replaceAll("5", "0101");
+        hex = hex.replaceAll("6", "0110");
+        hex = hex.replaceAll("7", "0111");
+        hex = hex.replaceAll("8", "1000");
+        hex = hex.replaceAll("9", "1001");
+        hex = hex.replaceAll("A", "1010");
+        hex = hex.replaceAll("B", "1011");
+        hex = hex.replaceAll("C", "1100");
+        hex = hex.replaceAll("D", "1101");
+        hex = hex.replaceAll("E", "1110");
+        hex = hex.replaceAll("F", "1111");
+        
+        char[] arr = hex.toCharArray();
+       
+        
+        for (int i = 0; i < (hex.length()-4); i++) {
+            ret_val[i] = Character.getNumericValue(hex.charAt(i+4));
+        }
+        return ret_val;
+    }
+    
+     /* 
+    Function to convert a binary int value to binary array value specifically for the PC
+    IN: String containing the int value to be converted
+    OUT: Int array containing the converted value
+    */
+    public int[] intToBinaryArrayShort(String int_value){
+        int[] ret_val = new int[12];
+        
+        char[] arr = int_value.toCharArray();
+       
+        
+        for (int i = 0; i < 12; i++) {
+            if (i < 12 - arr.length){
+                ret_val[i] = 0;
+            }else{
+                ret_val[i] = Character.getNumericValue(int_value.charAt(i-(12 - arr.length)));
             }
             
         }

@@ -18,30 +18,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MachineSimulator extends javax.swing.JFrame {
-
+    
+    // Global Vars
     CPU main_CPU;
     int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     boolean run_check = false;
-    /**
-     * Creates new form newQuiz
-     */
+    
+    
+    /* 
+    Function that runs the gui and CPU
+    IN: N/A
+    OUT: N/A
+    */
     public MachineSimulator() {
-        
         initComponents();
         main_CPU = new CPU();
         new Timer(delay, taskPerformer).start();
     }
     
-
+    
+    
+    // Main loop of the program that runs every 500 mil
     int delay = 500; //milliseconds
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
-            //...Perform a task...
-            //System.out.println(Arrays.toString(in_button_array));
-            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(0)));
-            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(10)));
-            //System.out.println(Arrays.toString(main_CPU.getMemoryValue(32)));
-            //System.out.println();
             
             // Update Registers for display
             update_registers();
@@ -97,7 +97,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         jTextField12 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -115,13 +114,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -138,6 +135,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         jButton34 = new javax.swing.JButton();
         jTextField13 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jToggleButton5 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,11 +196,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jTextField7.setText("jTextField7");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIXR3(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel8.setText("PC");
@@ -253,16 +247,19 @@ public class MachineSimulator extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("IPL");
         jButton1.setActionCommand("Store");
-        jButton1.setLabel("INIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setActionCommand("ST+");
         jButton2.setLabel("ST+");
-
-        jButton3.setLabel("Load");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -274,6 +271,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton5.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton5.setLabel("15");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +280,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton6.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton6.setLabel("14");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +289,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton7.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton7.setLabel("13");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,6 +298,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton15.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton15.setLabel("12");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,6 +307,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton16.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton16.setLabel("11");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +316,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton17.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton17.setLabel("10");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,6 +325,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton18.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton18.setLabel("9");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,6 +334,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton19.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton19.setLabel("8");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,6 +343,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton20.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton20.setLabel("5");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,6 +352,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton21.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton21.setLabel("7");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,6 +361,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton22.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton22.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton22.setLabel("6");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,6 +370,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton23.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton23.setLabel("0");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,6 +379,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton24.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton24.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton24.setLabel("1");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,6 +388,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton8.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton8.setLabel("2");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,6 +397,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton9.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton9.setLabel("3");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,14 +406,13 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jButton10.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton10.setLabel("4");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
-
-        jToggleButton1.setText("jToggleButton1");
 
         jLabel19.setText("Operation");
 
@@ -412,13 +423,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel22.setText("I");
 
         jLabel23.setText("Address");
-
-        jButton11.setLabel("Run");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
 
         jButton12.setLabel("SS");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -523,6 +527,20 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel13.setText("CC");
 
+        jButton11.setText("Load");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton5.setText("Reset");
+        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -573,7 +591,7 @@ public class MachineSimulator extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton25)
                             .addComponent(jButton13)
@@ -581,6 +599,11 @@ public class MachineSimulator extends javax.swing.JFrame {
                             .addComponent(jButton26))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -613,13 +636,7 @@ public class MachineSimulator extends javax.swing.JFrame {
                                         .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(195, 195, 195)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -663,17 +680,16 @@ public class MachineSimulator extends javax.swing.JFrame {
                                     .addComponent(jButton32)
                                     .addComponent(jButton33)
                                     .addComponent(jButton34))))
-                        .addGap(42, 42, 42))
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton4)
-                        .addGap(21, 21, 21))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton11))
+                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(880, Short.MAX_VALUE)
@@ -702,7 +718,6 @@ public class MachineSimulator extends javax.swing.JFrame {
                                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
                                     .addComponent(jButton34)))
-                            .addComponent(jToggleButton1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -762,47 +777,43 @@ public class MachineSimulator extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton11))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel21)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel23)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(jToggleButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jToggleButton3)))
-                        .addGap(43, 43, 43))))
+                        .addGap(92, 92, 92)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jToggleButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton3)))
+                .addGap(43, 43, 43))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(385, Short.MAX_VALUE)
@@ -937,19 +948,10 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
-
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         main_CPU.execute("single");
     }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void update_regIXR3(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIXR3
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X3");
-    }//GEN-LAST:event_update_regIXR3
 
     private void update_regIXR2(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIXR2
         // TODO add your handling code here:
@@ -1098,23 +1100,18 @@ public class MachineSimulator extends javax.swing.JFrame {
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("X3", Arrays.copyOfRange(in_button_array, 0, 16));
+        
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jTextField13update_regMFR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13update_regMFR
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13update_regMFR
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            // TODO add your handling code here:
-            main_CPU.loadFileIntoMemory();
-        } catch (IOException ex) {
-            Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // Set Memory(MAR) to MBR
+        int[] cur_MAR = main_CPU.getRegisterValue("MAR");
+        int trans_MAR = main_CPU.binaryToInt(cur_MAR);
+        main_CPU.setMemoryValue(trans_MAR, main_CPU.getRegisterValue("MBR"));
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1127,7 +1124,62 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            main_CPU.loadFileIntoMemory();
+        } catch (IOException ex) {
+            Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // Set MBR equal to the value located at MAR in memory
+        int[] cur_MAR = main_CPU.getRegisterValue("MAR");
+        int trans_MAR = main_CPU.binaryToInt(cur_MAR);
+        main_CPU.setRegisterValue("MBR", main_CPU.getMemoryValue(trans_MAR));
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Set Memory(MAR) to MBR 
+        int[] cur_MAR = main_CPU.getRegisterValue("MAR");
+        int trans_MAR = main_CPU.binaryToInt(cur_MAR);
+        main_CPU.setMemoryValue(trans_MAR, main_CPU.getRegisterValue("MBR"));
+        // Increment MAR by 1
+        trans_MAR = trans_MAR + 1;
+        int[] new_MAR = main_CPU.intToBinaryArrayShort(Integer.toBinaryString(trans_MAR));
+        main_CPU.setRegisterValue("MAR", new_MAR);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+        // Reset registers
+        int[] Reset_large = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        int[] Reset_medium = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
+        int[] Reset_small = new int[]{0,0,0,0};
+        
+        main_CPU.setRegisterValue("IR", Reset_large);
+        main_CPU.setRegisterValue("MBR", Reset_large);
+        main_CPU.setRegisterValue("X1", Reset_large);
+        main_CPU.setRegisterValue("X2", Reset_large);
+        main_CPU.setRegisterValue("X3", Reset_large);
+        main_CPU.setRegisterValue("GPR3", Reset_large);
+        main_CPU.setRegisterValue("GPR0", Reset_large);
+        main_CPU.setRegisterValue("GPR1", Reset_large);
+        main_CPU.setRegisterValue("GPR2", Reset_large);
+        
+        main_CPU.setRegisterValue("PC", Reset_medium);
+        main_CPU.setRegisterValue("MAR", Reset_medium);
+        
+        main_CPU.setRegisterValue("CC", Reset_small);
+        main_CPU.setRegisterValue("MFR", Reset_small);
+    }//GEN-LAST:event_jToggleButton5ActionPerformed
+
+    /* 
+    Function to Update Values of the registers
+    IN: N/A
+    OUT: N/A
+    */
     public void update_registers(){
         
         // Update PC
@@ -1242,7 +1294,6 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
@@ -1287,8 +1338,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }
