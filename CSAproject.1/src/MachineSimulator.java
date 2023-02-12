@@ -10,9 +10,12 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.Timer;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MachineSimulator extends javax.swing.JFrame {
 
@@ -253,6 +256,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         jButton2.setLabel("ST+");
 
         jButton3.setLabel("Load");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setLabel("Store");
 
@@ -1090,6 +1098,15 @@ public class MachineSimulator extends javax.swing.JFrame {
     private void jTextField13update_regMFR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13update_regMFR
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13update_regMFR
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            // TODO add your handling code here:
+            main_CPU.loadIntoMemory();
+        } catch (IOException ex) {
+            Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     public void update_registers(){
