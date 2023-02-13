@@ -50,7 +50,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent evt) {
             
             // Update Registers for display
-            update_registers();
+            updateRegisters();
             
             // Check if machine is set to run
             if (run_check){
@@ -84,65 +84,84 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        GPR0TextField = new javax.swing.JTextField();
+        GPR1TextField = new javax.swing.JTextField();
+        GPR2TextField = new javax.swing.JTextField();
+        GPR3TextField = new javax.swing.JTextField();
+        IXR1TextField = new javax.swing.JTextField();
+        IXR2TextField = new javax.swing.JTextField();
+        IXR3TextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        PCTextfField = new javax.swing.JTextField();
+        MARTextField = new javax.swing.JTextField();
+        MBRTextField = new javax.swing.JTextField();
+        IRTextField = new javax.swing.JTextField();
+        MFRTextField = new javax.swing.JTextField();
+        IPLLoadButton = new javax.swing.JButton();
+        STPLoadButton = new javax.swing.JButton();
+        STLoadButton = new javax.swing.JButton();
+        FifteenButton = new javax.swing.JButton();
+        FourteenButton = new javax.swing.JButton();
+        ThirteenButton = new javax.swing.JButton();
+        TweleveButton = new javax.swing.JButton();
+        ElevenButton = new javax.swing.JButton();
+        TenButton = new javax.swing.JButton();
+        NineButton = new javax.swing.JButton();
+        EightButton = new javax.swing.JButton();
+        FiveButton = new javax.swing.JButton();
+        SevenButton = new javax.swing.JButton();
+        SixButton = new javax.swing.JButton();
+        ZeroButton = new javax.swing.JButton();
+        OneButton = new javax.swing.JButton();
+        TwoButton = new javax.swing.JButton();
+        ThreeButton = new javax.swing.JButton();
+        FourButton = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
-        jButton29 = new javax.swing.JButton();
-        jButton30 = new javax.swing.JButton();
-        jButton31 = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
-        jButton33 = new javax.swing.JButton();
-        jButton34 = new javax.swing.JButton();
-        jTextField13 = new javax.swing.JTextField();
+        SingleStepButton = new javax.swing.JButton();
+        RunButton = new javax.swing.JToggleButton();
+        HaltButton = new javax.swing.JToggleButton();
+        PCLoadButton = new javax.swing.JButton();
+        MARLoadButton = new javax.swing.JButton();
+        IRLoadButton = new javax.swing.JButton();
+        MBRLoadButton = new javax.swing.JButton();
+        GPR0LoadButton = new javax.swing.JButton();
+        GPR1LoadButton = new javax.swing.JButton();
+        GPR2LoadButton = new javax.swing.JButton();
+        GPR3LoadButton = new javax.swing.JButton();
+        IXR1LoadButton = new javax.swing.JButton();
+        IXR2LoadButton = new javax.swing.JButton();
+        IXR3LoadButton = new javax.swing.JButton();
+        CCTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
+        LoadLoadButton = new javax.swing.JButton();
+        ResetButton = new javax.swing.JToggleButton();
+        Mem_2ValueTextField = new javax.swing.JTextField();
+        Mem_1ValueTextField = new javax.swing.JTextField();
+        Mem0ValueTextField = new javax.swing.JTextField();
+        Mem1ValueTextField = new javax.swing.JTextField();
+        Mem2ValueTextField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        Mem_2RowTextField = new javax.swing.JTextField();
+        Mem_1RowTextField = new javax.swing.JTextField();
+        Mem1RowTextField = new javax.swing.JTextField();
+        Mem2RowTextField = new javax.swing.JTextField();
+        Mem0RowTextField = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,39 +188,19 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel7.setText("IXR 3");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIGPR0(evt);
-            }
-        });
+        GPR0TextField.setText("jTextField1");
 
-        jTextField2.setText("jTextField2");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIGPR1(evt);
-            }
-        });
+        GPR1TextField.setText("jTextField2");
 
-        jTextField3.setText("jTextField3");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIGPR2(evt);
-            }
-        });
+        GPR2TextField.setText("jTextField3");
 
-        jTextField4.setText("jTextField4");
+        GPR3TextField.setText("jTextField4");
 
-        jTextField5.setText("jTextField5");
+        IXR1TextField.setText("jTextField5");
 
-        jTextField6.setText("jTextField6");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIXR2(evt);
-            }
-        });
+        IXR2TextField.setText("jTextField6");
 
-        jTextField7.setText("jTextField7");
+        IXR3TextField.setText("jTextField7");
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel8.setText("PC");
@@ -218,205 +217,180 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel12.setText("MFR");
 
-        jTextField8.setText("jTextField8");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        PCTextfField.setText("jTextField8");
+
+        MARTextField.setText("jTextField9");
+
+        MBRTextField.setText("jTextField10");
+
+        IRTextField.setText("jTextField11");
+
+        MFRTextField.setText("jTextField12");
+
+        IPLLoadButton.setText("IPL");
+        IPLLoadButton.setActionCommand("Store");
+        IPLLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regPC(evt);
+                IPLLoadButtonActionPerformed(evt);
             }
         });
 
-        jTextField9.setText("jTextField9");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        STPLoadButton.setActionCommand("ST+");
+        STPLoadButton.setLabel("ST+");
+        STPLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regMAR(evt);
+                STPLoadButtonActionPerformed(evt);
             }
         });
 
-        jTextField10.setText("jTextField10");
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        STLoadButton.setLabel("Store");
+        STLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regMBR(evt);
+                STLoadButtonActionPerformed(evt);
             }
         });
 
-        jTextField11.setText("jTextField11");
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        FifteenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        FifteenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        FifteenButton.setLabel("15");
+        FifteenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regIR(evt);
+                FifteenButtonActionPerformed(evt);
             }
         });
 
-        jTextField12.setText("jTextField12");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        FourteenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        FourteenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        FourteenButton.setLabel("14");
+        FourteenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_regMFR(evt);
+                FourteenButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("IPL");
-        jButton1.setActionCommand("Store");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ThirteenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        ThirteenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ThirteenButton.setLabel("13");
+        ThirteenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ThirteenButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setActionCommand("ST+");
-        jButton2.setLabel("ST+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        TweleveButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        TweleveButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TweleveButton.setLabel("12");
+        TweleveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                TweleveButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setLabel("Store");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ElevenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        ElevenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ElevenButton.setLabel("11");
+        ElevenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ElevenButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton5.setLabel("15");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        TenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        TenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TenButton.setLabel("10");
+        TenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                TenButtonActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.setLabel("14");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        NineButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        NineButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        NineButton.setLabel("9");
+        NineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                NineButtonActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton7.setLabel("13");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        EightButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        EightButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        EightButton.setLabel("8");
+        EightButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                EightButtonActionPerformed(evt);
             }
         });
 
-        jButton15.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton15.setLabel("12");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        FiveButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        FiveButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        FiveButton.setLabel("5");
+        FiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                FiveButtonActionPerformed(evt);
             }
         });
 
-        jButton16.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton16.setLabel("11");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        SevenButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        SevenButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SevenButton.setLabel("7");
+        SevenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                SevenButtonActionPerformed(evt);
             }
         });
 
-        jButton17.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton17.setLabel("10");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        SixButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        SixButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SixButton.setLabel("6");
+        SixButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                SixButtonActionPerformed(evt);
             }
         });
 
-        jButton18.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton18.setLabel("9");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        ZeroButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        ZeroButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ZeroButton.setLabel("0");
+        ZeroButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                ZeroButtonActionPerformed(evt);
             }
         });
 
-        jButton19.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton19.setLabel("8");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        OneButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        OneButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        OneButton.setLabel("1");
+        OneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                OneButtonActionPerformed(evt);
             }
         });
 
-        jButton20.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton20.setLabel("5");
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
+        TwoButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        TwoButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TwoButton.setLabel("2");
+        TwoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
+                TwoButtonActionPerformed(evt);
             }
         });
 
-        jButton21.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton21.setLabel("7");
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
+        ThreeButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        ThreeButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ThreeButton.setLabel("3");
+        ThreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
+                ThreeButtonActionPerformed(evt);
             }
         });
 
-        jButton22.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton22.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton22.setLabel("6");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
+        FourButton.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        FourButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        FourButton.setLabel("4");
+        FourButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-
-        jButton23.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton23.setLabel("0");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-
-        jButton24.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton24.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton24.setLabel("1");
-        jButton24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton24ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton8.setLabel("2");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton9.setLabel("3");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
-        jButton10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton10.setLabel("4");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                FourButtonActionPerformed(evt);
             }
         });
 
@@ -430,163 +404,230 @@ public class MachineSimulator extends javax.swing.JFrame {
 
         jLabel23.setText("Address");
 
-        jButton12.setLabel("SS");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        SingleStepButton.setLabel("SS");
+        SingleStepButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                SingleStepButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setLabel("Run");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        RunButton.setLabel("Run");
+        RunButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                RunButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton3.setLabel("Halt");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        HaltButton.setLabel("Halt");
+        HaltButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                HaltButtonActionPerformed(evt);
             }
         });
 
-        jButton13.setLabel("Load");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        PCLoadButton.setLabel("Load");
+        PCLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                PCLoadButtonActionPerformed(evt);
             }
         });
 
-        jButton14.setLabel("Load");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        MARLoadButton.setLabel("Load");
+        MARLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                MARLoadButtonActionPerformed(evt);
             }
         });
 
-        jButton25.setLabel("Load");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        IRLoadButton.setLabel("Load");
+        IRLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                IRLoadButtonActionPerformed(evt);
             }
         });
 
-        jButton26.setLabel("Load");
-        jButton26.addActionListener(new java.awt.event.ActionListener() {
+        MBRLoadButton.setLabel("Load");
+        MBRLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton26ActionPerformed(evt);
+                MBRLoadButtonActionPerformed(evt);
             }
         });
 
-        jButton28.setLabel("Load");
-        jButton28.addActionListener(new java.awt.event.ActionListener() {
+        GPR0LoadButton.setLabel("Load");
+        GPR0LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton28ActionPerformed(evt);
+                GPR0LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton29.setLabel("Load");
-        jButton29.addActionListener(new java.awt.event.ActionListener() {
+        GPR1LoadButton.setLabel("Load");
+        GPR1LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton29ActionPerformed(evt);
+                GPR1LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton30.setLabel("Load");
-        jButton30.addActionListener(new java.awt.event.ActionListener() {
+        GPR2LoadButton.setLabel("Load");
+        GPR2LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton30ActionPerformed(evt);
+                GPR2LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton31.setLabel("Load");
-        jButton31.addActionListener(new java.awt.event.ActionListener() {
+        GPR3LoadButton.setLabel("Load");
+        GPR3LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton31ActionPerformed(evt);
+                GPR3LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton32.setLabel("Load");
-        jButton32.addActionListener(new java.awt.event.ActionListener() {
+        IXR1LoadButton.setLabel("Load");
+        IXR1LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton32ActionPerformed(evt);
+                IXR1LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton33.setLabel("Load");
-        jButton33.addActionListener(new java.awt.event.ActionListener() {
+        IXR2LoadButton.setLabel("Load");
+        IXR2LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton33ActionPerformed(evt);
+                IXR2LoadButtonActionPerformed(evt);
             }
         });
 
-        jButton34.setLabel("Load");
-        jButton34.addActionListener(new java.awt.event.ActionListener() {
+        IXR3LoadButton.setLabel("Load");
+        IXR3LoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton34ActionPerformed(evt);
+                IXR3LoadButtonActionPerformed(evt);
             }
         });
 
-        jTextField13.setText("jTextField12");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13update_regMFR(evt);
-            }
-        });
+        CCTextField.setText("jTextField12");
 
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel13.setText("CC");
 
-        jButton11.setText("Load");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        LoadLoadButton.setText("Load");
+        LoadLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                LoadLoadButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton5.setText("Reset");
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+        ResetButton.setText("Reset");
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
+                ResetButtonActionPerformed(evt);
             }
         });
+
+        Mem_2ValueTextField.setText("jTextField1");
+
+        Mem_1ValueTextField.setText("jTextField2");
+        Mem_1ValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem_1ValueTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem0ValueTextField.setText("jTextField3");
+        Mem0ValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem0ValueTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem1ValueTextField.setText("jTextField4");
+
+        Mem2ValueTextField.setText("jTextField5");
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel14.setText("Memory Location - 2");
+
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel15.setText("Memory Location - 1");
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel16.setText("MBR Location");
+
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel17.setText("Memory Location + 1");
+
+        jLabel18.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel18.setText("Memory Location + 2");
+
+        Mem_2RowTextField.setText("jTextField1");
+        Mem_2RowTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem_2RowTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem_1RowTextField.setText("jTextField1");
+        Mem_1RowTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem_1RowTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem1RowTextField.setText("jTextField1");
+        Mem1RowTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem1RowTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem2RowTextField.setText("jTextField1");
+        Mem2RowTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem2RowTextFieldActionPerformed(evt);
+            }
+        });
+
+        Mem0RowTextField.setText("jTextField1");
+        Mem0RowTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mem0RowTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel24.setText("Mem. Row");
+
+        jLabel25.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel25.setText("Mem. Value");
+
+        jLabel26.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel26.setText("Register Value");
+
+        jLabel27.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel27.setText("Register Value");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 164, Short.MAX_VALUE)
+                        .addGap(140, 140, 140)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(FifteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(FourteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ThirteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TweleveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ElevenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(TenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField8)
-                                    .addComponent(jTextField9)
-                                    .addComponent(jTextField10)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -597,219 +638,308 @@ public class MachineSimulator extends javax.swing.JFrame {
                                         .addComponent(jLabel13)
                                         .addGap(18, 18, 18)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField12)
-                                    .addComponent(jTextField13)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                    .addComponent(MFRTextField)
+                                    .addComponent(CCTextField)
+                                    .addComponent(IRTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27)
+                                    .addComponent(PCTextfField)
+                                    .addComponent(MARTextField)
+                                    .addComponent(MBRTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton25)
-                            .addComponent(jButton13)
-                            .addComponent(jButton14)
-                            .addComponent(jButton26))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IRLoadButton)
+                            .addComponent(PCLoadButton)
+                            .addComponent(MARLoadButton)
+                            .addComponent(MBRLoadButton))))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(IPLLoadButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(STPLoadButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(STLoadButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(LoadLoadButton)
+                        .addGap(148, 148, 148))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(206, 206, 206)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(IXR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(IXR1LoadButton))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField4))
+                                                .addComponent(GPR3TextField))
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(GPR2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addComponent(jLabel1)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel26)
+                                                .addComponent(GPR0TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField2)))
+                                        .addComponent(GPR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton28)
-                                    .addComponent(jButton29)
-                                    .addComponent(jButton30)
-                                    .addComponent(jButton31))
-                                .addGap(18, 18, 18)
+                                    .addComponent(GPR0LoadButton)
+                                    .addComponent(GPR1LoadButton)
+                                    .addComponent(GPR2LoadButton)
+                                    .addComponent(GPR3LoadButton)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jTextField7))
+                                    .addComponent(IXR2TextField)
+                                    .addComponent(IXR3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton32)
-                                    .addComponent(jButton33)
-                                    .addComponent(jButton34))))
-                        .addGap(12, 12, 12)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(IXR2LoadButton)
+                                    .addComponent(IXR3LoadButton)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(NineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(EightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton11))
-                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(880, Short.MAX_VALUE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(252, 252, 252)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(SevenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SixButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(206, 206, 206)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(FourButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ThreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TwoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(OneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ZeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(HaltButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(21, 21, 21)
+                                        .addComponent(Mem_1RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel18)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Mem2RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel17)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Mem1RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel16)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Mem0RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel14)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel24)
+                                                .addComponent(Mem_2RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(Mem1ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(Mem_2ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Mem2ValueTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(Mem_1ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Mem0ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel25))))))
+                .addGap(317, 317, 317))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(PCLoadButton)
+                                        .addGap(70, 70, 70)
+                                        .addComponent(IRLoadButton))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addComponent(MARLoadButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(MBRLoadButton)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton32))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Mem_2ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Mem_2RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton33))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel15)
+                                    .addComponent(Mem_1ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Mem_1RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jButton34)))
+                                    .addComponent(Mem0ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(Mem0RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Mem1ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(Mem1RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel18)
+                                    .addComponent(Mem2ValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Mem2RowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(129, 129, 129))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton28)))
+                                        .addComponent(GPR0TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(GPR0LoadButton)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton29))
+                                    .addComponent(GPR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(GPR1LoadButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton30))
+                                    .addComponent(GPR2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(GPR2LoadButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton31))))
-                        .addGap(8, 8, 8))
+                                    .addComponent(GPR3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(GPR3LoadButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(IXR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(IXR1LoadButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(IXR2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(IXR2LoadButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(IXR3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(IXR3LoadButton))
+                                .addGap(62, 62, 62)))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(IPLLoadButton)
+                            .addComponent(STPLoadButton)
+                            .addComponent(STLoadButton)
+                            .addComponent(LoadLoadButton)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jButton13)
-                                    .addGap(70, 70, 70)
-                                    .addComponent(jButton25))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton14))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton26))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton11))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PCTextfField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(MARTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(MBRTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(IRTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(MFRTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CCTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(57, 57, 57)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(FifteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ThirteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FourteenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TweleveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ElevenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SevenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SixButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FourButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TwoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ThreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ZeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
@@ -817,19 +947,17 @@ public class MachineSimulator extends javax.swing.JFrame {
                             .addComponent(jLabel21)
                             .addComponent(jLabel22)
                             .addComponent(jLabel23)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jToggleButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton3)))
-                .addGap(43, 43, 43))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(385, Short.MAX_VALUE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(45, 45, 45)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(ResetButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RunButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(HaltButton)))))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -838,13 +966,13 @@ public class MachineSimulator extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 101, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -859,283 +987,235 @@ public class MachineSimulator extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 107, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//ACTION performed by each button or text field
-    private void update_regIGPR0(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIGPR0
-            // TODO add your handling code here:
-    }//GEN-LAST:event_update_regIGPR0
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void FifteenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FifteenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[0] == 0){
             in_button_array[0] = 1;
         } else{
             in_button_array[0] = 0;
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_FifteenButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void ThirteenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThirteenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[2] == 0){
             in_button_array[2] = 1;
         } else{
             in_button_array[2] = 0;
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_ThirteenButtonActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+    private void TweleveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TweleveButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[3] == 0){
             in_button_array[3] = 1;
         } else{
             in_button_array[3] = 0;
         }
-    }//GEN-LAST:event_jButton15ActionPerformed
+    }//GEN-LAST:event_TweleveButtonActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void TenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[5] == 0){
             in_button_array[5] = 1;
         } else{
             in_button_array[5] = 0;
         }
-    }//GEN-LAST:event_jButton17ActionPerformed
+    }//GEN-LAST:event_TenButtonActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void NineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NineButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[6] == 0){
             in_button_array[6] = 1;
         } else{
             in_button_array[6] = 0;
         }
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_NineButtonActionPerformed
 
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+    private void FiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiveButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[10] == 0){
             in_button_array[10] = 1;
         } else{
             in_button_array[10] = 0;
         }
-    }//GEN-LAST:event_jButton20ActionPerformed
+    }//GEN-LAST:event_FiveButtonActionPerformed
 
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+    private void SevenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SevenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[8] == 0){
             in_button_array[8] = 1;
         } else{
             in_button_array[8] = 0;
         }
-    }//GEN-LAST:event_jButton21ActionPerformed
+    }//GEN-LAST:event_SevenButtonActionPerformed
 
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+    private void OneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OneButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[14] == 0){
             in_button_array[14] = 1;
         } else{
             in_button_array[14] = 0;
         }
-    }//GEN-LAST:event_jButton24ActionPerformed
+    }//GEN-LAST:event_OneButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void TwoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TwoButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[13] == 0){
             in_button_array[13] = 1;
         } else{
             in_button_array[13] = 0;
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_TwoButtonActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void FourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FourButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[11] == 0){
             in_button_array[11] = 1;
         } else{
             in_button_array[11] = 0;
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_FourButtonActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void SingleStepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingleStepButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.execute("single");
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_SingleStepButtonActionPerformed
 
-    private void update_regIXR2(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIXR2
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X2");
-    }//GEN-LAST:event_update_regIXR2
-
-    private void update_regIGPR1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIGPR1
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X1");
-    }//GEN-LAST:event_update_regIGPR1
-
-    private void update_regIGPR2(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIGPR2
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("X2");
-    }//GEN-LAST:event_update_regIGPR2
-
-    private void update_regPC(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regPC
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("PC");
-    }//GEN-LAST:event_update_regPC
-
-    private void update_regMAR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regMAR
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("MAR");
-    }//GEN-LAST:event_update_regMAR
-
-    private void update_regMBR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regMBR
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("MBR");
-    }//GEN-LAST:event_update_regMBR
-
-    private void update_regIR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regIR
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("IR");
-    }//GEN-LAST:event_update_regIR
-
-    private void update_regMFR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_regMFR
-        // TODO add your handling code here:
-        main_CPU.getRegisterValue("MFR");
-    }//GEN-LAST:event_update_regMFR
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+    private void ZeroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZeroButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[15] == 0){
             in_button_array[15] = 1;
         } else{
             in_button_array[15] = 0;
         }
-    }//GEN-LAST:event_jButton23ActionPerformed
+    }//GEN-LAST:event_ZeroButtonActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void ThreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThreeButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[12] == 0){
             in_button_array[12] = 1;
         } else{
             in_button_array[12] = 0;
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_ThreeButtonActionPerformed
 
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+    private void SixButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SixButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[9] == 0){
             in_button_array[9] = 1;
         } else{
             in_button_array[9] = 0;
         }
-    }//GEN-LAST:event_jButton22ActionPerformed
+    }//GEN-LAST:event_SixButtonActionPerformed
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+    private void EightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EightButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[7] == 0){
             in_button_array[7] = 1;
         } else{
             in_button_array[7] = 0;
         }
-    }//GEN-LAST:event_jButton19ActionPerformed
+    }//GEN-LAST:event_EightButtonActionPerformed
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void ElevenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElevenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[4] == 0){
             in_button_array[4] = 1;
         } else{
             in_button_array[4] = 0;
         }
-    }//GEN-LAST:event_jButton16ActionPerformed
+    }//GEN-LAST:event_ElevenButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void FourteenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FourteenButtonActionPerformed
         // TODO add your handling code here:
         if (in_button_array[1] == 0){
             in_button_array[1] = 1;
         } else{
             in_button_array[1] = 0;
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_FourteenButtonActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void PCLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCLoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("PC", Arrays.copyOfRange(in_button_array,4, 16));
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_PCLoadButtonActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void MARLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MARLoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("MAR", Arrays.copyOfRange(in_button_array, 4, 16));
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_MARLoadButtonActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+    private void IRLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IRLoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("IR", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton25ActionPerformed
+    }//GEN-LAST:event_IRLoadButtonActionPerformed
 
-    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+    private void MBRLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MBRLoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("MBR", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton26ActionPerformed
+    }//GEN-LAST:event_MBRLoadButtonActionPerformed
 
-    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+    private void GPR0LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GPR0LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("GPR0", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton28ActionPerformed
+    }//GEN-LAST:event_GPR0LoadButtonActionPerformed
 
-    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+    private void GPR1LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GPR1LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("GPR1", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton29ActionPerformed
+    }//GEN-LAST:event_GPR1LoadButtonActionPerformed
 
-    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+    private void GPR2LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GPR2LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("GPR2", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton30ActionPerformed
+    }//GEN-LAST:event_GPR2LoadButtonActionPerformed
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    private void GPR3LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GPR3LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("GPR3", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton31ActionPerformed
+    }//GEN-LAST:event_GPR3LoadButtonActionPerformed
 
-    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+    private void IXR1LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IXR1LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("X1", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton32ActionPerformed
+    }//GEN-LAST:event_IXR1LoadButtonActionPerformed
 
-    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+    private void IXR2LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IXR2LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("X2", Arrays.copyOfRange(in_button_array, 0, 16));
-    }//GEN-LAST:event_jButton33ActionPerformed
+    }//GEN-LAST:event_IXR2LoadButtonActionPerformed
 
-    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+    private void IXR3LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IXR3LoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("X3", Arrays.copyOfRange(in_button_array, 0, 16));
         
-    }//GEN-LAST:event_jButton34ActionPerformed
+    }//GEN-LAST:event_IXR3LoadButtonActionPerformed
 
-    private void jTextField13update_regMFR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13update_regMFR
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13update_regMFR
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void STLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STLoadButtonActionPerformed
         // Set Memory(MAR) to MBR
         int[] cur_MAR = main_CPU.getRegisterValue("MAR");
         int trans_MAR = main_CPU.binaryToInt(cur_MAR);
         main_CPU.setMemoryValue(trans_MAR, main_CPU.getRegisterValue("MBR"));
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_STLoadButtonActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
         // TODO add your handling code here:
         if (run_check == false){
             run_check = true;
         }else{
             run_check = false;
         }
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_RunButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void IPLLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IPLLoadButtonActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
@@ -1145,16 +1225,16 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
         int[] default_PC_loc = new int[]{0,0,0,0,0,0,1,1,0,0,0,0};
         main_CPU.setRegisterValue("PC",default_PC_loc);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_IPLLoadButtonActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void LoadLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadLoadButtonActionPerformed
         // Set MBR equal to the value located at MAR in memory
         int[] cur_MAR = main_CPU.getRegisterValue("MAR");
         int trans_MAR = main_CPU.binaryToInt(cur_MAR);
         main_CPU.setRegisterValue("MBR", main_CPU.getMemoryValue(trans_MAR));
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_LoadLoadButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void STPLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STPLoadButtonActionPerformed
         // Set Memory(MAR) to MBR 
         int[] cur_MAR = main_CPU.getRegisterValue("MAR");
         int trans_MAR = main_CPU.binaryToInt(cur_MAR);
@@ -1163,9 +1243,9 @@ public class MachineSimulator extends javax.swing.JFrame {
         trans_MAR = trans_MAR + 1;
         int[] new_MAR = main_CPU.intToBinaryArrayShort(Integer.toBinaryString(trans_MAR));
         main_CPU.setRegisterValue("MAR", new_MAR);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_STPLoadButtonActionPerformed
 
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         // Reset registers
         int[] Reset_large = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         int[] Reset_medium = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
@@ -1186,68 +1266,148 @@ public class MachineSimulator extends javax.swing.JFrame {
         
         main_CPU.setRegisterValue("CC", Reset_small);
         main_CPU.setRegisterValue("MFR", Reset_small);
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
+    }//GEN-LAST:event_ResetButtonActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+    private void HaltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HaltButtonActionPerformed
         // TODO add your handling code here:
         int [] msg = new int[]{1};
         main_CPU.setRegisterValue("HLT",msg);
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    }//GEN-LAST:event_HaltButtonActionPerformed
+
+    private void Mem_1ValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_1ValueTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem_1ValueTextFieldActionPerformed
+
+    private void Mem_2RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_2RowTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem_2RowTextFieldActionPerformed
+
+    private void Mem_1RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_1RowTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem_1RowTextFieldActionPerformed
+
+    private void Mem1RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem1RowTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem1RowTextFieldActionPerformed
+
+    private void Mem2RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem2RowTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem2RowTextFieldActionPerformed
+
+    private void Mem0RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem0RowTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem0RowTextFieldActionPerformed
+
+    private void Mem0ValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem0ValueTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mem0ValueTextFieldActionPerformed
 
     /* 
     Function to Update Values of the registers
     IN: N/A
     OUT: N/A
     */
-    public void update_registers(){
+    public void updateRegisters(){
         
         // Update PC
         int[] tmp_array;
         tmp_array = main_CPU.getRegisterValue("PC");
-        jTextField8.setText(format_text(tmp_array));
+        PCTextfField.setText(formatText(tmp_array));
         // Update CC
         tmp_array = main_CPU.getRegisterValue("CC");
-        jTextField13.setText(format_text(tmp_array));
-        // Update MAR
+        CCTextField.setText(formatText(tmp_array));
+        // Update MAR and Associated Display
         tmp_array = main_CPU.getRegisterValue("MAR");
-        jTextField9.setText(format_text(tmp_array));
+        MARTextField.setText(formatText(tmp_array));
+        updateMemoryDisplay();
         // Update MBR
         tmp_array = main_CPU.getRegisterValue("MBR");
-        jTextField10.setText(format_text(tmp_array));
+        MBRTextField.setText(formatText(tmp_array));
         // Update IR
         tmp_array = main_CPU.getRegisterValue("IR");
-        jTextField11.setText(format_text(tmp_array));
+        IRTextField.setText(formatText(tmp_array));
         // Update MFR
         tmp_array = main_CPU.getRegisterValue("MFR");
-        jTextField12.setText(format_text(tmp_array));
+        MFRTextField.setText(formatText(tmp_array));
         // Update X1
         tmp_array = main_CPU.getRegisterValue("X1");
-        jTextField5.setText(format_text(tmp_array));
+        IXR1TextField.setText(formatText(tmp_array));
         // Update X2
         tmp_array = main_CPU.getRegisterValue("X2");
-        jTextField6.setText(format_text(tmp_array));
+        IXR2TextField.setText(formatText(tmp_array));
         // Update X3
         tmp_array = main_CPU.getRegisterValue("X3");
-        jTextField7.setText(format_text(tmp_array));
+        IXR3TextField.setText(formatText(tmp_array));
         // Update GPR0
         tmp_array = main_CPU.getRegisterValue("GPR0");
-        jTextField1.setText(format_text(tmp_array));
+        GPR0TextField.setText(formatText(tmp_array));
         // Update GPR1
         tmp_array = main_CPU.getRegisterValue("GPR1");
-        jTextField2.setText(format_text(tmp_array));
+        GPR1TextField.setText(formatText(tmp_array));
         // Update GPR2
         tmp_array = main_CPU.getRegisterValue("GPR2");
-        jTextField3.setText(format_text(tmp_array));
+        GPR2TextField.setText(formatText(tmp_array));
         // Update GPR3
         tmp_array = main_CPU.getRegisterValue("GPR3");
-        jTextField4.setText(format_text(tmp_array));
+        GPR3TextField.setText(formatText(tmp_array));
     }
     
-    public String format_text(int[] arr){
+    /* 
+    Function to 
+    IN: 
+    OUT: 
+    */
+    public void updateMemoryDisplay(){
+        // Set values for current Mar Location
+        int[] tmp_array;
+        int[] cur_MAR = main_CPU.getRegisterValue("MAR");
+        int trans_MAR = main_CPU.binaryToInt(cur_MAR);
+        tmp_array = cur_MAR;
+        Mem0ValueTextField.setText(formatText(tmp_array));
+        Mem0RowTextField.setText(Integer.toString(trans_MAR));
+        
+        // Get MAR + 1
+        trans_MAR = trans_MAR + 1;
+        tmp_array = main_CPU.getMemoryValue(trans_MAR);
+        Mem1ValueTextField.setText(formatText(tmp_array));
+        Mem1RowTextField.setText(Integer.toString(trans_MAR));
+        
+        // Get MAR + 2
+        trans_MAR = trans_MAR + 1;
+        tmp_array = main_CPU.getMemoryValue(trans_MAR);
+        Mem2ValueTextField.setText(formatText(tmp_array));
+        Mem2RowTextField.setText(Integer.toString(trans_MAR));
+        
+        if (main_CPU.binaryToInt(cur_MAR) > 2){
+            // Get MAR - 1
+            trans_MAR = trans_MAR - 3;
+            tmp_array = main_CPU.getMemoryValue(trans_MAR);
+            Mem_1ValueTextField.setText(formatText(tmp_array));
+            Mem_1RowTextField.setText(Integer.toString(trans_MAR));
+
+            // Get MAR - 2
+            trans_MAR = trans_MAR - 1;
+            tmp_array = main_CPU.getMemoryValue(trans_MAR);
+            Mem_2ValueTextField.setText(formatText(tmp_array));
+            Mem_2RowTextField.setText(Integer.toString(trans_MAR));
+        }else{
+            int[] blank_value = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            Mem_1ValueTextField.setText(formatText(blank_value));
+            Mem_1RowTextField.setText(Integer.toString(0));
+            Mem_2ValueTextField.setText(formatText(blank_value));
+            Mem_2RowTextField.setText(Integer.toString(0));
+        }
+    }
+    
+    /* 
+    Function to format int[] values for display on the GUI
+    IN: int[] array representing the value of a register
+    OUT: String representing the converted value
+    */
+    public String formatText(int[] arr){
         String res = Arrays.toString(arr).replaceAll("[\\[\\],]", "");
         return res;
     }
-    
     
     /**
      * @param args the command line arguments
@@ -1278,63 +1438,93 @@ public class MachineSimulator extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
-        
-        
-        
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
                 new MachineSimulator().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JTextField CCTextField;
+    private javax.swing.JButton EightButton;
+    private javax.swing.JButton ElevenButton;
+    private javax.swing.JButton FifteenButton;
+    private javax.swing.JButton FiveButton;
+    private javax.swing.JButton FourButton;
+    private javax.swing.JButton FourteenButton;
+    private javax.swing.JButton GPR0LoadButton;
+    private javax.swing.JTextField GPR0TextField;
+    private javax.swing.JButton GPR1LoadButton;
+    private javax.swing.JTextField GPR1TextField;
+    private javax.swing.JButton GPR2LoadButton;
+    private javax.swing.JTextField GPR2TextField;
+    private javax.swing.JButton GPR3LoadButton;
+    private javax.swing.JTextField GPR3TextField;
+    private javax.swing.JToggleButton HaltButton;
+    private javax.swing.JButton IPLLoadButton;
+    private javax.swing.JButton IRLoadButton;
+    private javax.swing.JTextField IRTextField;
+    private javax.swing.JButton IXR1LoadButton;
+    private javax.swing.JTextField IXR1TextField;
+    private javax.swing.JButton IXR2LoadButton;
+    private javax.swing.JTextField IXR2TextField;
+    private javax.swing.JButton IXR3LoadButton;
+    private javax.swing.JTextField IXR3TextField;
+    private javax.swing.JButton LoadLoadButton;
+    private javax.swing.JButton MARLoadButton;
+    private javax.swing.JTextField MARTextField;
+    private javax.swing.JButton MBRLoadButton;
+    private javax.swing.JTextField MBRTextField;
+    private javax.swing.JTextField MFRTextField;
+    private javax.swing.JTextField Mem0RowTextField;
+    private javax.swing.JTextField Mem0ValueTextField;
+    private javax.swing.JTextField Mem1RowTextField;
+    private javax.swing.JTextField Mem1ValueTextField;
+    private javax.swing.JTextField Mem2RowTextField;
+    private javax.swing.JTextField Mem2ValueTextField;
+    private javax.swing.JTextField Mem_1RowTextField;
+    private javax.swing.JTextField Mem_1ValueTextField;
+    private javax.swing.JTextField Mem_2RowTextField;
+    private javax.swing.JTextField Mem_2ValueTextField;
+    private javax.swing.JButton NineButton;
+    private javax.swing.JButton OneButton;
+    private javax.swing.JButton PCLoadButton;
+    private javax.swing.JTextField PCTextfField;
+    private javax.swing.JToggleButton ResetButton;
+    private javax.swing.JToggleButton RunButton;
+    private javax.swing.JButton STLoadButton;
+    private javax.swing.JButton STPLoadButton;
+    private javax.swing.JButton SevenButton;
+    private javax.swing.JButton SingleStepButton;
+    private javax.swing.JButton SixButton;
+    private javax.swing.JButton TenButton;
+    private javax.swing.JButton ThirteenButton;
+    private javax.swing.JButton ThreeButton;
+    private javax.swing.JButton TweleveButton;
+    private javax.swing.JButton TwoButton;
+    private javax.swing.JButton ZeroButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1344,21 +1534,5 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }

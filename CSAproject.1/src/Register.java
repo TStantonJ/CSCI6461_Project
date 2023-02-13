@@ -60,7 +60,7 @@ public class Register {
     IN: Int representing the size of the register
     OUT: N/A
     */
-   public void initRegisterSize(int register_size){
+   private void initRegisterSize(int register_size){
        this.register_size = register_size;
        this.register_value = new int[register_size];
        
