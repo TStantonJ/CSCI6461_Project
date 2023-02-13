@@ -937,6 +937,9 @@
               <Properties>
                 <Property name="label" type="java.lang.String" value="Halt"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton3ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton13">
               <Properties>

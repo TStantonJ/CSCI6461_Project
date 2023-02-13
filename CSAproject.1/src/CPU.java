@@ -6,6 +6,9 @@
 /**
  *
  * @author trs
+ * 
+ * Class CPU creates registers and a memory object. Provides functions to 
+ * manipulate these objects.
  */
 import java.io.*;
 import java.util.Scanner;
@@ -29,17 +32,7 @@ public class CPU {
     Register HLT = new Register(1);
     
     Memory main_Memory = new Memory();
-    
 
-    
-     /* 
-    Function to
-    IN: 
-    OUT: 
-    */
-    public CPU(){
-        
-    }
     
     /* 
     Function to execute a Single Step or Run
@@ -61,9 +54,6 @@ public class CPU {
             int[] new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
             setRegisterValue("PC", new_PC);
             
-            //System.out.println(Arrays.toString(instruction_address));
-            //System.out.println(converted_address);
-            
             
             // Read and decode instruction
             int[] instructionBinary = getMemoryValue(converted_address);
@@ -77,7 +67,7 @@ public class CPU {
                 int EA = result[0];
                 int I= result[1];
                 int R= result[2];
-                int IX= result[2];
+                int IX= result[3];
                 
                 // Set MAR to location in memory to fetch
                 int Addr= result[4];
@@ -95,7 +85,6 @@ public class CPU {
                         break; 
                     default:
                         GPR3.setRegisterValue(getMemoryValue(EA));
-                        System.out.println(converted_address);
                  }
                 
                 // Set MBR to value just fetched
@@ -107,7 +96,7 @@ public class CPU {
                 int EA = result[0];
                 int I= result[1];
                 int R= result[2];
-                int IX= result[2];
+                int IX= result[3];
                 int Addr= result[4];
                 
                 switch(R) {
@@ -140,7 +129,7 @@ public class CPU {
                 int EA = result[0];
                 int I= result[1];
                 int R= result[2];
-                int IX= result[2];
+                int IX= result[3];
                 int Addr= result[4];
                 
                 int[] converted_value = intToBinaryArray(Integer.toBinaryString(EA));
@@ -156,15 +145,13 @@ public class CPU {
                         break; 
                     default:
                         GPR3.setRegisterValue(converted_value);
-                        System.out.println(Arrays.toString(converted_value));
-                        System.out.println(binaryToInt(converted_value));
                  }
             }else if("LDX".equals(instruction)){
                 int[] result = computeEffectiveAddr(instructionBinary);
                 int EA = result[0];
                 int I= result[1];
                 int R= result[2];
-                int IX= result[2];
+                int IX= result[3];
                 int Addr= result[4];
                 switch(IX) {
                     case 1:
@@ -177,14 +164,13 @@ public class CPU {
                         X2.setRegisterValue(getMemoryValue(EA));
                         break;
                     default:
-                        // raise issue
                  }
             }else if("STX".equals(instruction)){
                 int[] result = computeEffectiveAddr(instructionBinary);
                 int EA = result[0];
                 int I= result[1];
                 int R= result[2];
-                int IX= result[2];
+                int IX= result[3];
                 int Addr= result[4];
                 switch(IX) {
                     case 1:
@@ -206,10 +192,9 @@ public class CPU {
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break; 
                     default:
-                        // Raise issue
                 }
             }else if("HLT".equals(instruction)){
-                int [] msg = new int[]{0};
+                int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
             
             }
@@ -236,8 +221,6 @@ public class CPU {
         }else{
             I = 1;
         }
-        System.out.print("I is");
-        System.out.println(I);
         
         // Calculate R
         int R;
@@ -251,8 +234,6 @@ public class CPU {
         }else{
             R = 3;
         }
-        System.out.print("R is");
-        System.out.println(R);
         
         // Calculate IX
         int IX;
@@ -266,26 +247,19 @@ public class CPU {
         }else{
             IX = 3;
         }
-        System.out.print("IX is");
-        System.out.println(IX);
         
         // Calculate Address Field
         int[] Addr_Field = Arrays.copyOfRange(instruction, 11, 16);
-        System.out.print("ADDR is");
-        System.out.println(binaryToInt(Addr_Field));
         
         // Calculate EA using I,R,IX, and Address Field
         int EA;
         int[] tmp_var;
         if (I == 0){
             if (IX == 0){   // c(Address Field)
-                System.out.print("Direct load");
                 // EA is just Address Field
-                System.out.print("test is");
                 EA = binaryToInt(Addr_Field);
                 
             }else{          // c(Address Field) + c(IX)
-                System.out.print("Register plus addr");
                 // Get Value in Ix Register
                 int IX_value;
                 if (IX == 1){
@@ -300,18 +274,15 @@ public class CPU {
             }
         }else{
             if (IX == 0){   // c(c(Address Field))
-                System.out.print("pointer");
                 // Get memory index from Address Field
                 int tmp_var2 = binaryToInt(Addr_Field);
                 
                 tmp_var = getMemoryValue(tmp_var2);
-                System.out.println(Arrays.toString(tmp_var));
                 
                 // Get address from earleir address
                 EA = binaryToInt(tmp_var);
                 
             }else{          // c(c(IX) + c(Address Field))
-                System.out.print("Weird");
                 // Get Value in Ix Register
                 int IX_value;
                 if (IX == 1){
@@ -324,15 +295,13 @@ public class CPU {
                 
                 // Get value of Address Field
                 int tmp_var2 = binaryToInt(Addr_Field);
-                
+                int tmp_var3 = binaryToInt(getMemoryValue(tmp_var2));
                 // Add the two together to get memory location of EA
-                tmp_var2 = tmp_var2 + IX_value;
-                EA = binaryToInt(getMemoryValue(tmp_var2));
+                tmp_var3 = tmp_var3 + IX_value;
+                EA = binaryToInt(getMemoryValue(tmp_var3));
                 
             }
         }
-        System.out.print("EA is");
-        System.out.println(EA);
         
         int ret[] = {EA,I,R,IX, binaryToInt(Addr_Field)};
         return ret;
@@ -360,9 +329,9 @@ public class CPU {
             ret_val = "STR";
         }else if("000011".equals(opCode)){
             ret_val = "LDA";
-        }else if("101001".equals(opCode)){
+        }else if("100001".equals(opCode)){
             ret_val = "LDX";
-        }else if("101010".equals(opCode)){
+        }else if("100010".equals(opCode)){
             ret_val = "STX";
         }else if("001010".equals(opCode)){
             ret_val = "JZ";
@@ -401,7 +370,7 @@ public class CPU {
         }else if("000000".equals(opCode)){
             ret_val = "HLT";
         }else{
-            ret_val = "NOT";
+            ret_val = "HLT";
         }
         return ret_val;
     }
@@ -503,6 +472,9 @@ public class CPU {
         if (row < 6){
             int[] fault_code = new int[]{0,0,0,1};
             MFR.setRegisterValue(fault_code);
+            int [] msg = new int[]{1};
+            HLT.setRegisterValue(msg);
+            
         }else{
             main_Memory.setMemoryValue(row, value);
         }
@@ -539,8 +511,6 @@ public class CPU {
             }else{
                 setMemoryValue(row,value);
             }
-            //System.out.println(Arrays.toString(hexToBinaryArray(tokens[1])));
-            //System.out.println(hexToInt(tokens[0]));
         }
     }
     

@@ -6,6 +6,9 @@
 /**
  *
  * @author shahin
+ * 
+ * Main class that drives GUI. This file creates a CPU object 
+ * and runs the computer by making repeated calls to that object.
  */
 
 import java.awt.event.ActionEvent;
@@ -22,6 +25,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     // Global Vars
     CPU main_CPU;
     int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0};
     boolean run_check = false;
     
     
@@ -53,9 +57,9 @@ public class MachineSimulator extends javax.swing.JFrame {
                 main_CPU.execute("single");
                 
                 // If running, check if halt flag is raised
-                if (main_CPU.getRegisterValue("HLT")[0] == 0){
+                if (main_CPU.getRegisterValue("HLT")[0] == 1){
                     run_check = false;
-                    int [] msg = new int[]{1};
+                    int [] msg = new int[]{0};
                     main_CPU.setRegisterValue("HLT",msg);
                 }
             }
@@ -441,6 +445,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         });
 
         jToggleButton3.setLabel("Halt");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
 
         jButton13.setLabel("Load");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -1134,6 +1143,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        int[] default_PC_loc = new int[]{0,0,0,0,0,0,1,1,0,0,0,0};
+        main_CPU.setRegisterValue("PC",default_PC_loc);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1176,6 +1187,12 @@ public class MachineSimulator extends javax.swing.JFrame {
         main_CPU.setRegisterValue("CC", Reset_small);
         main_CPU.setRegisterValue("MFR", Reset_small);
     }//GEN-LAST:event_jToggleButton5ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        // TODO add your handling code here:
+        int [] msg = new int[]{1};
+        main_CPU.setRegisterValue("HLT",msg);
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     /* 
     Function to Update Values of the registers

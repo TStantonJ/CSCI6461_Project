@@ -6,6 +6,8 @@
 /**
  *
  * @author trs
+ * 
+ * Class Register is the class that all register objects implement.
  */
 
 public class Register {

@@ -7,6 +7,8 @@ import java.util.Arrays;
 /**
  *
  * @author trs
+ * 
+ * Class Memory is the class that the memory objects implement.
  */
 public class Memory {
     
