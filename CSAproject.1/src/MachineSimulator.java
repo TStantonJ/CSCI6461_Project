@@ -524,18 +524,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         Mem_2ValueTextField.setText("jTextField1");
 
         Mem_1ValueTextField.setText("jTextField2");
-        Mem_1ValueTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem_1ValueTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem0ValueTextField.setText("jTextField3");
-        Mem0ValueTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem0ValueTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem1ValueTextField.setText("jTextField4");
 
@@ -557,39 +547,14 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel18.setText("Memory Location + 2");
 
         Mem_2RowTextField.setText("jTextField1");
-        Mem_2RowTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem_2RowTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem_1RowTextField.setText("jTextField1");
-        Mem_1RowTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem_1RowTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem1RowTextField.setText("jTextField1");
-        Mem1RowTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem1RowTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem2RowTextField.setText("jTextField1");
-        Mem2RowTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem2RowTextFieldActionPerformed(evt);
-            }
-        });
 
         Mem0RowTextField.setText("jTextField1");
-        Mem0RowTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mem0RowTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel24.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel24.setText("Mem. Row");
@@ -1273,34 +1238,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         int [] msg = new int[]{1};
         main_CPU.setRegisterValue("HLT",msg);
     }//GEN-LAST:event_HaltButtonActionPerformed
-
-    private void Mem_1ValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_1ValueTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem_1ValueTextFieldActionPerformed
-
-    private void Mem_2RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_2RowTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem_2RowTextFieldActionPerformed
-
-    private void Mem_1RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem_1RowTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem_1RowTextFieldActionPerformed
-
-    private void Mem1RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem1RowTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem1RowTextFieldActionPerformed
-
-    private void Mem2RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem2RowTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem2RowTextFieldActionPerformed
-
-    private void Mem0RowTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem0RowTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem0RowTextFieldActionPerformed
-
-    private void Mem0ValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mem0ValueTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Mem0ValueTextFieldActionPerformed
 
     /* 
     Function to Update Values of the registers

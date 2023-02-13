@@ -1137,17 +1137,11 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField2"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem_1ValueTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem0ValueTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField3"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem0ValueTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem1ValueTextField">
               <Properties>
@@ -1203,41 +1197,26 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem_2RowTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem_1RowTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem_1RowTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem1RowTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem1RowTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem2RowTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem2RowTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Mem0RowTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mem0RowTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
