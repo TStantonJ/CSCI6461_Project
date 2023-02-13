@@ -71,20 +71,32 @@ public class CPU {
                 
                 // Set MAR to location in memory to fetch
                 int Addr= result[4];
-                setRegisterValue("MAR", intToBinaryArray(Integer.toBinaryString(EA)));
+                setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 
                 switch(R) {
                     case 0:
-                        GPR0.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the word to be stored in register
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Set register to value from MBR
+                        GPR0.setRegisterValue(MBR.getRegisterValue());
                         break;
                     case 1:
-                        GPR1.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the word to be stored in register
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Set register to value from MBR
+                        GPR1.setRegisterValue(MBR.getRegisterValue());
                         break;
                     case 2:
-                        GPR2.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the word to be stored in register
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Set register to value from MBR
+                        GPR2.setRegisterValue(MBR.getRegisterValue());
                         break; 
                     default:
-                        GPR3.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the word to be stored in register
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Set register to value from MBR
+                        GPR3.setRegisterValue(MBR.getRegisterValue());
                  }
                 
                 // Set MBR to value just fetched
@@ -99,6 +111,7 @@ public class CPU {
                 int IX= result[3];
                 int Addr= result[4];
                 
+                setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(R) {
                     case 0:
                         // Set MBR to the word to be stored in memory
@@ -132,6 +145,7 @@ public class CPU {
                 int IX= result[3];
                 int Addr= result[4];
                 
+                setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 int[] converted_value = intToBinaryArray(Integer.toBinaryString(EA));
                 switch(R) {
                     case 0:
@@ -153,15 +167,26 @@ public class CPU {
                 int R= result[2];
                 int IX= result[3];
                 int Addr= result[4];
+                
+                setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(IX) {
                     case 1:
-                        X1.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the value loaded from memory
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Load MBR into index register
+                        X1.setRegisterValue(MBR.getRegisterValue());
                         break;
                     case 2:
-                        X2.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the value loaded from memory
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Load MBR into index register
+                        X2.setRegisterValue(MBR.getRegisterValue());
                         break;
                     case 3:
-                        X2.setRegisterValue(getMemoryValue(EA));
+                        // Set MBR to the value loaded from memory
+                        setRegisterValue("MBR", getMemoryValue(EA));
+                        // Load MBR into index register
+                        X2.setRegisterValue(MBR.getRegisterValue());
                         break;
                     default:
                  }
@@ -172,6 +197,8 @@ public class CPU {
                 int R= result[2];
                 int IX= result[3];
                 int Addr= result[4];
+                
+                setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(IX) {
                     case 1:
                         // Set MBR to the word to be stored in memory
@@ -281,6 +308,9 @@ public class CPU {
                 tmp_var = getMemoryValue(tmp_var2);
                 
                 // Get address from earleir address
+                tmp_var2 = binaryToInt(tmp_var);
+                
+                tmp_var = getMemoryValue(tmp_var2);
                 EA = binaryToInt(tmp_var);
                 
             }else{          // c(c(IX) + c(Address Field))
@@ -296,14 +326,12 @@ public class CPU {
                 
                 // Get value of Address Field
                 int tmp_var2 = binaryToInt(Addr_Field);
-                int tmp_var3 = binaryToInt(getMemoryValue(tmp_var2));
                 // Add the two together to get memory location of EA
-                tmp_var3 = tmp_var3 + IX_value;
+                int tmp_var3 = tmp_var2 + IX_value;
                 EA = binaryToInt(getMemoryValue(tmp_var3));
                 
             }
         }
-        
         int ret[] = {EA,I,R,IX, binaryToInt(Addr_Field)};
         return ret;
         
@@ -465,7 +493,18 @@ public class CPU {
     OUT: Int array with the contents of that row
     */
     public int[] getMemoryValue(int row){
-        return main_Memory.getMemoryValue(row);
+        if (row < 6){
+            int[] fault_code = new int[]{0,0,0,1};
+            MFR.setRegisterValue(fault_code);
+            int [] msg = new int[]{1};
+            HLT.setRegisterValue(msg);
+            
+            int[] blank_value = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            return blank_value;
+            
+        }else{
+            return main_Memory.getMemoryValue(row);
+        }
     }
     
      /* 
