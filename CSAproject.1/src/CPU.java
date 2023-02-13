@@ -198,6 +198,7 @@ public class CPU {
                 HLT.setRegisterValue(msg);
             
             }
+             
         }
     }
     
@@ -406,8 +407,10 @@ public class CPU {
             ret_value = GPR1.getRegisterValue();
         }else if("GPR2".equals(register)){
             ret_value = GPR2.getRegisterValue();
-        }else{
+        }else if("GPR3".equals(register)){
             ret_value = GPR3.getRegisterValue();
+        }else{
+            ret_value = HLT.getRegisterValue();
         }
         return ret_value;
     }
@@ -448,9 +451,11 @@ public class CPU {
             GPR1.setRegisterValue(value);
         }else if("GPR2".equals(register)){
             GPR2.setRegisterValue(value);
-        }else{
+        }else if("GPR3".equals(register)){
             GPR3.setRegisterValue(value);
-        } 
+        }else{
+            HLT.setRegisterValue(value);
+        }
         
     }
     
