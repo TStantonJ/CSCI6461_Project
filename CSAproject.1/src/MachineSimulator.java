@@ -39,12 +39,12 @@ public class MachineSimulator extends javax.swing.JFrame {
         main_CPU = new CPU();
         int[] tmp_val = {0,0,0,0,0,0,0,0,1,0,1,0};
         main_CPU.setRegisterValue("PC",tmp_val);
-        new Timer(delay, taskPerformer).start();
+        new Timer(delay, mainLoop).start();
     }
     
     // Main loop of the program that runs every 500 mil
     int delay = 500; //milliseconds
-    ActionListener taskPerformer = new ActionListener() {
+    ActionListener mainLoop = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             
             // Update Registers for display

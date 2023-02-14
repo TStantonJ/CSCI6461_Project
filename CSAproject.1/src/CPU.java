@@ -494,13 +494,13 @@ public class CPU {
     */
     public int[] getMemoryValue(int row){
         if (row < 6){
-            int[] fault_code = new int[]{0,0,0,1};
-            MFR.setRegisterValue(fault_code);
-            int [] msg = new int[]{1};
-            HLT.setRegisterValue(msg);
+            //int[] fault_code = new int[]{0,0,0,1};
+            //MFR.setRegisterValue(fault_code);
+            //int [] msg = new int[]{1};
+            //HLT.setRegisterValue(msg);
             
-            int[] blank_value = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-            return blank_value;
+            int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            return in_button_array;
             
         }else{
             return main_Memory.getMemoryValue(row);
