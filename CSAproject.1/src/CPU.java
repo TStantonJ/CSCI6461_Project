@@ -11,7 +11,6 @@
  * manipulate these objects.
  */
 import java.io.*;
-import java.util.Scanner;
 import java.util.Arrays;
 
 public class CPU {
@@ -531,9 +530,9 @@ public class CPU {
     OUT: N/A
     */
     public void loadFileIntoMemory() throws FileNotFoundException, IOException{
-        //File file = new File("src/IPL.txt");
-        //Scanner sc = new Scanner(file);
-        FileInputStream fstream = new FileInputStream("src/IPL.txt");
+        
+        String path_var = System.getProperty("user.dir") + "/IPL.txt";
+        FileInputStream fstream = new FileInputStream(path_var);
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         
