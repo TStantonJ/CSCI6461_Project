@@ -46,12 +46,13 @@ public class CPU {
             int converted_address = binaryToInt(instruction_address);
             setRegisterValue("IR",getMemoryValue(converted_address)); 
             
-            // Increment PC 
+            // Flag to tell CPU to increment PC after instruction or not
+            boolean inc_PC = true;
+            
+            // Local variable to store current PC and transfer PC
             int[] cur_PC = getRegisterValue("PC");
-            int trans_PC = binaryToInt(cur_PC);
-            trans_PC = trans_PC+1;
-            int[] new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
-            setRegisterValue("PC", new_PC);
+            int trans_PC;
+            int[] new_PC;
             
             
             // Read and decode instruction
@@ -208,6 +209,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 1:
@@ -216,6 +218,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 2:
@@ -224,6 +227,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 3:
@@ -232,6 +236,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     default:
@@ -248,6 +253,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 1:
@@ -256,6 +262,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 2:
@@ -264,6 +271,7 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     case 3:
@@ -272,25 +280,34 @@ public class CPU {
                             trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                             new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
+                            inc_PC = false;
                         }
                         break;
                     default:
                 }
                 
             }else if("JCC".equals(instruction)){
-                
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
+                // JUMP if condition code
+                // TODO: Implement
                 
             }else if("JMA".equals(instruction)){
-                
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
+                // Unconditional JUMP to address=EA
+                // Dont save PC
+                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                setRegisterValue("PC", new_PC);
              
             }else if("JSR".equals(instruction)){
+                // Unconditional JUMP to address=EA
+                // Save PC to register 3 and unset PC increment flag
+                cur_PC = getRegisterValue("PC");
+                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
+                setRegisterValue("GPR3", new_PC);
+                setRegisterValue("PC", new_PC);
+                
+                inc_PC = false;
              
             }else if("RFS".equals(instruction)){
                 
@@ -314,6 +331,14 @@ public class CPU {
             
             }
              
+            if (inc_PC){
+                // Increment PC by one if applicable 
+                cur_PC = getRegisterValue("PC");
+                trans_PC = binaryToInt(cur_PC);
+                trans_PC = trans_PC+1;
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                setRegisterValue("PC", new_PC);
+            }
         }
     }
     
