@@ -59,17 +59,17 @@ public class CPU {
             int[] OPcode = Arrays.copyOfRange(instructionBinary, 0, 6);
             String instruction = decodeOPCode(OPcode);
             
+            int[] result = computeEffectiveAddr(instructionBinary);
+            int EA = result[0];
+            int I= result[1];
+            int R= result[2];
+            int IX= result[3];
+            int Addr= result[4];
+            
             // Execute instruction
             if ("LDR".equals(instruction)){     //Load instruction
                 
-                int[] result = computeEffectiveAddr(instructionBinary);
-                int EA = result[0];
-                int I= result[1];
-                int R= result[2];
-                int IX= result[3];
-                
                 // Set MAR to location in memory to fetch
-                int Addr= result[4];
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 
                 switch(R) {
@@ -103,13 +103,6 @@ public class CPU {
                 
             }else if("STR".equals(instruction)){
                 
-                int[] result = computeEffectiveAddr(instructionBinary);
-                int EA = result[0];
-                int I= result[1];
-                int R= result[2];
-                int IX= result[3];
-                int Addr= result[4];
-                
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(R) {
                     case 0:
@@ -137,12 +130,6 @@ public class CPU {
                         setMemoryValue(EA,MBR.getRegisterValue());
                  }
             }else if("LDA".equals(instruction)){
-                int[] result = computeEffectiveAddr(instructionBinary);
-                int EA = result[0];
-                int I= result[1];
-                int R= result[2];
-                int IX= result[3];
-                int Addr= result[4];
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 int[] converted_value = intToBinaryArray(Integer.toBinaryString(EA));
@@ -160,12 +147,7 @@ public class CPU {
                         GPR3.setRegisterValue(converted_value);
                  }
             }else if("LDX".equals(instruction)){
-                int[] result = computeEffectiveAddr(instructionBinary);
-                int EA = result[0];
-                int I= result[1];
-                int R= result[2];
-                int IX= result[3];
-                int Addr= result[4];
+                
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(IX) {
@@ -190,12 +172,6 @@ public class CPU {
                     default:
                  }
             }else if("STX".equals(instruction)){
-                int[] result = computeEffectiveAddr(instructionBinary);
-                int EA = result[0];
-                int I= result[1];
-                int R= result[2];
-                int IX= result[3];
-                int Addr= result[4];
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 switch(IX) {
@@ -219,6 +195,119 @@ public class CPU {
                         break; 
                     default:
                 }
+            
+            // ------ TRANSFER INSTRUCTIONS ------
+            }else if("JZ".equals(instruction)){
+                // JUMP if c(r) is Zero
+                // If 0, set pc to EA
+                // TODO: store pc somewhere
+                switch(R) {
+                    case 0:
+                        if (binaryToInt(getRegisterValue("GPR0")) == 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 1:
+                        if (binaryToInt(getRegisterValue("GPR1")) == 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 2:
+                        if (binaryToInt(getRegisterValue("GPR2")) == 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 3:
+                        if (binaryToInt(getRegisterValue("GPR3")) == 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    default:
+                }
+            
+            }else if("JNE".equals(instruction)){
+                // JUMP if c(r) is not Zero
+                // If not 0, set pc to EA
+                // TODO: store pc somewhere
+                switch(R) {
+                    case 0:
+                        if (binaryToInt(getRegisterValue("GPR0")) != 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 1:
+                        if (binaryToInt(getRegisterValue("GPR1")) != 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 2:
+                        if (binaryToInt(getRegisterValue("GPR2")) != 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    case 3:
+                        if (binaryToInt(getRegisterValue("GPR3")) != 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                        }
+                        break;
+                    default:
+                }
+                
+            }else if("JCC".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+                
+            }else if("JMA".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+             
+            }else if("JSR".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+             
+            }else if("RFS".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+                
+            }else if("SOB".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+                
+                
+            }else if("JGE".equals(instruction)){
+                
+                int [] msg = new int[]{1};
+                HLT.setRegisterValue(msg);
+            
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
