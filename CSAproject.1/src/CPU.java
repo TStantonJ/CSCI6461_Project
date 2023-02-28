@@ -199,9 +199,8 @@ public class CPU {
             
             // ------ TRANSFER INSTRUCTIONS ------
             }else if("JZ".equals(instruction)){
-                // JUMP if c(r) is Zero
+                // JUMP if c(r) is Zero and unset PC increment flag
                 // If 0, set pc to EA
-                // TODO: store pc somewhere
                 switch(R) {
                     case 0:
                         if (binaryToInt(getRegisterValue("GPR0")) == 0){
@@ -243,7 +242,7 @@ public class CPU {
                 }
             
             }else if("JNE".equals(instruction)){
-                // JUMP if c(r) is not Zero
+                // JUMP if c(r) is not Zero and unset PC increment flag
                 // If not 0, set pc to EA
                 // TODO: store pc somewhere
                 switch(R) {
@@ -291,11 +290,13 @@ public class CPU {
                 // TODO: Implement
                 
             }else if("JMA".equals(instruction)){
-                // Unconditional JUMP to address=EA
+                // Unconditional JUMP to address=EA and unset PC increment flag
                 // Dont save PC
                 trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 setRegisterValue("PC", new_PC);
+                
+                inc_PC = false;
              
             }else if("JSR".equals(instruction)){
                 // Unconditional JUMP to address=EA
@@ -304,26 +305,60 @@ public class CPU {
                 trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 
-                setRegisterValue("GPR3", new_PC);
                 setRegisterValue("PC", new_PC);
+                setRegisterValue("GPR3", incrementBinaryArray(cur_PC));
                 
                 inc_PC = false;
              
             }else if("RFS".equals(instruction)){
-                
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
+                // Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field.
+                // TODO: Implement
                 
             }else if("SOB".equals(instruction)){
-                
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
-                
+                // Subtract One and Branch. R = 0..3
+                // TODO: Implement
                 
             }else if("JGE".equals(instruction)){
-                
-                int [] msg = new int[]{1};
-                HLT.setRegisterValue(msg);
+                // JUMP if c(r) is greater than or equal to 0
+                switch(R) {
+                    case 0:
+                        if (binaryToInt(getRegisterValue("GPR0")) >= 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                            inc_PC = false;
+                        }
+                        break;
+                    case 1:
+                        if (binaryToInt(getRegisterValue("GPR1")) >= 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                            inc_PC = false;
+                        }
+                        break;
+                    case 2:
+                        if (binaryToInt(getRegisterValue("GPR2")) >= 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                            inc_PC = false;
+                        }
+                        break;
+                    case 3:
+                        if (binaryToInt(getRegisterValue("GPR3")) >= 0){
+                            cur_PC = getRegisterValue("PC");
+                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                            setRegisterValue("PC", new_PC);
+                            inc_PC = false;
+                        }
+                        break;
+                    default:
+                }
             
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
@@ -333,11 +368,7 @@ public class CPU {
              
             if (inc_PC){
                 // Increment PC by one if applicable 
-                cur_PC = getRegisterValue("PC");
-                trans_PC = binaryToInt(cur_PC);
-                trans_PC = trans_PC+1;
-                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
-                setRegisterValue("PC", new_PC);
+                setRegisterValue("PC", incrementBinaryArray(getRegisterValue("PC")));
             }
         }
     }
@@ -805,5 +836,20 @@ public class CPU {
             
         }
         return ret_val;
+    }
+    
+    /* 
+    Function to increment a register by 1
+    IN: Register contents to be incremented
+    OUT: Register contents incremented
+    */
+    public int[] incrementBinaryArray(int[] in_array){
+        // Increment PC by one if applicable 
+        
+        int converted_array = binaryToInt(in_array);
+        converted_array = converted_array+1;
+        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_array));
+        
+        return out_array;
     }
 }
