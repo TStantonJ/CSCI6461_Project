@@ -497,7 +497,6 @@ public class CPU {
         
         if ("000001".equals(opCode)){
             ret_val = "LDR";
-            
         }else if("000010".equals(opCode)){
             ret_val = "STR";
         }else if("000011".equals(opCode)){
@@ -506,7 +505,10 @@ public class CPU {
             ret_val = "LDX";
         }else if("100010".equals(opCode)){
             ret_val = "STX";
-        }else if("001010".equals(opCode)){
+            
+            
+        // NEEDS to be checked
+        }else if("001000".equals(opCode)){
             ret_val = "JZ";
         }else if("001011".equals(opCode)){
             ret_val = "JNE";
