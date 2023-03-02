@@ -510,38 +510,64 @@ public class CPU {
         // NEEDS to be checked
         }else if("001000".equals(opCode)){
             ret_val = "JZ";
-        }else if("001011".equals(opCode)){
+        }else if("001001".equals(opCode)){
             ret_val = "JNE";
-        }else if("001100".equals(opCode)){
+        }else if("001010".equals(opCode)){
             ret_val = "JCC";
-        }else if("001101".equals(opCode)){
+        }else if("001011".equals(opCode)){
             ret_val = "JMA";
-        }else if("001110".equals(opCode)){
+        }else if("001100".equals(opCode)){
             ret_val = "JSR";
-        }else if("001111".equals(opCode)){
+        }else if("001101".equals(opCode)){
             ret_val = "RFS";
-        }else if("010000".equals(opCode)){
+        }else if("001110".equals(opCode)){
             ret_val = "SOB";
-        }else if("010001".equals(opCode)){
+        }else if("001111".equals(opCode)){
             ret_val = "JGE";
         }else if("000100".equals(opCode)){
             ret_val = "AMR";
         }else if("000101".equals(opCode)){
-            ret_val = "STR";
+            ret_val = "SMR";
         }else if("000110".equals(opCode)){
-            ret_val = "STR";
+            ret_val = "AIR";
         }else if("000111".equals(opCode)){
-            ret_val = "STR";
-        }else if("010100".equals(opCode)){
+            ret_val = "SIR";
+        }else if("010000".equals(opCode)){
             ret_val = "MLT";
-        }else if("010101".equals(opCode)){
+        }else if("010001".equals(opCode)){
             ret_val = "DVD";
-        }else if("010110".equals(opCode)){
+        }else if("010010".equals(opCode)){
             ret_val = "TRR";
-        }else if("010111".equals(opCode)){
+        }else if("010011".equals(opCode)){
             ret_val = "AND";
-        }else if("011000".equals(opCode)){
+        }else if("010100".equals(opCode)){
             ret_val = "ORR";
+        }else if("010101".equals(opCode)){
+            ret_val = "NOT";
+        }else if("011001".equals(opCode)){
+            ret_val = "SRC";
+        }else if("011010".equals(opCode)){
+            ret_val = "RRC";
+        }else if("110001".equals(opCode)){
+            ret_val = "IN";
+        }else if("110010".equals(opCode)){
+            ret_val = "OUT";
+        }else if("110011".equals(opCode)){
+            ret_val = "CHK";
+        }else if("011011".equals(opCode)){
+            ret_val = "FADD";
+        }else if("111000".equals(opCode)){
+            ret_val = "FSUB";
+        }else if("011101".equals(opCode)){
+            ret_val = "VADD";
+        }else if("011110".equals(opCode)){
+            ret_val = "VSUB";
+        }else if("011111".equals(opCode)){
+            ret_val = "CNVRT";
+        }else if("101000".equals(opCode)){
+            ret_val = "LDFR";
+        }else if("".equals(opCode)){
+            ret_val = "STFR";
         }else if("000000".equals(opCode)){
             ret_val = "HLT";
         }else{
