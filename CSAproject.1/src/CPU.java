@@ -240,7 +240,6 @@ public class CPU {
                         break;
                     default:
                 }
-            
             }else if("JNE".equals(instruction)){
                 // JUMP if c(r) is not Zero and unset PC increment flag
                 // If not 0, set pc to EA
@@ -284,7 +283,6 @@ public class CPU {
                         break;
                     default:
                 }
-                
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
                 // TODO: Implement
@@ -297,7 +295,6 @@ public class CPU {
                 setRegisterValue("PC", new_PC);
                 
                 inc_PC = false;
-             
             }else if("JSR".equals(instruction)){
                 // Unconditional JUMP to address=EA
                 // Save PC to register 3 and unset PC increment flag
@@ -359,7 +356,118 @@ public class CPU {
                         break;
                     default:
                 }
-            
+                
+            // ------Arithmetic Instructions------    
+            }else if("AMR".equals(instruction)){
+                // Add contents at memory to contents of register. R = 0..3
+                // TODO: 
+                int[] register_array;
+                int[] memory_array;
+                switch(R) {
+                    case 0:
+                        register_array = getRegisterValue("GPR0");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP0",addBinaryArrays(register_array,memory_array));
+                        break;
+                    case 1:
+                        register_array = getRegisterValue("GPR1");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP1",addBinaryArrays(register_array,memory_array));
+                        break;
+                    case 2:
+                        register_array = getRegisterValue("GPR2");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP2",addBinaryArrays(register_array,memory_array));
+                        break;
+                    case 3:
+                        register_array = getRegisterValue("GPR3");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP3",addBinaryArrays(register_array,memory_array));
+                        break;
+                    default: 
+                }
+            }else if("SMR".equals(instruction)){
+                // Add contents at memory to contents of register. R = 0..3
+                // TODO: 
+                int[] register_array;
+                int[] memory_array;
+                switch(R) {
+                    case 0:
+                        register_array = getRegisterValue("GPR0");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP0",subtractBinaryArrays(register_array,memory_array));
+                        break;
+                    case 1:
+                        register_array = getRegisterValue("GPR1");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP1",subtractBinaryArrays(register_array,memory_array));
+                        break;
+                    case 2:
+                        register_array = getRegisterValue("GPR2");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP2",subtractBinaryArrays(register_array,memory_array));
+                        break;
+                    case 3:
+                        register_array = getRegisterValue("GPR3");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP3",subtractBinaryArrays(register_array,memory_array));
+                        break;
+                    default: 
+                }
+            }else if("AIR".equals(instruction)){
+                // Add contents  of immediate(addr) to contents of register. R = 0..3
+                // 
+                int[] register_array;
+                int[] memory_array;
+                switch(R) {
+                    case 0:
+                        register_array = getRegisterValue("GPR0");
+                        setRegisterValue("GRP0",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 1:
+                        register_array = getRegisterValue("GPR1");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP1",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 2:
+                        register_array = getRegisterValue("GPR2");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP2",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 3:
+                        register_array = getRegisterValue("GPR3");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP3",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    default: 
+                }
+            }else if("SIR".equals(instruction)){
+                // Add contents  of immediate(addr) to contents of register. R = 0..3
+                // 
+                int[] register_array;
+                int[] memory_array;
+                switch(R) {
+                    case 0:
+                        register_array = getRegisterValue("GPR0");
+                        setRegisterValue("GRP0",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 1:
+                        register_array = getRegisterValue("GPR1");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP1",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 2:
+                        register_array = getRegisterValue("GPR2");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP2",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    case 3:
+                        register_array = getRegisterValue("GPR3");
+                        memory_array = getMemoryValue(EA);
+                        setRegisterValue("GRP3",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        break;
+                    default: 
+                }
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
@@ -877,6 +985,38 @@ public class CPU {
         int converted_array = binaryToInt(in_array);
         converted_array = converted_array+1;
         int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_array));
+        
+        return out_array;
+    }
+    
+    /* 
+    Function to add two binary arrays together
+    IN: Registers contents to be incremented
+    OUT: Register content added together
+    TODO: handle overflows
+    */
+    public int[] addBinaryArrays(int[] in_array_1, int[] in_array_2){
+        int converted_array_1 = binaryToInt(in_array_1);
+        int converted_array_2 = binaryToInt(in_array_2);
+        
+        int converted_out_array = converted_array_1 + converted_array_2;
+        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+        
+        return out_array;
+    }
+    
+    /* 
+    Function to add two binary arrays together
+    IN: Registers contents to be incremented
+    OUT: Register content added together
+    TODO: handle underflows
+    */
+    public int[] subtractBinaryArrays(int[] in_array_1, int[] in_array_2){
+        int converted_array_1 = binaryToInt(in_array_1);
+        int converted_array_2 = binaryToInt(in_array_2);
+        
+        int converted_out_array = converted_array_1 - converted_array_2;
+        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
         
         return out_array;
     }
