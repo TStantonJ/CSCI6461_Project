@@ -387,7 +387,7 @@ public class CPU {
                     default: 
                 }
             }else if("SMR".equals(instruction)){
-                // Add contents at memory to contents of register. R = 0..3
+                // Subtract contents at memory to contents of register. R = 0..3
                 // TODO: 
                 int[] register_array;
                 int[] memory_array;
@@ -442,7 +442,7 @@ public class CPU {
                     default: 
                 }
             }else if("SIR".equals(instruction)){
-                // Add contents  of immediate(addr) to contents of register. R = 0..3
+                // Subtract contents  of immediate(addr) to contents of register. R = 0..3
                 // 
                 int[] register_array;
                 int[] memory_array;
@@ -468,6 +468,107 @@ public class CPU {
                         break;
                     default: 
                 }
+                
+            // ------Logical Instructions------ 
+            }else if("MLT".equals(instruction)){
+                // Multiply contents  of register RX to contents of register RY. R(X,Y) must = 0,2
+                // Store results in rX, rX+1
+                // RX = R, RY = IX
+                // TODO: Check endianness
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int RX = 0;
+                if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
+                    //TODO: raise error
+                    System.out.println("Error in mul");
+                }else{
+                    // Get RX register
+                    switch(R) {
+                        case 0:
+                            register_array_RX = getRegisterValue("GPR0");
+                            RX = 0;
+                            break;
+                        case 2:
+                            register_array_RX = getRegisterValue("GPR2");
+                            RX = 2;
+                            break;
+                        default: 
+                    }
+                    // Get RY register
+                    switch(IX) {
+                        case 0:
+                            register_array_RY = getRegisterValue("GPR0");
+                            break;
+                        case 2:
+                            register_array_RY = getRegisterValue("GPR2");
+                            break;
+                        default: 
+                    }
+                    // Multiply and put into RX,RX+1
+                    int[][] multiply_return = multiplyBinaryArrays(register_array_RX,register_array_RY);
+                    int[] RX_value_0 = multiply_return[0];
+                    int[] RX_value_1 = multiply_return[1];
+                    
+                    if (RX == 0){
+                        setRegisterValue("GPR0",RX_value_0);
+                        setRegisterValue("GPR1",RX_value_1);
+                    }else{
+                        setRegisterValue("GPR2",RX_value_0);
+                        setRegisterValue("GPR3",RX_value_1);
+                    }
+                }
+            }else if("DVD".equals(instruction)){
+                // Divide contents  of register RX to contents of register RY. R(X,Y) must = 0,2
+                // Store results in rX(quotient), rX+1(remainder)
+                // RX = R, RY = IX
+                // TODO: set divide by zero flag
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int RX = 0;
+                if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
+                    //TODO: raise error
+                    System.out.println("Error in mul");
+                }else{
+                    // Get RX register
+                    switch(R) {
+                        case 0:
+                            register_array_RX = getRegisterValue("GPR0");
+                            RX = 0;
+                            break;
+                        case 2:
+                            register_array_RX = getRegisterValue("GPR2");
+                            RX = 2;
+                            break;
+                        default: 
+                    }
+                    // Get RY register
+                    switch(IX) {
+                        case 0:
+                            register_array_RY = getRegisterValue("GPR0");
+                            break;
+                        case 2:
+                            register_array_RY = getRegisterValue("GPR2");
+                            break;
+                        default: 
+                    }
+                    // Multiply and put into RX,RX+1
+                    int[][] divide_return = divideBinaryArrays(register_array_RX,register_array_RY);
+                    int[] RX_value_0 = divide_return[0];
+                    int[] RX_value_1 = divide_return[1];
+                    
+                    if (RX == 0){
+                        setRegisterValue("GPR0",RX_value_0);
+                        setRegisterValue("GPR1",RX_value_1);
+                    }else{
+                        setRegisterValue("GPR2",RX_value_0);
+                        setRegisterValue("GPR3",RX_value_1);
+                    }
+                }      
+            }else if("TRR".equals(instruction)){
+                // Test if contents  of register RX equals contents of register RY. 
+                // RX = R, RY = IX
+                // TODO: 
+                
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
@@ -991,7 +1092,7 @@ public class CPU {
     
     /* 
     Function to add two binary arrays together
-    IN: Registers contents to be incremented
+    IN: Registers contents to be added
     OUT: Register content added together
     TODO: handle overflows
     */
@@ -1007,7 +1108,7 @@ public class CPU {
     
     /* 
     Function to add two binary arrays together
-    IN: Registers contents to be incremented
+    IN: Registers contents to be subtracted
     OUT: Register content added together
     TODO: handle underflows
     */
@@ -1019,5 +1120,54 @@ public class CPU {
         int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
         
         return out_array;
+    }
+    
+    /* 
+    Function to multiply two binary arrays together
+    IN: Registers contents to be multiplied
+    OUT: two binary arrays representing upper and lower halves of result( Little endian, lower half first)
+    TODO: Change single filled limit from 65535 to 32768 if signed ints
+    */
+    public int[][] multiplyBinaryArrays(int[] in_array_1, int[] in_array_2){
+        int[] out_array_1;
+        int[] out_array_2;
+        
+        int converted_array_1 = binaryToInt(in_array_1);
+        int converted_array_2 = binaryToInt(in_array_2);
+        int converted_out_number = converted_array_1 * converted_array_2;
+       
+        if (converted_out_number < 65535){
+            out_array_1 = intToBinaryArrayShort(Integer.toBinaryString(converted_out_number));
+            out_array_2 = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        }else{
+            int lower_amnt = 65535;
+            int upper_amnt = converted_out_number - 65535;
+            out_array_1 = intToBinaryArrayShort(Integer.toBinaryString(lower_amnt));
+            out_array_2 = intToBinaryArrayShort(Integer.toBinaryString(upper_amnt));
+        }
+        
+        
+        int[][] return_package = {out_array_1,out_array_2};
+        return return_package;
+    }
+    /* 
+    Function to Divide two binary arrays together
+    IN: Registers contents to be Divdie
+    OUT: two binary arrays representing Quotient and Remainder(in that order)
+    TODO: Verify
+    */
+    public int[][] divideBinaryArrays(int[] in_array_1, int[] in_array_2){
+        int[] out_array_1;
+        int[] out_array_2;
+        
+        int converted_array_1 = binaryToInt(in_array_1);
+        int converted_array_2 = binaryToInt(in_array_2);
+       
+        out_array_1 = intToBinaryArrayShort(Integer.toBinaryString(converted_array_1/converted_array_2));
+        out_array_2 = intToBinaryArrayShort(Integer.toBinaryString(converted_array_1%converted_array_2));
+        
+        
+        int[][] return_package = {out_array_1,out_array_2};
+        return return_package;
     }
 }
