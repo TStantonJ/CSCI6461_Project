@@ -1105,6 +1105,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private void PCLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCLoadButtonActionPerformed
         // TODO add your handling code here:
         main_CPU.setRegisterValue("PC", Arrays.copyOfRange(in_button_array,4, 16));
+        System.out.println("PC counter value: "+ main_CPU.PC.getRegisterValue());
     }//GEN-LAST:event_PCLoadButtonActionPerformed
 
     private void HaltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HaltButtonActionPerformed

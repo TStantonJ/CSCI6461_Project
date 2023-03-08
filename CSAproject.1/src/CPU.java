@@ -31,7 +31,7 @@ public class CPU {
     Register HLT = new Register(1);
     
     Memory main_Memory = new Memory();
-
+    Cache cache_Memory = new Cache();
     
     /* 
     Function to execute a Single Step or Run
@@ -43,6 +43,7 @@ public class CPU {
         if ("single".equals(type)){
             // Use PC to get instruction location and add it IR
             int[] instruction_address = getRegisterValue("PC");
+            System.out.println(instruction_address);
             int converted_address = binaryToInt(instruction_address);
             setRegisterValue("IR",getMemoryValue(converted_address)); 
             

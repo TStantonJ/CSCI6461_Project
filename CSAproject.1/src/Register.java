@@ -63,6 +63,7 @@ public class Register {
    private void initRegisterSize(int register_size){
        this.register_size = register_size;
        this.register_value = new int[register_size];
+       System.out.println(register_value);
        
    }
 }
