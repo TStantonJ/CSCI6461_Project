@@ -568,6 +568,188 @@ public class CPU {
                 // Test if contents  of register RX equals contents of register RY. 
                 // RX = R, RY = IX
                 // TODO: 
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                // Get RX register
+                switch(R) {
+                    case 0:
+                        register_array_RX = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        register_array_RX = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        register_array_RX = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        register_array_RX = getRegisterValue("GPR3");
+                        break;
+                    default: 
+                }
+                int RX =  binaryToInt(register_array_RX);
+                // Get RY register
+                switch(IX) {
+                    case 0:
+                        register_array_RY = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        register_array_RY = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        register_array_RY = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        register_array_RY = getRegisterValue("GPR3");
+                        break;
+                    default: 
+                }
+                int RY =  binaryToInt(register_array_RY);
+                // Test equality
+                if(RX == RY){
+                    setCC(3,true);
+                }else{
+                    setCC(3,false);
+                }
+            }else if("AND".equals(instruction)){
+                // Bitwise AND of RX and RY
+                // RX = R, RY = IX
+                // TODO: 
+                String RX = "";
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                // Get RX register
+                switch(R) {
+                    case 0:
+                        register_array_RX = getRegisterValue("GPR0");
+                        RX = "GPR0";
+                        break;
+                    case 1:
+                        register_array_RX = getRegisterValue("GPR1");
+                        RX = "GPR1";
+                        break;
+                    case 2:
+                        register_array_RX = getRegisterValue("GPR2");
+                        RX = "GPR2";
+                        break;
+                    case 3:
+                        register_array_RX = getRegisterValue("GPR3");
+                        RX = "GPR3";
+                        break;
+                    default: 
+                }
+                // Get RY register
+                switch(IX) {
+                    case 0:
+                        register_array_RY = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        register_array_RY = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        register_array_RY = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        register_array_RY = getRegisterValue("GPR3");
+                        break;
+                    default: 
+                }
+                // Perform AND
+                int[] register_array_final = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                for (int i = 0; i<16; i++){
+                    if (register_array_RX[i] == register_array_RY[i]){
+                        register_array_final[i] = 1;
+                    }
+                }
+                setRegisterValue(RX,register_array_final);
+            }else if("ORR".equals(instruction)){
+                // Bitwise ORR of RX and RY
+                // RX = R, RY = IX
+                // TODO: 
+                String RX = "";
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                // Get RX register
+                switch(R) {
+                    case 0:
+                        register_array_RX = getRegisterValue("GPR0");
+                        RX = "GPR0";
+                        break;
+                    case 1:
+                        register_array_RX = getRegisterValue("GPR1");
+                        RX = "GPR1";
+                        break;
+                    case 2:
+                        register_array_RX = getRegisterValue("GPR2");
+                        RX = "GPR2";
+                        break;
+                    case 3:
+                        register_array_RX = getRegisterValue("GPR3");
+                        RX = "GPR3";
+                        break;
+                    default: 
+                }
+                // Get RY register
+                switch(IX) {
+                    case 0:
+                        register_array_RY = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        register_array_RY = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        register_array_RY = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        register_array_RY = getRegisterValue("GPR3");
+                        break;
+                    default: 
+                }
+                // Perform ORR
+                int[] register_array_final = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                for (int i = 0; i<16; i++){
+                    if (register_array_RX[i] == 1 || register_array_RY[i] == 1){
+                        register_array_final[i] = 1;
+                    }
+                }
+                setRegisterValue(RX,register_array_final);
+            }else if("NOT".equals(instruction)){
+                // Bitwise NOT of RX 
+                // RX = R
+                // TODO: 
+                String RX = "";
+                int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                // Get RX register
+                switch(R) {
+                    case 0:
+                        register_array_RX = getRegisterValue("GPR0");
+                        RX = "GPR0";
+                        break;
+                    case 1:
+                        register_array_RX = getRegisterValue("GPR1");
+                        RX = "GPR1";
+                        break;
+                    case 2:
+                        register_array_RX = getRegisterValue("GPR2");
+                        RX = "GPR2";
+                        break;
+                    case 3:
+                        register_array_RX = getRegisterValue("GPR3");
+                        RX = "GPR3";
+                        break;
+                    default: 
+                }
+               
+                // Perform NOT
+                int[] register_array_final = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                for (int i = 0; i<16; i++){
+                    if (register_array_RX[i] == 0){
+                        register_array_final[i] = 1;
+                    }else{
+                        register_array_final[i] = 0;
+                    }
+                }
+                setRegisterValue(RX,register_array_final);
                 
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
@@ -1169,5 +1351,23 @@ public class CPU {
         
         int[][] return_package = {out_array_1,out_array_2};
         return return_package;
+    }
+    /* 
+    Function to set a bit in the CC register
+    IN: Bit to set in CC AND value to set it to
+    OUT: N/A
+    TODO: Verify
+    */
+    public void setCC(int bit_num, boolean value){
+        int int_value;
+        if (value == false){
+            int_value = 0;
+        }else{
+            int_value = 1;
+        }
+        
+        int[] cur_CC = getRegisterValue("CC");
+        cur_CC[bit_num] = int_value;
+        setRegisterValue("CC",cur_CC);
     }
 }
