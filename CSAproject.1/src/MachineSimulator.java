@@ -1434,8 +1434,10 @@ public class MachineSimulator extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MachineSimulator().setVisible(true);
+                new InputOutputGUI().setVisible(true);
             }
         });
+         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
