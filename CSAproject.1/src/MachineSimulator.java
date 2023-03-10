@@ -18,6 +18,8 @@ import java.io.IOException;
 import javax.swing.Timer;
 import java.util.Arrays;
 import java.util.logging.Level;
+import java.util.*;
+ 
 import java.util.logging.Logger;
 
 public class MachineSimulator extends javax.swing.JFrame {
@@ -49,6 +51,9 @@ public class MachineSimulator extends javax.swing.JFrame {
             
             // Update Registers for display
             updateRegisters();
+            if (main_CPU.getRegisterValue("IOWAIT")[0] == 1){
+                main_CPU.setRegisterValue("KEYBOARD", converTextToArray(KeyboardTextField.getText()));
+            }
             
             // Check if machine is set to run
             if (run_check){
@@ -164,6 +169,10 @@ public class MachineSimulator extends javax.swing.JFrame {
         HaltButton = new javax.swing.JToggleButton();
         LoadLoadButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JToggleButton();
+        PrinterTextField = new javax.swing.JTextField();
+        KeyboardTextField = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -525,7 +534,7 @@ public class MachineSimulator extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(CCTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -979,6 +988,12 @@ public class MachineSimulator extends javax.swing.JFrame {
                         .addGap(31, 31, 31))))
         );
 
+        jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel28.setText("Console Printer");
+
+        jLabel29.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel29.setText("Console Keyboard");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -986,12 +1001,30 @@ public class MachineSimulator extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 1339, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PrinterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 101, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(PrinterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1391,6 +1424,34 @@ public class MachineSimulator extends javax.swing.JFrame {
     }
     
     /* 
+    Function to convert a textbox to binary array
+    IN: N/A
+    OUT: N/A
+    */
+    public int[] converTextToArray(String value){
+        int val = Integer.valueOf(value.charAt(0));
+        
+        
+        
+        return main_CPU.intToBinaryArray(Integer.toString(val));
+    }
+    
+    static String reverse(String input){
+        char[] a = input.toCharArray();
+        int l, r = 0;
+        r = a.length - 1;
+ 
+        for (l = 0; l < r; l++, r--)
+        {
+            // Swap values of l and r
+            char temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+        }
+        return String.valueOf(a);
+    }
+    
+    /* 
     Function to format int[] values for display on the GUI
     IN: int[] array representing the value of a register
     OUT: String representing the converted value
@@ -1457,6 +1518,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JTextField IXR2TextField;
     private javax.swing.JButton IXR3LoadButton;
     private javax.swing.JTextField IXR3TextField;
+    private javax.swing.JTextField KeyboardTextField;
     private javax.swing.JButton LoadLoadButton;
     private javax.swing.JButton MARLoadButton;
     private javax.swing.JTextField MARTextField;
@@ -1475,6 +1537,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JTextField Mem_2ValueTextField;
     private javax.swing.JButton PCLoadButton;
     private javax.swing.JTextField PCTextfField;
+    private javax.swing.JTextField PrinterTextField;
     private javax.swing.JToggleButton ResetButton;
     private javax.swing.JButton RunButton;
     private javax.swing.JButton STLoadButton;
@@ -1500,6 +1563,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

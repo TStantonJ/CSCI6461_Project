@@ -28,7 +28,14 @@ public class CPU {
     Register GPR1 = new Register(16);
     Register GPR2 = new Register(16);
     Register GPR3 = new Register(16);
+    
+    Register PRINT_FLAG = new Register(1);
+    Register PRINTER = new Register(16);
+    Register KEYBOARD = new Register(16);
+    
     Register HLT = new Register(1);
+    Register WAIT = new Register(1);
+    Register IOWAIT = new Register(1);
     
     Memory main_Memory = new Memory();
 
@@ -750,7 +757,73 @@ public class CPU {
                     }
                 }
                 setRegisterValue(RX,register_array_final);
+            }else if("SRC".equals(instruction)){
+                // Shift register by count
+                // TODO: 
+                int[] count_array = Arrays.copyOfRange(instructionBinary, 12, 16); 
+                int count = binaryToInt(count_array);
+                // Calculate AL and LR from IX field
+                int al;
+                int lr;
+                switch(IX){
+                    case 0:
+                        al = 0;
+                        lr = 0;
+                        break;
+                    case 1:
+                        al = 0;
+                        lr = 1;
+                        break;
+                    case 2:
+                        al = 1;
+                        lr = 0;
+                        break;
+                    case 3:
+                        al = 1;
+                        lr = 1;
+                        break;
+                }
+                // COMPLETE TGIS
                 
+                
+            }else if("IN".equals(instruction)){
+                // Input Character To Register from Device puts into r = 0..3
+                // TODO: add devid
+                int [] one_msg = new int[]{1};
+                IOWAIT.setRegisterValue(one_msg);
+                int do_nothing = 0;
+                while (binaryToInt(getRegisterValue("IOWAIT")) != 0){
+                    do_nothing += 1;
+                }
+                
+                int[] in_value = getRegisterValue("KEYBOARD");
+                switch(R){
+                    case 0:
+                        setRegisterValue("GPR0",in_value);
+                        break;
+                    case 1:
+                        setRegisterValue("GPR1",in_value);
+                        break;
+                    case 2:
+                        setRegisterValue("GPR2",in_value);
+                        break;
+                    case 3:
+                        setRegisterValue("GPR3",in_value);
+                        break;
+                }
+                int[] DEVID = Arrays.copyOfRange(instructionBinary, 11, 16); 
+                
+               
+                PRINT_FLAG.setRegisterValue(one_msg);
+                
+            }else if("OUT".equals(instruction)){
+                // Input Character To Register from Device from r = 0..3
+                // TODO: add devid
+            
+            }else if("CHK".equals(instruction)){
+                // Input Character To Register from Device r = 0..3
+                // TODO: 
+              
             }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
