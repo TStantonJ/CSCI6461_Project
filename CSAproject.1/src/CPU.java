@@ -29,13 +29,13 @@ public class CPU {
     Register GPR2 = new Register(16);
     Register GPR3 = new Register(16);
     
-    Register PRINT_FLAG = new Register(1);
     Register PRINTER = new Register(16);
     Register KEYBOARD = new Register(16);
     
     Register HLT = new Register(1);
     Register WAIT = new Register(1);
     Register IOWAIT = new Register(1);
+    Register PRINT_FLAG = new Register(1);
     
     Memory main_Memory = new Memory();
 
@@ -786,45 +786,57 @@ public class CPU {
                 // COMPLETE TGIS
                 
                 
-            }else if("IN".equals(instruction)){
+              }else if("IN".equals(instruction)){
                 // Input Character To Register from Device puts into r = 0..3
                 // TODO: add devid
-                int [] one_msg = new int[]{1};
-                IOWAIT.setRegisterValue(one_msg);
-                int do_nothing = 0;
-                while (binaryToInt(getRegisterValue("IOWAIT")) != 0){
-                    do_nothing += 1;
-                }
-                
-                int[] in_value = getRegisterValue("KEYBOARD");
+                int [] one_msg = null;
                 switch(R){
                     case 0:
-                        setRegisterValue("GPR0",in_value);
+                        one_msg = new int[]{1};
                         break;
                     case 1:
-                        setRegisterValue("GPR1",in_value);
+                        one_msg = new int[]{2};
                         break;
                     case 2:
-                        setRegisterValue("GPR2",in_value);
+                        one_msg = new int[]{3};
                         break;
                     case 3:
-                        setRegisterValue("GPR3",in_value);
+                        one_msg = new int[]{4};
                         break;
                 }
-                int[] DEVID = Arrays.copyOfRange(instructionBinary, 11, 16); 
+                setRegisterValue("IOWAIT",one_msg);
+                
                 
                
-                PRINT_FLAG.setRegisterValue(one_msg);
+                //PRINT_FLAG.setRegisterValue(one_msg);
                 
             }else if("OUT".equals(instruction)){
                 // Input Character To Register from Device from r = 0..3
                 // TODO: add devid
+                
+                switch(R){
+                    case 0:
+                        setRegisterValue("KEYBOARD",getRegisterValue("GPR0"));
+                        break;
+                    case 1:
+                        setRegisterValue("KEYBOARD",getRegisterValue("GPR1"));
+                        break;
+                    case 2:
+                        setRegisterValue("KEYBOARD",getRegisterValue("GPR2"));
+                        break;
+                    case 3:
+                        setRegisterValue("KEYBOARD",getRegisterValue("GPR3"));
+                        break;
+                }
+                int [] one_msg = new int[]{1};
+                PRINT_FLAG.setRegisterValue(one_msg);
+                
             
             }else if("CHK".equals(instruction)){
                 // Input Character To Register from Device r = 0..3
                 // TODO: 
               
-            }else if("HLT".equals(instruction)){
+              }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
             
@@ -832,7 +844,8 @@ public class CPU {
              
             if (inc_PC){
                 // Increment PC by one if applicable 
-                setRegisterValue("PC", incrementBinaryArray(getRegisterValue("PC")));
+                int[] new_pc = incrementBinaryArray(getRegisterValue("PC"));
+                setRegisterValue("PC", new_pc);
             }
         }
     }
@@ -1086,9 +1099,9 @@ public class CPU {
     */
     public void setRegisterValue(String register, int[] value){
         if ("PC".equals(register)){
-            if (binaryToInt(value)< 10){
+            if (binaryToInt(value)< 6){
                 // If pc tries to be set to before 10, set it to 10
-                int[] tmp_val = {0,0,0,0,0,0,0,0,1,0,1,0};
+                int[] tmp_val = {0,0,0,0,0,0,0,0,0,1,1,0};
                 PC.setRegisterValue(tmp_val);
             }else{
                 PC.setRegisterValue(value);
@@ -1237,6 +1250,12 @@ public class CPU {
         hex = hex.replaceAll("7", "0111");
         hex = hex.replaceAll("8", "1000");
         hex = hex.replaceAll("9", "1001");
+        hex = hex.replaceAll("a", "1010");
+        hex = hex.replaceAll("b", "1011");
+        hex = hex.replaceAll("c", "1100");
+        hex = hex.replaceAll("d", "1101");
+        hex = hex.replaceAll("e", "1110");
+        hex = hex.replaceAll("f", "1111");
         hex = hex.replaceAll("A", "1010");
         hex = hex.replaceAll("B", "1011");
         hex = hex.replaceAll("C", "1100");
@@ -1292,6 +1311,12 @@ public class CPU {
         hex = hex.replaceAll("7", "0111");
         hex = hex.replaceAll("8", "1000");
         hex = hex.replaceAll("9", "1001");
+        hex = hex.replaceAll("a", "1010");
+        hex = hex.replaceAll("b", "1011");
+        hex = hex.replaceAll("c", "1100");
+        hex = hex.replaceAll("d", "1101");
+        hex = hex.replaceAll("e", "1110");
+        hex = hex.replaceAll("f", "1111");
         hex = hex.replaceAll("A", "1010");
         hex = hex.replaceAll("B", "1011");
         hex = hex.replaceAll("C", "1100");
