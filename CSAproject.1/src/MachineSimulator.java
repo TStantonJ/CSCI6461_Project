@@ -53,6 +53,8 @@ public class MachineSimulator extends javax.swing.JFrame {
             updateRegisters();
             if (main_CPU.getRegisterValue("IOWAIT")[0] == 1){
                 main_CPU.setRegisterValue("KEYBOARD", converTextToArray(KeyboardTextField.getText()));
+                int [] msg = new int[]{0};
+                main_CPU.setRegisterValue("IOWAIT", msg);
             }
             
             // Check if machine is set to run
