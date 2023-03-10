@@ -1,8 +1,11 @@
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DebugPackage;
+
+
 /**
  *
  * @author shahin
@@ -160,11 +163,6 @@ public class DebugForm extends javax.swing.JFrame {
         label5.setText("Cache");
 
         readCacheBtn.setLabel("Print Cache");
-        readCacheBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                readCacheBtnActionPerformed(evt);
-            }
-        });
 
         FlushBtn.setLabel("Flush Cache");
 
@@ -230,32 +228,6 @@ public class DebugForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void readCacheBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readCacheBtnActionPerformed
-       
-    System.out.println("Cache contents:");
-    for (int i = 0; i < numSets; i++) {
-        System.out.println("Set " + i + ":");
-        for (int j = 0; j < linesPerSet; j++) {
-            CacheEntry entry = (CacheEntry)cache[i][j];
-            if (entry != null) {
-                System.out.println("  Line " + j + ":");
-                System.out.println("    Tag: " + entry.getTag());
-                System.out.println("    Data:");
-                int[] data = entry.getData();
-                for (int k = 0; k < data.length; k++) {
-                    System.out.print("      ");
-                    System.out.print(Integer.toBinaryString(data[k] & 0xFFFF));
-                    System.out.println(" (" + data[k] + ")");
-                }
-            } else {
-                System.out.println("  Line " + j + ": empty");
-            }
-        }
-    
-}
-
-    }//GEN-LAST:event_readCacheBtnActionPerformed
 
     /**
      * @param args the command line arguments
