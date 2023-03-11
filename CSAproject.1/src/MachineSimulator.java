@@ -1199,7 +1199,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,0,0,1,1,0};
+        int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
         main_CPU.setRegisterValue("PC",default_PC_loc);
     }//GEN-LAST:event_IPLLoadButtonActionPerformed
 

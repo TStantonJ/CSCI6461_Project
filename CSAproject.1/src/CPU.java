@@ -108,6 +108,9 @@ public class CPU {
                 
                 // Set MBR to value just fetched
                 setRegisterValue("MBR", getMemoryValue(EA));
+                System.out.print("LDR ");
+                System.out.print(R);
+                System.out.println(Arrays.toString(getMemoryValue(EA)));
                 
             }else if("STR".equals(instruction)){
                 
@@ -137,6 +140,10 @@ public class CPU {
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                  }
+                System.out.print("STR ");
+                System.out.print(R);
+                System.out.print(" at ");
+                System.out.println(EA);
             }else if("LDA".equals(instruction)){
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
@@ -154,6 +161,10 @@ public class CPU {
                     default:
                         GPR3.setRegisterValue(converted_value);
                  }
+                System.out.print("LDA ");
+                System.out.print(R);
+                System.out.print(" with ");
+                System.out.println(Arrays.toString(converted_value));
             }else if("LDX".equals(instruction)){
                 
                 
@@ -179,6 +190,10 @@ public class CPU {
                         break;
                     default:
                  }
+                System.out.print("LDX ");
+                System.out.print(IX);
+                System.out.print("(IX) with ");
+                System.out.println(Arrays.toString(MBR.getRegisterValue()));
             }else if("STX".equals(instruction)){
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
@@ -203,7 +218,10 @@ public class CPU {
                         break; 
                     default:
                 }
-            
+                System.out.print("STX ");
+                System.out.print(IX);
+                System.out.print("(IX) with ");
+                System.out.println(Arrays.toString(MBR.getRegisterValue()));
             // ------ TRANSFER INSTRUCTIONS ------
             }else if("JZ".equals(instruction)){
                 // JUMP if c(r) is Zero and unset PC increment flag
@@ -245,7 +263,14 @@ public class CPU {
                             inc_PC = false;
                         }
                         break;
-                    default:
+                }
+                System.out.print("JZ ");
+                System.out.print(R);
+                if (inc_PC){
+                    System.out.println(" failed");
+                }else{
+                    System.out.print(" to ");
+                    System.out.println(Arrays.toString(getRegisterValue("PC")));
                 }
             }else if("JNE".equals(instruction)){
                 // JUMP if c(r) is not Zero and unset PC increment flag
@@ -288,11 +313,19 @@ public class CPU {
                             inc_PC = false;
                         }
                         break;
-                    default:
+                }
+                System.out.print("JNE ");
+                System.out.print(R);
+                if (inc_PC){
+                    System.out.println(" failed");
+                }else{
+                    System.out.print(" to ");
+                    System.out.println(Arrays.toString(getRegisterValue("PC")));
                 }
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
                 // TODO: Implement
+                
                 
             }else if("JMA".equals(instruction)){
                 // Unconditional JUMP to address=EA and unset PC increment flag
@@ -300,6 +333,15 @@ public class CPU {
                 trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 setRegisterValue("PC", new_PC);
+                inc_PC = false;
+                
+                System.out.print("JMA ");
+                if (inc_PC){
+                    System.out.println(" failed");
+                }else{
+                    System.out.print(" to ");
+                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                }
                 
                 inc_PC = false;
             }else if("JSR".equals(instruction)){
@@ -313,6 +355,14 @@ public class CPU {
                 setRegisterValue("GPR3", incrementBinaryArray(cur_PC));
                 
                 inc_PC = false;
+                
+                System.out.print("JSR ");
+                if (inc_PC){
+                    System.out.println(" failed");
+                }else{
+                    System.out.print(" to ");
+                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                }
              
             }else if("RFS".equals(instruction)){
                 // Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field.
@@ -361,7 +411,14 @@ public class CPU {
                             inc_PC = false;
                         }
                         break;
-                    default:
+                }
+                System.out.print("JGE ");
+                System.out.print(R);
+                if (inc_PC){
+                    System.out.println(" failed");
+                }else{
+                    System.out.print(" to ");
+                    System.out.println(Arrays.toString(getRegisterValue("PC")));
                 }
                 
             // ------Arithmetic Instructions------    
@@ -391,8 +448,11 @@ public class CPU {
                         memory_array = getMemoryValue(EA);
                         setRegisterValue("GRP3",addBinaryArrays(register_array,memory_array));
                         break;
-                    default: 
                 }
+                System.out.print("AMR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(Arrays.toString(getMemoryValue(EA)));
             }else if("SMR".equals(instruction)){
                 // Subtract contents at memory to contents of register. R = 0..3
                 // TODO: 
@@ -419,8 +479,11 @@ public class CPU {
                         memory_array = getMemoryValue(EA);
                         setRegisterValue("GRP3",subtractBinaryArrays(register_array,memory_array));
                         break;
-                    default: 
                 }
+                System.out.print("SMR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(Arrays.toString(getMemoryValue(EA)));
             }else if("AIR".equals(instruction)){
                 // Add contents  of immediate(addr) to contents of register. R = 0..3
                 // 
@@ -446,17 +509,22 @@ public class CPU {
                         memory_array = getMemoryValue(EA);
                         setRegisterValue("GRP3",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
                         break;
-                    default: 
                 }
+                System.out.print("AIR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(Arrays.toString(intToBinaryArrayShort(Integer.toBinaryString(Addr))));
             }else if("SIR".equals(instruction)){
-                // Subtract contents  of immediate(addr) to contents of register. R = 0..3
+                // Subtract contents  of immediate(aka addr) from contents of register. R = 0..3
                 // 
-                int[] register_array;
-                int[] memory_array;
+                int[] register_array = null;
+                int[] memory_array = null;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
                         setRegisterValue("GRP0",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        
+
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
@@ -473,8 +541,8 @@ public class CPU {
                         memory_array = getMemoryValue(EA);
                         setRegisterValue("GRP3",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
                         break;
-                    default: 
                 }
+                System.out.println("SIR(Register"+R+"): subtracted "+ EA + "from " + Arrays.toString(register_array));
                 
             // ------Logical Instructions------ 
             }else if("MLT".equals(instruction)){
@@ -524,6 +592,10 @@ public class CPU {
                         setRegisterValue("GPR3",RX_value_1);
                     }
                 }
+                System.out.print("MLT ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(IX);
             }else if("DVD".equals(instruction)){
                 // Divide contents  of register RX to contents of register RY. R(X,Y) must = 0,2
                 // Store results in rX(quotient), rX+1(remainder)
@@ -571,6 +643,10 @@ public class CPU {
                         setRegisterValue("GPR3",RX_value_1);
                     }
                 }      
+                System.out.print("DVD ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(IX);
             }else if("TRR".equals(instruction)){
                 // Test if contents  of register RX equals contents of register RY. 
                 // RX = R, RY = IX
@@ -617,6 +693,10 @@ public class CPU {
                 }else{
                     setCC(3,false);
                 }
+                System.out.print("TRR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(IX);
             }else if("AND".equals(instruction)){
                 // Bitwise AND of RX and RY
                 // RX = R, RY = IX
@@ -667,6 +747,10 @@ public class CPU {
                         register_array_final[i] = 1;
                     }
                 }
+                System.out.print("AND ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(IX);
                 setRegisterValue(RX,register_array_final);
             }else if("ORR".equals(instruction)){
                 // Bitwise ORR of RX and RY
@@ -693,7 +777,6 @@ public class CPU {
                         register_array_RX = getRegisterValue("GPR3");
                         RX = "GPR3";
                         break;
-                    default: 
                 }
                 // Get RY register
                 switch(IX) {
@@ -709,7 +792,6 @@ public class CPU {
                     case 3:
                         register_array_RY = getRegisterValue("GPR3");
                         break;
-                    default: 
                 }
                 // Perform ORR
                 int[] register_array_final = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -718,6 +800,10 @@ public class CPU {
                         register_array_final[i] = 1;
                     }
                 }
+                System.out.print("ORR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                System.out.println(IX);
                 setRegisterValue(RX,register_array_final);
             }else if("NOT".equals(instruction)){
                 // Bitwise NOT of RX 
@@ -757,14 +843,35 @@ public class CPU {
                     }
                 }
                 setRegisterValue(RX,register_array_final);
+                System.out.print("MLT ");
+                System.out.println(R);
+                
             }else if("SRC".equals(instruction)){
                 // Shift register by count
                 // TODO: 
+                
+                // Get array and count to shift by
                 int[] count_array = Arrays.copyOfRange(instructionBinary, 12, 16); 
-                int count = binaryToInt(count_array);
+                int amount = binaryToInt(count_array);
+                int[] arr = null;
+                switch(R){
+                    case 0:
+                        arr = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        arr = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        arr = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        arr = getRegisterValue("GPR3");
+                        break;
+                }
+                int[] arr_copy = arr;
                 // Calculate AL and LR from IX field
-                int al;
-                int lr;
+                int al = 0;
+                int lr = 0;
                 switch(IX){
                     case 0:
                         al = 0;
@@ -783,9 +890,135 @@ public class CPU {
                         lr = 1;
                         break;
                 }
-                // COMPLETE TGIS
                 
+                // Shift
+                if(al == 1){        //Logically
+                    if(lr == 0){    //Shift right
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[arr.length - 1];
+                            int i;
+                            for (i = arr.length - 1; i > 0; i--)
+                                    arr[i] = arr[i - 1];
+                            arr[i] = 0;
+                        }
+                    }else{          //Shift left
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[0];
+                            int i;
+                            for (i = 0; i < arr.length - 1; i++)
+                                    arr[i] = arr[i + 1];
+                            arr[i] = 0;
+                        }   
+                    }
+                }else{              //Arithmatically
+                    int sign_bit = arr[0];
+                    if(lr == 0){    //Shift right
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[arr.length - 1];
+                            int i;
+                            for (i = arr.length - 1; i > 0; i--)
+                                    arr[i] = arr[i - 1];
+                            arr[i] = sign_bit;
+                        }
+                    }else{          //Shift left
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[0];
+                            int i;
+                            for (i = 0; i < arr.length - 1; i++)
+                                    arr[i] = arr[i + 1];
+                            arr[i] = 0;
+                        }   
+                    }
+                }
+                System.out.print("SRC ");
+                System.out.print(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr));
                 
+              }else if("RRC".equals(instruction)){
+                // Shift register by count
+                // TODO: 
+                
+                // Get array and count to shift by
+                int[] count_array = Arrays.copyOfRange(instructionBinary, 12, 16); 
+                int amount = binaryToInt(count_array);
+                int[] arr = null;
+                switch(R){
+                    case 0:
+                        arr = getRegisterValue("GPR0");
+                        break;
+                    case 1:
+                        arr = getRegisterValue("GPR1");
+                        break;
+                    case 2:
+                        arr = getRegisterValue("GPR2");
+                        break;
+                    case 3:
+                        arr = getRegisterValue("GPR3");
+                        break;
+                }
+                int[] arr_copy = arr;
+                // Calculate AL and LR from IX field
+                int al = 0;
+                int lr = 0;
+                switch(IX){
+                    case 0:
+                        al = 0;
+                        lr = 0;
+                        break;
+                    case 1:
+                        al = 0;
+                        lr = 1;
+                        break;
+                    case 2:
+                        al = 1;
+                        lr = 0;
+                        break;
+                    case 3:
+                        al = 1;
+                        lr = 1;
+                        break;
+                }
+                
+                // Rotate
+                if(al == 1){        //Logically
+                    if(lr == 0){    //Shift right
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[arr.length - 1];
+                            int i;
+                            for (i = arr.length - 1; i > 0; i--)
+                                    arr[i] = arr[i - 1];
+                            arr[i] = a;
+                        }
+                    }else{          //Shift left
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[0];
+                            int i;
+                            for (i = 0; i < arr.length - 1; i++)
+                                    arr[i] = arr[i + 1];
+                            arr[i] = a;
+                        }   
+                    }
+                }else{              //Arithmatically
+                    int sign_bit = arr[0];
+                    if(lr == 0){    //Shift right
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[arr.length - 1];
+                            int i;
+                            for (i = arr.length - 1; i > 0; i--)
+                                    arr[i] = arr[i - 1];
+                            arr[i] = sign_bit;
+                        }
+                    }else{          //Shift left
+                        for (int j = 0; j < amount; j++) {
+                            int a = arr[0];
+                            int i;
+                            for (i = 0; i < arr.length - 1; i++)
+                                    arr[i] = arr[i + 1];
+                            arr[i] = a;
+                        }   
+                    }
+                }
+                System.out.print("RRC ");
+                System.out.print(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr)); 
               }else if("IN".equals(instruction)){
                 // Input Character To Register from Device puts into r = 0..3
                 // TODO: add devid
@@ -807,7 +1040,8 @@ public class CPU {
                 setRegisterValue("IOWAIT",one_msg);
                 
                 
-               
+                System.out.print("In ");
+                System.out.println(R);
                 //PRINT_FLAG.setRegisterValue(one_msg);
                 
             }else if("OUT".equals(instruction)){
@@ -833,6 +1067,8 @@ public class CPU {
                 setRegisterValue("PRINT_FLAG",one_msg);
                 System.out.println(Arrays.toString(PRINT_FLAG.getRegisterValue()));
                 
+                System.out.print("Out ");
+                System.out.println(R);
             
             }else if("CHK".equals(instruction)){
                 // Input Character To Register from Device r = 0..3
@@ -841,6 +1077,7 @@ public class CPU {
               }else if("HLT".equals(instruction)){
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
+                System.out.println("HLT");
             
             }
              
@@ -1300,18 +1537,22 @@ public class CPU {
     OUT: Int array containing the converted value
     */
     public int[] intToBinaryArray(String int_value){
+
+        
+        int int_int = Integer.parseInt(int_value);
         int[] ret_val = new int[16];
         
-        char[] arr = int_value.toCharArray();
-       
+        String result = Integer.toBinaryString(int_int);
+        char[] arr = result.toCharArray();
         
-        for (int i = 0; i < 16; i++) {
-            if (i < 16 - arr.length){
-                ret_val[i] = 0;
+        int j = arr.length-1;
+        for (int i = 11; i > -1; i--) {
+            if (i > 12 - arr.length-1){
+                ret_val[i] = Character.getNumericValue(arr[j]);
+                j-=1;
             }else{
-                ret_val[i] = Character.getNumericValue(int_value.charAt(i-(16 - arr.length)));
+                ret_val[i] = 0;
             }
-            
         }
         return ret_val;
     }
@@ -1361,18 +1602,21 @@ public class CPU {
     OUT: Int array containing the converted value
     */
     public int[] intToBinaryArrayShort(String int_value){
+        
+        int int_int = Integer.parseInt(int_value);
         int[] ret_val = new int[12];
         
-        char[] arr = int_value.toCharArray();
-       
+        String result = Integer.toBinaryString(int_int);
+        char[] arr = result.toCharArray();
         
-        for (int i = 0; i < 12; i++) {
-            if (i < 12 - arr.length){
-                ret_val[i] = 0;
+        int j = arr.length-1;
+        for (int i = 11; i > -1; i--) {
+            if (i > 12 - arr.length-1){
+                ret_val[i] = Character.getNumericValue(arr[j]);
+                j-=1;
             }else{
-                ret_val[i] = Character.getNumericValue(int_value.charAt(i-(12 - arr.length)));
+                ret_val[i] = 0;
             }
-            
         }
         return ret_val;
     }
@@ -1417,9 +1661,15 @@ public class CPU {
     public int[] subtractBinaryArrays(int[] in_array_1, int[] in_array_2){
         int converted_array_1 = binaryToInt(in_array_1);
         int converted_array_2 = binaryToInt(in_array_2);
-        
-        int converted_out_array = converted_array_1 - converted_array_2;
-        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+        int[] out_array = null;
+        if(converted_array_1 != 0){
+            int converted_out_array = converted_array_1 - converted_array_2;
+            out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+        }else{
+            int converted_out_array = -converted_array_2;
+            System.out.println(converted_out_array);
+            out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+        }
         
         return out_array;
     }
