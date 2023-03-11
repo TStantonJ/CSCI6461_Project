@@ -54,6 +54,8 @@ public class MachineSimulator extends javax.swing.JFrame {
             
             // Handle Flags
             if (main_CPU.getRegisterValue("IOWAIT")[0] != 0){
+                System.out.println();
+                System.out.println(main_CPU.getRegisterValue("IOWAIT")[0]);
                 System.out.println(formatText(main_CPU.getRegisterValue("IOWAIT")));
                 updateKeyboard();
                 System.out.println("IOWAIT");
@@ -1480,7 +1482,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     public void updatePrinter(){
         // add value to print area
         PrinterTextArea.append(formatText(main_CPU.getRegisterValue("KEYBOARD")));
-        
+        PrinterTextArea.append("\n");
         System.out.println(formatText(main_CPU.getRegisterValue("KEYBOARD")));
         // Flush printer
         int[] Reset_large = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

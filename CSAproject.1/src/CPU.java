@@ -829,7 +829,9 @@ public class CPU {
                         break;
                 }
                 int [] one_msg = new int[]{1};
-                PRINT_FLAG.setRegisterValue(one_msg);
+                System.out.println(Arrays.toString(one_msg));
+                setRegisterValue("PRINT_FLAG",one_msg);
+                System.out.println(Arrays.toString(PRINT_FLAG.getRegisterValue()));
                 
             
             }else if("CHK".equals(instruction)){
@@ -1086,6 +1088,16 @@ public class CPU {
             ret_value = GPR2.getRegisterValue();
         }else if("GPR3".equals(register)){
             ret_value = GPR3.getRegisterValue();
+        }else if("PRINTER".equals(register)){
+            ret_value = PRINTER.getRegisterValue();
+        }else if("KEYBOARD".equals(register)){
+            ret_value = KEYBOARD.getRegisterValue();
+        }else if("WAIT".equals(register)){
+            ret_value = WAIT.getRegisterValue();
+        }else if("IOWAIT".equals(register)){
+            ret_value = IOWAIT.getRegisterValue();
+        }else if("PRINT_FLAG".equals(register)){
+            ret_value = PRINT_FLAG.getRegisterValue();
         }else{
             ret_value = HLT.getRegisterValue();
         }
@@ -1130,6 +1142,16 @@ public class CPU {
             GPR2.setRegisterValue(value);
         }else if("GPR3".equals(register)){
             GPR3.setRegisterValue(value);
+        }else if("PRINTER".equals(register)){
+            PRINTER.setRegisterValue(value);
+        }else if("KEYBOARD".equals(register)){
+            KEYBOARD.setRegisterValue(value);
+        }else if("WAIT".equals(register)){
+            WAIT.setRegisterValue(value);
+        }else if("IOWAIT".equals(register)){
+            IOWAIT.setRegisterValue(value);
+        }else if("PRINT_FLAG".equals(register)){
+            PRINT_FLAG.setRegisterValue(value);
         }else{
             HLT.setRegisterValue(value);
         }
