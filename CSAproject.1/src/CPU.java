@@ -7,7 +7,7 @@
  *
  * @author trs
  * 
- * Class CPU creates registers and a memory object. Provides functions to 
+ * Class CPU creates registers and a memory(cache) object. Provides functions to 
  * manipulate these objects.
  */
 import java.io.*;
@@ -37,7 +37,8 @@ public class CPU {
     Register IOWAIT = new Register(1);
     Register PRINT_FLAG = new Register(1);
     
-    Memory main_Memory = new Memory();
+    //Memory main_Memory = new Memory();
+    Cache main_Memory = new Cache();
 
     
     /* 
@@ -275,7 +276,6 @@ public class CPU {
             }else if("JNE".equals(instruction)){
                 // JUMP if c(r) is not Zero and unset PC increment flag
                 // If not 0, set pc to EA
-                // TODO: store pc somewhere
                 switch(R) {
                     case 0:
                         if (binaryToInt(getRegisterValue("GPR0")) != 0){
@@ -324,13 +324,13 @@ public class CPU {
                 }
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
-                // TODO: Implement
                 
                 
             }else if("JMA".equals(instruction)){
                 // Unconditional JUMP to address=EA and unset PC increment flag
                 // Dont save PC
-                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                trans_PC = EA;
+                System.out.print("EA "+EA);
                 new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 setRegisterValue("PC", new_PC);
                 inc_PC = false;
@@ -366,12 +366,47 @@ public class CPU {
              
             }else if("RFS".equals(instruction)){
                 // Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field.
-                // TODO: Implement
                 
             }else if("SOB".equals(instruction)){
                 // Subtract One and Branch. R = 0..3
-                // TODO: Implement
-                
+                int[] register_array = null;
+                int converted_register = 0;
+                int[] new_register_array = null;
+                switch(R){
+                    case 0:
+                        register_array = getRegisterValue("GPR0");
+                        converted_register = binaryToInt(decrementBinaryArray(register_array));
+                        new_register_array = intToBinaryArrayFixed(Integer.toString(converted_register));
+                        setRegisterValue("GPR0",new_register_array);
+                        break;
+                    case 1:
+                        register_array = getRegisterValue("GPR1");
+                        converted_register = binaryToInt(decrementBinaryArray(register_array));
+                        new_register_array = intToBinaryArrayFixed(Integer.toString(converted_register));
+                        setRegisterValue("GPR1",new_register_array);
+                        break;
+                    case 2:
+                        register_array = getRegisterValue("GPR2");
+                        converted_register = binaryToInt(decrementBinaryArray(register_array));
+                        new_register_array = intToBinaryArrayFixed(Integer.toString(converted_register));
+                        setRegisterValue("GPR2",new_register_array);
+                        break;
+                    case 3:
+                        register_array = getRegisterValue("GPR3");
+                        converted_register = binaryToInt(decrementBinaryArray(register_array));
+                        new_register_array = intToBinaryArrayFixed(Integer.toString(converted_register));
+                        setRegisterValue("GPR3",new_register_array);
+                        break;
+                }
+                if (converted_register > 0){
+                    cur_PC = getRegisterValue("PC");
+                    trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                    new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                    setRegisterValue("PC", new_PC);
+                    inc_PC = false;
+                    System.out.print("SOB BRANCH to "+Arrays.toString(new_PC)+" ");
+                }
+                System.out.println("SOB "+R+"From: "+Arrays.toString(register_array)+" T0: "+Arrays.toString(new_register_array));
             }else if("JGE".equals(instruction)){
                 // JUMP if c(r) is greater than or equal to 0
                 switch(R) {
@@ -424,66 +459,76 @@ public class CPU {
             // ------Arithmetic Instructions------    
             }else if("AMR".equals(instruction)){
                 // Add contents at memory to contents of register. R = 0..3
-                // TODO: 
-                int[] register_array;
-                int[] memory_array;
+                int[] register_array = null;
+                int[] memory_array = null;
+                int[] final_array = null;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR0",addBinaryArrays(register_array,memory_array));
+                        final_array = addBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR0",final_array);
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR1",addBinaryArrays(register_array,memory_array));
+                        final_array = addBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR1",final_array);
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR2",addBinaryArrays(register_array,memory_array));
+                        final_array = addBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR2",final_array);
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR3",addBinaryArrays(register_array,memory_array));
+                        final_array = addBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR3",final_array);
                         break;
                 }
                 System.out.print("AMR ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(Arrays.toString(getMemoryValue(EA)));
+                System.out.print(R + " Before: "+Arrays.toString(register_array));
+                System.out.print(" and EA Before: ");
+                System.out.print(Arrays.toString(memory_array));
+                System.out.println("Resulting in:"+Arrays.toString(final_array));
             }else if("SMR".equals(instruction)){
                 // Subtract contents at memory to contents of register. R = 0..3
-                // TODO: 
-                int[] register_array;
-                int[] memory_array;
+                System.out.print("SMR ");
+                System.out.print(R);
+                System.out.print(" and ");
+                int[] register_array = null;
+                int[] memory_array = null;
+                int[] new_register_array = null;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR0",subtractBinaryArrays(register_array,memory_array));
+                        new_register_array = subtractBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR0",new_register_array);
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR1",subtractBinaryArrays(register_array,memory_array));
+                        new_register_array = subtractBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR1",new_register_array);
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR2",subtractBinaryArrays(register_array,memory_array));
+                        new_register_array = subtractBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR2",new_register_array);
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GPR3",subtractBinaryArrays(register_array,memory_array));
+                        new_register_array = subtractBinaryArrays(register_array,memory_array);
+                        setRegisterValue("GPR3",new_register_array);
                         break;
                 }
-                System.out.print("SMR ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(Arrays.toString(getMemoryValue(EA)));
+                
+                System.out.println("R = "+Arrays.toString(register_array)+" Mem = "+Arrays.toString(memory_array)+" Results in: "+Arrays.toString(new_register_array));
             }else if("AIR".equals(instruction)){
                 // Add contents  of immediate(addr) to contents of register. R = 0..3
                 // 
@@ -551,13 +596,12 @@ public class CPU {
                 // Multiply contents  of register RX to contents of register RY. R(X,Y) must = 0,2
                 // Store results in rX, rX+1
                 // RX = R, RY = IX
-                // TODO: Check endianness
                 int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int RX = 0;
                 if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
-                    //TODO: raise error
-                    System.out.println("Error in mul");
+                    //System.out.println("Error in mul");
+                    System.out.println("");
                 }else{
                     // Get RX register
                     switch(R) {
@@ -602,13 +646,12 @@ public class CPU {
                 // Divide contents  of register RX to contents of register RY. R(X,Y) must = 0,2
                 // Store results in rX(quotient), rX+1(remainder)
                 // RX = R, RY = IX
-                // TODO: set divide by zero flag
                 int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int RX = 0;
                 if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
-                    //TODO: raise error
-                    System.out.println("Error in mul");
+                    //System.out.println("Error in mul");
+                    System.out.println("");
                 }else{
                     // Get RX register
                     switch(R) {
@@ -652,7 +695,6 @@ public class CPU {
             }else if("TRR".equals(instruction)){
                 // Test if contents  of register RX equals contents of register RY. 
                 // RX = R, RY = IX
-                // TODO: 
                 int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 // Get RX register
@@ -1025,7 +1067,6 @@ public class CPU {
                 System.out.println(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr)); 
               }else if("IN".equals(instruction)){
                 // Input Character To Register from Device puts into r = 0..3
-                // TODO: add devid
                 int [] one_msg = null;
                 switch(R){
                     case 0:
@@ -1050,7 +1091,6 @@ public class CPU {
                 
             }else if("OUT".equals(instruction)){
                 // Input Character To Register from Device from r = 0..3
-                // TODO: add devid
                 
                 switch(R){
                     case 0:
@@ -1168,14 +1208,13 @@ public class CPU {
             if (IX == 0){   // c(c(Address Field))
                 // Get memory index from Address Field
                 int tmp_var2 = binaryToInt(Addr_Field);
-                
                 tmp_var = getMemoryValue(tmp_var2);
                 
                 // Get address from earleir address
                 tmp_var2 = binaryToInt(tmp_var);
-                
-                tmp_var = getMemoryValue(tmp_var2);
-                EA = binaryToInt(tmp_var);
+                EA = tmp_var2;
+                //tmp_var = getMemoryValue(tmp_var2);
+                //EA = binaryToInt(tmp_var);
                 
             }else{          // c(c(IX) + c(Address Field))
                 // Get Value in Ix Register
@@ -1225,8 +1264,6 @@ public class CPU {
             ret_val = "LDX";
         }else if("100010".equals(opCode)){
             ret_val = "STX";
-            
-            
         // NEEDS to be checked
         }else if("001000".equals(opCode)){
             ret_val = "JZ";
@@ -1619,11 +1656,16 @@ public class CPU {
         return ret_val;
     }
     
-    
+    /* 
+    Function to convert a int to binary value
+    IN: Int array containing the int
+    OUT: Int of the converted value
+    */
     public int[] intToBinaryArrayFixed(String int_value){
-        System.out.println(int_value);
+        //System.out.println(int_value);
         short int_int = Short.parseShort(int_value);
         int[] ret_val = new int[16];
+        
         
         
         String result = Integer.toBinaryString(int_int);
@@ -1632,7 +1674,7 @@ public class CPU {
         
         int j = arr.length-1;
         for (int i = 15; i > -1; i--) {
-            if (i > 12 - arr.length-1){
+            if (i > 15 - arr.length){
                 ret_val[i] = Character.getNumericValue(arr[j]);
                 j-=1;
             }else{
@@ -1642,6 +1684,12 @@ public class CPU {
         }
         return ret_val;
     }
+    
+    /* 
+    Function to convert a int to binary value
+    IN: Int array containing the int
+    OUT: Int of the converted value
+    */
     public int[] intToBinaryArrayShortFixed(String int_value){
         System.out.println(int_value);
         short int_int = Short.parseShort(int_value);
@@ -1681,15 +1729,30 @@ public class CPU {
     }
     
     /* 
+    Function to increment a register by 1
+    IN: Register contents to be incremented
+    OUT: Register contents incremented
+    */
+    public int[] decrementBinaryArray(int[] in_array){
+        // Increment PC by one if applicable 
+        
+        int converted_array = binaryToInt(in_array);
+        converted_array = converted_array-1;
+        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_array));
+        
+        return out_array;
+    }
+    
+    /* 
     Function to add two binary arrays together
     IN: Registers contents to be added
     OUT: Register content added together
-    TODO: handle overflows
+   
     */
     public int[] addBinaryArrays(int[] in_array_1, int[] in_array_2){
         int converted_array_1 = binaryToInt(in_array_1);
         int converted_array_2 = binaryToInt(in_array_2);
-        
+
         int converted_out_array = converted_array_1 + converted_array_2;
         
         int[] out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
@@ -1701,7 +1764,6 @@ public class CPU {
     Function to add two binary arrays together
     IN: Registers contents to be subtracted
     OUT: Register content added together
-    TODO: handle underflows
     */
     public int[] subtractBinaryArrays(int[] in_array_1, int[] in_array_2){
         int converted_array_1 = binaryToInt(in_array_1);
@@ -1711,6 +1773,11 @@ public class CPU {
             int converted_out_array = converted_array_1 - converted_array_2;
             out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
         }else{
+            if (in_array_2[0] == 1){
+                int[] tmp = Arrays.copyOf(in_array_2,16);
+                tmp[0] = 0;
+                converted_array_2 = binaryToInt(tmp);
+            }
             int converted_out_array = -converted_array_2;
             System.out.println(converted_out_array);
             out_array = intToBinaryArrayFixed(Integer.toString(converted_out_array));
@@ -1723,7 +1790,6 @@ public class CPU {
     Function to multiply two binary arrays together
     IN: Registers contents to be multiplied
     OUT: two binary arrays representing upper and lower halves of result( Little endian, lower half first)
-    TODO: Change single filled limit from 65535 to 32768 if signed ints
     */
     public int[][] multiplyBinaryArrays(int[] in_array_1, int[] in_array_2){
         int[] out_array_1;
@@ -1751,7 +1817,6 @@ public class CPU {
     Function to Divide two binary arrays together
     IN: Registers contents to be Divdie
     OUT: two binary arrays representing Quotient and Remainder(in that order)
-    TODO: Verify
     */
     public int[][] divideBinaryArrays(int[] in_array_1, int[] in_array_2){
         int[] out_array_1;
@@ -1771,7 +1836,6 @@ public class CPU {
     Function to set a bit in the CC register
     IN: Bit to set in CC AND value to set it to
     OUT: N/A
-    TODO: Verify
     */
     public void setCC(int bit_num, boolean value){
         int int_value;

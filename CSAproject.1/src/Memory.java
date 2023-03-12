@@ -19,6 +19,8 @@ public class Memory {
         this.memory_value = new int[2048][16];
     }
     
+    
+    
      /* 
     Function to get a value stored in Memory    
     IN: Int representing the row the value is stored in
@@ -26,7 +28,7 @@ public class Memory {
     */
     public int[] getMemoryValue(int row){
         // Return 16 bit value stored at given row
-       return Arrays.copyOfRange(this.memory_value[row],0,16);
+        return Arrays.copyOfRange(this.memory_value[row],0,16);
     }
     
      /* 
