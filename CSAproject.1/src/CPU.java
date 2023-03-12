@@ -134,14 +134,14 @@ public class CPU {
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break; 
-                    default:
+                    case 3:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", GPR3.getRegisterValue());
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                  }
                 System.out.print("STR ");
-                System.out.print(R);
+                System.out.print(R + " = to " + Arrays.toString(getRegisterValue("MBR")));
                 System.out.print(" at ");
                 System.out.println(EA);
             }else if("LDA".equals(instruction)){
@@ -431,22 +431,22 @@ public class CPU {
                     case 0:
                         register_array = getRegisterValue("GPR0");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP0",addBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR0",addBinaryArrays(register_array,memory_array));
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP1",addBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR1",addBinaryArrays(register_array,memory_array));
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP2",addBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR2",addBinaryArrays(register_array,memory_array));
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP3",addBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR3",addBinaryArrays(register_array,memory_array));
                         break;
                 }
                 System.out.print("AMR ");
@@ -462,22 +462,22 @@ public class CPU {
                     case 0:
                         register_array = getRegisterValue("GPR0");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP0",subtractBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR0",subtractBinaryArrays(register_array,memory_array));
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP1",subtractBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR1",subtractBinaryArrays(register_array,memory_array));
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP2",subtractBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR2",subtractBinaryArrays(register_array,memory_array));
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP3",subtractBinaryArrays(register_array,memory_array));
+                        setRegisterValue("GPR3",subtractBinaryArrays(register_array,memory_array));
                         break;
                 }
                 System.out.print("SMR ");
@@ -487,62 +487,64 @@ public class CPU {
             }else if("AIR".equals(instruction)){
                 // Add contents  of immediate(addr) to contents of register. R = 0..3
                 // 
-                int[] register_array;
+                int[] register_array = null;
                 int[] memory_array;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
-                        setRegisterValue("GRP0",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        setRegisterValue("GPR0",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
-                        memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP1",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        setRegisterValue("GPR1",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
-                        memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP2",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        setRegisterValue("GPR2",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
-                        memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP3",addBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        setRegisterValue("GPR3",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
                         break;
                 }
-                System.out.print("AIR ");
+                System.out.print("AIR to");
                 System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(Arrays.toString(intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                System.out.print(" results from" + Arrays.toString(register_array)+" to ");
+                System.out.println(Arrays.toString(intToBinaryArray(Integer.toBinaryString(Addr))));
             }else if("SIR".equals(instruction)){
                 // Subtract contents  of immediate(aka addr) from contents of register. R = 0..3
                 // 
                 int[] register_array = null;
                 int[] memory_array = null;
+                int[] final_array = null;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
-                        setRegisterValue("GRP0",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
-                        
-
+                        memory_array = getMemoryValue(EA);
+                        final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR0",final_array);
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP1",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR1",final_array);
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP2",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR2",final_array);
+                        System.out.println(Arrays.toString(getRegisterValue("GPR2")));
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
-                        setRegisterValue("GRP3",subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr))));
+                        final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR3",final_array);
                         break;
                 }
-                System.out.println("SIR(Register"+R+"): subtracted "+ EA + "from " + Arrays.toString(register_array));
+                System.out.println("SIR(Register"+R+"): subtracted "+ EA + " from " + Arrays.toString(register_array)+" for result: "+Arrays.toString(final_array));
                 
             // ------Logical Instructions------ 
             }else if("MLT".equals(instruction)){
@@ -852,7 +854,9 @@ public class CPU {
                 
                 // Get array and count to shift by
                 int[] count_array = Arrays.copyOfRange(instructionBinary, 12, 16); 
+                //System.out.println(Arrays.toString(count_array));
                 int amount = binaryToInt(count_array);
+                
                 int[] arr = null;
                 switch(R){
                     case 0:
@@ -868,7 +872,7 @@ public class CPU {
                         arr = getRegisterValue("GPR3");
                         break;
                 }
-                int[] arr_copy = arr;
+                int[] copiedArray = Arrays.copyOf(arr, arr.length);
                 // Calculate AL and LR from IX field
                 int al = 0;
                 int lr = 0;
@@ -931,7 +935,7 @@ public class CPU {
                     }
                 }
                 System.out.print("SRC ");
-                System.out.print(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr));
+                System.out.println(R + " by " + amount + " Pre:" + Arrays.toString(copiedArray) + " Post:" + Arrays.toString(arr));
                 
               }else if("RRC".equals(instruction)){
                 // Shift register by count
@@ -1018,7 +1022,7 @@ public class CPU {
                     }
                 }
                 System.out.print("RRC ");
-                System.out.print(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr)); 
+                System.out.println(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr)); 
               }else if("IN".equals(instruction)){
                 // Input Character To Register from Device puts into r = 0..3
                 // TODO: add devid
@@ -1401,7 +1405,7 @@ public class CPU {
     OUT: Int array with the contents of that row
     */
     public int[] getMemoryValue(int row){
-        if (row < 6){
+        if (row < 6 || row>2047){
             //int[] fault_code = new int[]{0,0,0,1};
             //MFR.setRegisterValue(fault_code);
             //int [] msg = new int[]{1};
@@ -1537,22 +1541,18 @@ public class CPU {
     OUT: Int array containing the converted value
     */
     public int[] intToBinaryArray(String int_value){
-
-        
-        int int_int = Integer.parseInt(int_value);
         int[] ret_val = new int[16];
         
-        String result = Integer.toBinaryString(int_int);
-        char[] arr = result.toCharArray();
+        char[] arr = int_value.toCharArray();
+       
         
-        int j = arr.length-1;
-        for (int i = 11; i > -1; i--) {
-            if (i > 12 - arr.length-1){
-                ret_val[i] = Character.getNumericValue(arr[j]);
-                j-=1;
-            }else{
+        for (int i = 0; i < 16; i++) {
+            if (i < 16 - arr.length){
                 ret_val[i] = 0;
+            }else{
+                ret_val[i] = Character.getNumericValue(int_value.charAt(i-(16 - arr.length)));
             }
+            
         }
         return ret_val;
     }
@@ -1602,11 +1602,54 @@ public class CPU {
     OUT: Int array containing the converted value
     */
     public int[] intToBinaryArrayShort(String int_value){
-        
-        int int_int = Integer.parseInt(int_value);
         int[] ret_val = new int[12];
         
+        char[] arr = int_value.toCharArray();
+       
+        
+        for (int i = 0; i < 12; i++) {
+            if (i < 12 - arr.length){
+                ret_val[i] = 0;
+            }else{
+                ret_val[i] = Character.getNumericValue(int_value.charAt(i-(12 - arr.length)));
+            }
+            
+        }
+        
+        return ret_val;
+    }
+    
+    
+    public int[] intToBinaryArrayFixed(String int_value){
+        System.out.println(int_value);
+        short int_int = Short.parseShort(int_value);
+        int[] ret_val = new int[16];
+        
+        
         String result = Integer.toBinaryString(int_int);
+  
+        char[] arr = result.toCharArray();
+        
+        int j = arr.length-1;
+        for (int i = 15; i > -1; i--) {
+            if (i > 12 - arr.length-1){
+                ret_val[i] = Character.getNumericValue(arr[j]);
+                j-=1;
+            }else{
+                ret_val[i] = 0;
+            }
+            
+        }
+        return ret_val;
+    }
+    public int[] intToBinaryArrayShortFixed(String int_value){
+        System.out.println(int_value);
+        short int_int = Short.parseShort(int_value);
+        int[] ret_val = new int[12];
+        
+        
+        String result = Integer.toBinaryString(int_int);
+  
         char[] arr = result.toCharArray();
         
         int j = arr.length-1;
@@ -1617,6 +1660,7 @@ public class CPU {
             }else{
                 ret_val[i] = 0;
             }
+            
         }
         return ret_val;
     }
@@ -1647,7 +1691,8 @@ public class CPU {
         int converted_array_2 = binaryToInt(in_array_2);
         
         int converted_out_array = converted_array_1 + converted_array_2;
-        int[] out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+        
+        int[] out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
         
         return out_array;
     }
@@ -1664,11 +1709,11 @@ public class CPU {
         int[] out_array = null;
         if(converted_array_1 != 0){
             int converted_out_array = converted_array_1 - converted_array_2;
-            out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+            out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
         }else{
             int converted_out_array = -converted_array_2;
             System.out.println(converted_out_array);
-            out_array = intToBinaryArrayShort(Integer.toBinaryString(converted_out_array));
+            out_array = intToBinaryArrayFixed(Integer.toString(converted_out_array));
         }
         
         return out_array;
