@@ -81,247 +81,291 @@ public class CPU {
                 // Set MAR to location in memory to fetch
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 
+                int[] cur_register_value = null;
+                int[] new_register_value = null;
                 switch(R) {
                     case 0:
                         // Set MBR to the word to be stored in register
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getRegisterValue("GPR0");
+                        
                         // Set register to value from MBR
-                        GPR0.setRegisterValue(MBR.getRegisterValue());
+                        GPR0.setRegisterValue(new_register_value);
                         break;
                     case 1:
                         // Set MBR to the word to be stored in register
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getRegisterValue("GPR1");
+                        
                         // Set register to value from MBR
-                        GPR1.setRegisterValue(MBR.getRegisterValue());
+                        GPR1.setRegisterValue(new_register_value);
                         break;
                     case 2:
                         // Set MBR to the word to be stored in register
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getRegisterValue("GPR2");
+                        
                         // Set register to value from MBR
-                        GPR2.setRegisterValue(MBR.getRegisterValue());
+                        GPR2.setRegisterValue(new_register_value);
                         break; 
                     default:
                         // Set MBR to the word to be stored in register
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getRegisterValue("GPR3");
+                        
                         // Set register to value from MBR
-                        GPR3.setRegisterValue(MBR.getRegisterValue());
+                        GPR3.setRegisterValue(new_register_value);
+                        break;
                  }
                 
                 // Set MBR to value just fetched
                 setRegisterValue("MBR", getMemoryValue(EA));
-                System.out.print("LDR ");
-                System.out.print(R);
-                System.out.println(Arrays.toString(getMemoryValue(EA)));
+                
+                System.out.print("LDR | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(cur_register_value) + Arrays.toString(cur_register_value));
+                System.out.print(" R After:" + binaryToInt(new_register_value) + Arrays.toString(new_register_value));
+                System.out.println(" From location: " + EA);
                 
             }else if("STR".equals(instruction)){
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                
+                int[] cur_register_value = null;
+                int[] new_register_value = null;
                 switch(R) {
                     case 0:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", GPR0.getRegisterValue());
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getMemoryValue(EA);
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break;
                     case 1:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", GPR1.getRegisterValue());
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getMemoryValue(EA);
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break;
                     case 2:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", GPR2.getRegisterValue());
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getMemoryValue(EA);
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break; 
                     case 3:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", GPR3.getRegisterValue());
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = getMemoryValue(EA);
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                  }
-                System.out.print("STR ");
-                System.out.print(R + " = to " + Arrays.toString(getRegisterValue("MBR")));
-                System.out.print(" at ");
-                System.out.println(EA);
+                System.out.print("STR | Register:" + R);
+                System.out.print(" EA Before:" + binaryToInt(cur_register_value) + Arrays.toString(cur_register_value));
+                System.out.print(" EA After:" + binaryToInt(new_register_value) + Arrays.toString(new_register_value));
+                System.out.println(" EA location: " + EA);
+                
             }else if("LDA".equals(instruction)){
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
                 int[] converted_value = intToBinaryArray(Integer.toBinaryString(EA));
+                
+                int[] cur_register_value = null;
+                int[] new_register_value = converted_value;
                 switch(R) {
                     case 0:
+                        cur_register_value = GPR0.getRegisterValue();
                         GPR0.setRegisterValue(converted_value);
                         break;
                     case 1:
+                        cur_register_value = GPR1.getRegisterValue();
                         GPR1.setRegisterValue(converted_value);
                         break;
                     case 2:
+                        cur_register_value = GPR2.getRegisterValue();
                         GPR2.setRegisterValue(converted_value);
                         break; 
                     default:
+                        cur_register_value = GPR3.getRegisterValue();
                         GPR3.setRegisterValue(converted_value);
                  }
-                System.out.print("LDA ");
-                System.out.print(R);
-                System.out.print(" with ");
-                System.out.println(Arrays.toString(converted_value));
+                System.out.print("LDA | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(cur_register_value) + Arrays.toString(cur_register_value));
+                System.out.print(" R After:" + binaryToInt(new_register_value) + Arrays.toString(new_register_value));
+                System.out.println(" With Value:" + EA + Arrays.toString(converted_value));
+                
             }else if("LDX".equals(instruction)){
                 
-                
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                
+                int[] cur_register_value = null;
+                int[] new_register_value = null;
                 switch(IX) {
                     case 1:
                         // Set MBR to the value loaded from memory
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = X1.getRegisterValue();
                         // Load MBR into index register
-                        X1.setRegisterValue(MBR.getRegisterValue());
+                        X1.setRegisterValue(new_register_value);
                         break;
                     case 2:
                         // Set MBR to the value loaded from memory
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = X2.getRegisterValue();
                         // Load MBR into index register
-                        X2.setRegisterValue(MBR.getRegisterValue());
+                        X2.setRegisterValue(new_register_value);
                         break;
                     case 3:
                         // Set MBR to the value loaded from memory
                         setRegisterValue("MBR", getMemoryValue(EA));
+                        new_register_value = MBR.getRegisterValue();
+                        cur_register_value = X3.getRegisterValue();
                         // Load MBR into index register
-                        X2.setRegisterValue(MBR.getRegisterValue());
+                        X2.setRegisterValue(new_register_value);
                         break;
                     default:
                  }
-                System.out.print("LDX ");
-                System.out.print(IX);
-                System.out.print("(IX) with ");
-                System.out.println(Arrays.toString(MBR.getRegisterValue()));
+                System.out.print("LDX | IRegister:" + IX);
+                System.out.print(" IX Before:" + binaryToInt(cur_register_value) + Arrays.toString(cur_register_value));
+                System.out.print(" IX After:" + binaryToInt(new_register_value) + Arrays.toString(new_register_value));
+                System.out.println(" EA location: " + EA);
+                
             }else if("STX".equals(instruction)){
                 
                 setRegisterValue("MAR", intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                
+                int[] cur_register_value = getMemoryValue(EA);
+                int[] new_register_value = null;
                 switch(IX) {
                     case 1:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", X1.getRegisterValue());
+                        new_register_value = X1.getRegisterValue();
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break;
                     case 2:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", X2.getRegisterValue());
+                        new_register_value = X2.getRegisterValue();
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break;
                     case 3:
                         // Set MBR to the word to be stored in memory
                         setRegisterValue("MBR", X3.getRegisterValue());
+                        new_register_value = X3.getRegisterValue();
                         // Store value from MBR
                         setMemoryValue(EA,MBR.getRegisterValue());
                         break; 
                     default:
                 }
-                System.out.print("STX ");
-                System.out.print(IX);
-                System.out.print("(IX) with ");
-                System.out.println(Arrays.toString(MBR.getRegisterValue()));
+                System.out.print("STX | Register:" + IX);
+                System.out.print(" EA Before:" + binaryToInt(cur_register_value) + Arrays.toString(cur_register_value));
+                System.out.print(" EA After:" + binaryToInt(new_register_value) + Arrays.toString(new_register_value));
+                System.out.println(" EA location: " + EA);
+                
             // ------ TRANSFER INSTRUCTIONS ------
             }else if("JZ".equals(instruction)){
                 // JUMP if c(r) is Zero and unset PC increment flag
                 // If 0, set pc to EA
+                cur_PC = getRegisterValue("PC");
+                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                
                 switch(R) {
                     case 0:
                         if (binaryToInt(getRegisterValue("GPR0")) == 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 1:
                         if (binaryToInt(getRegisterValue("GPR1")) == 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 2:
                         if (binaryToInt(getRegisterValue("GPR2")) == 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 3:
                         if (binaryToInt(getRegisterValue("GPR3")) == 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                 }
-                System.out.print("JZ ");
-                System.out.print(R);
+                
+                System.out.print("JZ  | Register:" + R);
+
                 if (inc_PC){
-                    System.out.println(" failed");
+                    System.out.println(" Not Zero");
                 }else{
-                    System.out.print(" to ");
-                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                    System.out.print(" Is  Zero");
                 }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA);
+                
             }else if("JNE".equals(instruction)){
                 // JUMP if c(r) is not Zero and unset PC increment flag
                 // If not 0, set pc to EA
+                
+                cur_PC = getRegisterValue("PC");
+                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 switch(R) {
                     case 0:
                         if (binaryToInt(getRegisterValue("GPR0")) != 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 1:
                         if (binaryToInt(getRegisterValue("GPR1")) != 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 2:
                         if (binaryToInt(getRegisterValue("GPR2")) != 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 3:
                         if (binaryToInt(getRegisterValue("GPR3")) != 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                 }
-                System.out.print("JNE ");
-                System.out.print(R);
+                
+                System.out.print("JNE  | Register:" + R);
                 if (inc_PC){
-                    System.out.println(" failed");
+                    System.out.println(" Not Equal");
                 }else{
-                    System.out.print(" to ");
-                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                    System.out.print(" Is  Equal");
                 }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA);
+                
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
                 
@@ -329,19 +373,21 @@ public class CPU {
             }else if("JMA".equals(instruction)){
                 // Unconditional JUMP to address=EA and unset PC increment flag
                 // Dont save PC
+                cur_PC = getRegisterValue("PC");
                 trans_PC = EA;
-                System.out.print("EA "+EA);
                 new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 setRegisterValue("PC", new_PC);
                 inc_PC = false;
                 
-                System.out.print("JMA ");
+                System.out.print("JMA |");
                 if (inc_PC){
-                    System.out.println(" failed");
+                    System.out.println(" Not JUMP");
                 }else{
-                    System.out.print(" to ");
-                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                    System.out.print(" Is  JUMP");
                 }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA);
                 
                 inc_PC = false;
             }else if("JSR".equals(instruction)){
@@ -356,13 +402,15 @@ public class CPU {
                 
                 inc_PC = false;
                 
-                System.out.print("JSR ");
+                System.out.print("JSR  |");
                 if (inc_PC){
-                    System.out.println(" failed");
+                    System.out.println(" Not JUMP");
                 }else{
-                    System.out.print(" to ");
-                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                    System.out.print(" Is  JUMP");
                 }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA + " Value saved to Register 3: " + Arrays.toString(GPR3.getRegisterValue()));
              
             }else if("RFS".equals(instruction)){
                 // Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field.
@@ -398,63 +446,65 @@ public class CPU {
                         setRegisterValue("GPR3",new_register_array);
                         break;
                 }
+                
+                System.out.print("SOB | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(register_array) + Arrays.toString(register_array));
+                System.out.print(" R After:" + binaryToInt(new_register_array) + Arrays.toString(new_register_array));
+                
+                
                 if (converted_register > 0){
                     cur_PC = getRegisterValue("PC");
                     trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
                     new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                     setRegisterValue("PC", new_PC);
                     inc_PC = false;
-                    System.out.print("SOB BRANCH to "+Arrays.toString(new_PC)+" ");
+                   
+                    System.out.println(" SOB BRANCH From:"+ binaryToInt(cur_PC) +Arrays.toString(cur_PC)+ " To:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                }else{
+                    System.out.println(" NO SOB BRACH");
                 }
-                System.out.println("SOB "+R+"From: "+Arrays.toString(register_array)+" T0: "+Arrays.toString(new_register_array));
+                
             }else if("JGE".equals(instruction)){
                 // JUMP if c(r) is greater than or equal to 0
+                cur_PC = getRegisterValue("PC");
+                trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
+                new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                 switch(R) {
                     case 0:
                         if (binaryToInt(getRegisterValue("GPR0")) >= 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 1:
                         if (binaryToInt(getRegisterValue("GPR1")) >= 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 2:
                         if (binaryToInt(getRegisterValue("GPR2")) >= 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                     case 3:
                         if (binaryToInt(getRegisterValue("GPR3")) >= 0){
-                            cur_PC = getRegisterValue("PC");
-                            trans_PC = binaryToInt(intToBinaryArrayShort(Integer.toBinaryString(EA)));
-                            new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                             setRegisterValue("PC", new_PC);
                             inc_PC = false;
                         }
                         break;
                 }
-                System.out.print("JGE ");
-                System.out.print(R);
+                System.out.print("JGE  | Register:" + R);
                 if (inc_PC){
-                    System.out.println(" failed");
+                    System.out.println(" Not Greater than");
                 }else{
-                    System.out.print(" to ");
-                    System.out.println(Arrays.toString(getRegisterValue("PC")));
+                    System.out.print(" Is  Greater than");
                 }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA);
+                
                 
             // ------Arithmetic Instructions------    
             }else if("AMR".equals(instruction)){
@@ -488,11 +538,11 @@ public class CPU {
                         setRegisterValue("GPR3",final_array);
                         break;
                 }
-                System.out.print("AMR ");
-                System.out.print(R + " Before: "+Arrays.toString(register_array));
-                System.out.print(" and EA Before: ");
-                System.out.print(Arrays.toString(memory_array));
-                System.out.println("Resulting in:"+Arrays.toString(final_array));
+                System.out.print("AMR | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(register_array) + Arrays.toString(register_array));
+                System.out.print(" Memory value at "+ EA +":" + binaryToInt(memory_array) + Arrays.toString(memory_array));
+                System.out.println(" R After:" + binaryToInt(final_array) + Arrays.toString(final_array));
+                
             }else if("SMR".equals(instruction)){
                 // Subtract contents at memory to contents of register. R = 0..3
                 System.out.print("SMR ");
@@ -527,35 +577,43 @@ public class CPU {
                         setRegisterValue("GPR3",new_register_array);
                         break;
                 }
-                
-                System.out.println("R = "+Arrays.toString(register_array)+" Mem = "+Arrays.toString(memory_array)+" Results in: "+Arrays.toString(new_register_array));
+                System.out.print("SMR | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(register_array) + Arrays.toString(register_array));
+                System.out.print(" Memory value at "+ EA +":" + binaryToInt(memory_array) + Arrays.toString(memory_array));
+                System.out.println(" R After:" + binaryToInt(new_register_array) + Arrays.toString(new_register_array));
+               
             }else if("AIR".equals(instruction)){
                 // Add contents  of immediate(addr) to contents of register. R = 0..3
                 // 
                 int[] register_array = null;
-                int[] memory_array;
+                int[] new_register_array = null;
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
-                        setRegisterValue("GPR0",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
+                        new_register_array = addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR0",new_register_array);
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
-                        setRegisterValue("GPR1",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
+                        new_register_array = addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR2",new_register_array);
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
-                        setRegisterValue("GPR2",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
+                        new_register_array = addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR2",new_register_array);
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
-                        setRegisterValue("GPR3",addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr))));
+                        new_register_array = addBinaryArrays(register_array,intToBinaryArray(Integer.toBinaryString(Addr)));
+                        setRegisterValue("GPR3",new_register_array);
                         break;
                 }
-                System.out.print("AIR to");
-                System.out.print(R);
-                System.out.print(" results from" + Arrays.toString(register_array)+" to ");
-                System.out.println(Arrays.toString(intToBinaryArray(Integer.toBinaryString(Addr))));
+                System.out.print("AIR | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(register_array) + Arrays.toString(register_array));
+                System.out.print(" Immediate:"+ Addr + Arrays.toString(intToBinaryArray(Integer.toBinaryString(Addr))));
+                System.out.println(" R After:" + binaryToInt(new_register_array) + Arrays.toString(new_register_array));
+                
             }else if("SIR".equals(instruction)){
                 // Subtract contents  of immediate(aka addr) from contents of register. R = 0..3
                 // 
@@ -565,31 +623,30 @@ public class CPU {
                 switch(R) {
                     case 0:
                         register_array = getRegisterValue("GPR0");
-                        memory_array = getMemoryValue(EA);
                         final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
                         setRegisterValue("GPR0",final_array);
                         break;
                     case 1:
                         register_array = getRegisterValue("GPR1");
-                        memory_array = getMemoryValue(EA);
                         final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
                         setRegisterValue("GPR1",final_array);
                         break;
                     case 2:
                         register_array = getRegisterValue("GPR2");
-                        memory_array = getMemoryValue(EA);
                         final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
                         setRegisterValue("GPR2",final_array);
-                        System.out.println(Arrays.toString(getRegisterValue("GPR2")));
                         break;
                     case 3:
                         register_array = getRegisterValue("GPR3");
-                        memory_array = getMemoryValue(EA);
                         final_array = subtractBinaryArrays(register_array,intToBinaryArrayShort(Integer.toBinaryString(Addr)));
                         setRegisterValue("GPR3",final_array);
                         break;
                 }
-                System.out.println("SIR(Register"+R+"): subtracted "+ EA + " from " + Arrays.toString(register_array)+" for result: "+Arrays.toString(final_array));
+                System.out.print("SIR | Register:" + R);
+                System.out.print(" R Before:" + binaryToInt(register_array) + Arrays.toString(register_array));
+                System.out.print(" Immediate:"+ Addr + Arrays.toString(intToBinaryArray(Integer.toBinaryString(Addr))));
+                System.out.println(" R After:" + binaryToInt(final_array) + Arrays.toString(final_array));
+                
                 
             // ------Logical Instructions------ 
             }else if("MLT".equals(instruction)){
