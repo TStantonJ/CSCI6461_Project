@@ -545,9 +545,6 @@ public class CPU {
                 
             }else if("SMR".equals(instruction)){
                 // Subtract contents at memory to contents of register. R = 0..3
-                System.out.print("SMR ");
-                System.out.print(R);
-                System.out.print(" and ");
                 int[] register_array = null;
                 int[] memory_array = null;
                 int[] new_register_array = null;
@@ -656,9 +653,15 @@ public class CPU {
                 int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int RX = 0;
+                
+                int answer_loc_1 = 0;
+                int answer_loc_2 = 0;
+                int[] RX_value_0 = null;
+                int[] RX_value_1 = null;
+                
                 if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
-                    //System.out.println("Error in mul");
-                    System.out.println("");
+                    System.out.println("Error in mul");
+                    //System.out.println("");
                 }else{
                     // Get RX register
                     switch(R) {
@@ -684,21 +687,29 @@ public class CPU {
                     }
                     // Multiply and put into RX,RX+1
                     int[][] multiply_return = multiplyBinaryArrays(register_array_RX,register_array_RY);
-                    int[] RX_value_0 = multiply_return[0];
-                    int[] RX_value_1 = multiply_return[1];
+                    RX_value_0 = multiply_return[0];
+                    RX_value_1 = multiply_return[1];
+                    
                     
                     if (RX == 0){
+                        answer_loc_1 = 0;
+                        answer_loc_2 = 1;
                         setRegisterValue("GPR0",RX_value_0);
                         setRegisterValue("GPR1",RX_value_1);
                     }else{
+                        answer_loc_1 = 2;
+                        answer_loc_2 = 3;
                         setRegisterValue("GPR2",RX_value_0);
                         setRegisterValue("GPR3",RX_value_1);
                     }
                 }
-                System.out.print("MLT ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(IX);
+                System.out.print("MLT | Register1:" + R);
+                System.out.print(" RX Before:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.print(" Answer stored in R: " + answer_loc_1 + " and R: " + answer_loc_2);
+                System.out.print(" First Value:" + binaryToInt(RX_value_0) + Arrays.toString(RX_value_0));
+                System.out.println(" Second Value:" + binaryToInt(RX_value_1) + Arrays.toString(RX_value_1));
+                
             }else if("DVD".equals(instruction)){
                 // Divide contents  of register RX to contents of register RY. R(X,Y) must = 0,2
                 // Store results in rX(quotient), rX+1(remainder)
@@ -706,9 +717,16 @@ public class CPU {
                 int[] register_array_RX = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int[] register_array_RY = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
                 int RX = 0;
+                
+                int answer_loc_1 = 0;
+                int answer_loc_2 = 0;
+                int[] RX_value_0 = null;
+                int[] RX_value_1 = null;
                 if ((R != 0 || R != 2)||(IX != 0 || IX != 2)){
-                    //System.out.println("Error in mul");
-                    System.out.println("");
+                    System.out.println("Error in DVD");
+                    RX_value_0 = register_array_RX;
+                    RX_value_1 = register_array_RY;
+                    //System.out.println("");
                 }else{
                     // Get RX register
                     switch(R) {
@@ -734,21 +752,28 @@ public class CPU {
                     }
                     // Multiply and put into RX,RX+1
                     int[][] divide_return = divideBinaryArrays(register_array_RX,register_array_RY);
-                    int[] RX_value_0 = divide_return[0];
-                    int[] RX_value_1 = divide_return[1];
+                    RX_value_0 = divide_return[0];
+                    RX_value_1 = divide_return[1];
                     
                     if (RX == 0){
+                        answer_loc_1 = 0;
+                        answer_loc_2 = 1;
                         setRegisterValue("GPR0",RX_value_0);
                         setRegisterValue("GPR1",RX_value_1);
                     }else{
+                        answer_loc_1 = 2;
+                        answer_loc_2 = 3;
                         setRegisterValue("GPR2",RX_value_0);
                         setRegisterValue("GPR3",RX_value_1);
                     }
-                }      
-                System.out.print("DVD ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(IX);
+                }   
+                System.out.print("DVD | Register1:" + R);
+                System.out.print(" RX Before:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.print(" Answer stored in R: " + answer_loc_1 + " and R: " + answer_loc_2);
+                System.out.print(" First Value:" + binaryToInt(RX_value_0) + Arrays.toString(RX_value_0));
+                System.out.println(" Second Value:" + binaryToInt(RX_value_1) + Arrays.toString(RX_value_1));
+                
             }else if("TRR".equals(instruction)){
                 // Test if contents  of register RX equals contents of register RY. 
                 // RX = R, RY = IX
@@ -788,16 +813,22 @@ public class CPU {
                     default: 
                 }
                 int RY =  binaryToInt(register_array_RY);
+                
                 // Test equality
+                boolean rslt = false;
                 if(RX == RY){
+                    rslt = true;
                     setCC(3,true);
                 }else{
                     setCC(3,false);
                 }
-                System.out.print("TRR ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(IX);
+                
+                
+                System.out.print("TRR | Register1:" + R);
+                System.out.print(" R1:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.println(" Result is: " + rslt);
+                
             }else if("AND".equals(instruction)){
                 // Bitwise AND of RX and RY
                 // RX = R, RY = IX
@@ -848,11 +879,12 @@ public class CPU {
                         register_array_final[i] = 1;
                     }
                 }
-                System.out.print("AND ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(IX);
-                setRegisterValue(RX,register_array_final);
+                System.out.print("AND | Register1:" + R);
+                System.out.print(" RX Before:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX );
+                System.out.print(" RY Before:" + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.print(" RX After:" + binaryToInt(register_array_final) + Arrays.toString(register_array_final));
+                
             }else if("ORR".equals(instruction)){
                 // Bitwise ORR of RX and RY
                 // RX = R, RY = IX
@@ -901,11 +933,13 @@ public class CPU {
                         register_array_final[i] = 1;
                     }
                 }
-                System.out.print("ORR ");
-                System.out.print(R);
-                System.out.print(" and ");
-                System.out.println(IX);
+                System.out.print("ORR | Register1:" + R);
+                System.out.print(" RX Before:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX );
+                System.out.print(" RY Before:" + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.print(" RX After:" + binaryToInt(register_array_final) + Arrays.toString(register_array_final));
                 setRegisterValue(RX,register_array_final);
+                
             }else if("NOT".equals(instruction)){
                 // Bitwise NOT of RX 
                 // RX = R
@@ -943,9 +977,11 @@ public class CPU {
                         register_array_final[i] = 0;
                     }
                 }
-                setRegisterValue(RX,register_array_final);
-                System.out.print("MLT ");
-                System.out.println(R);
+                System.out.print("NOT | Register1:" + R);
+                System.out.print(" RX Before:" + binaryToInt(register_array_RX) + Arrays.toString(register_array_RX));
+                System.out.print(" Register2:"+ IX );
+                System.out.print(" RY Before:" + binaryToInt(register_array_RY) + Arrays.toString(register_array_RY));
+                System.out.print(" RX After:" + binaryToInt(register_array_final) + Arrays.toString(register_array_final));
                 
             }else if("SRC".equals(instruction)){
                 // Shift register by count
@@ -972,6 +1008,7 @@ public class CPU {
                         break;
                 }
                 int[] copiedArray = Arrays.copyOf(arr, arr.length);
+                System.out.print("SRC | Register1:" + R);
                 // Calculate AL and LR from IX field
                 int al = 0;
                 int lr = 0;
@@ -979,18 +1016,22 @@ public class CPU {
                     case 0:
                         al = 0;
                         lr = 0;
+                        System.out.print(" Arithmatic Shift Right");
                         break;
                     case 1:
                         al = 0;
                         lr = 1;
+                        System.out.print(" Arithmatic Shift Left");
                         break;
                     case 2:
                         al = 1;
                         lr = 0;
+                        System.out.print(" Logic Shift Right");
                         break;
                     case 3:
                         al = 1;
                         lr = 1;
+                        System.out.print(" Logic Shift Left");
                         break;
                 }
                 
@@ -1033,8 +1074,9 @@ public class CPU {
                         }   
                     }
                 }
-                System.out.print("SRC ");
-                System.out.println(R + " by " + amount + " Pre:" + Arrays.toString(copiedArray) + " Post:" + Arrays.toString(arr));
+                
+                System.out.print(" R Before:" + binaryToInt(copiedArray) + Arrays.toString(copiedArray));
+                System.out.print(" R After:" + binaryToInt(arr) + Arrays.toString(arr));
                 
               }else if("RRC".equals(instruction)){
                 // Shift register by count
@@ -1059,6 +1101,7 @@ public class CPU {
                         break;
                 }
                 int[] arr_copy = arr;
+                System.out.print("RRC | Register1:" + R);
                 // Calculate AL and LR from IX field
                 int al = 0;
                 int lr = 0;
@@ -1066,18 +1109,22 @@ public class CPU {
                     case 0:
                         al = 0;
                         lr = 0;
+                        System.out.print("Arithmatic Rotate Right");
                         break;
                     case 1:
                         al = 0;
                         lr = 1;
+                        System.out.print("Arithmatic Rotate Left");
                         break;
                     case 2:
                         al = 1;
                         lr = 0;
+                        System.out.print("Logic Rotate Right");
                         break;
                     case 3:
                         al = 1;
                         lr = 1;
+                        System.out.print("Logic Rotate Left");
                         break;
                 }
                 
@@ -1120,8 +1167,10 @@ public class CPU {
                         }   
                     }
                 }
-                System.out.print("RRC ");
-                System.out.println(R + " by " + amount + " Pre:" + Arrays.toString(arr_copy) + " Post:" + Arrays.toString(arr)); 
+                System.out.print(" by:" + amount);
+                System.out.print(" R Before:" + binaryToInt(arr_copy) + Arrays.toString(arr_copy));
+                System.out.print(" R After:" + binaryToInt(arr) + Arrays.toString(arr));
+                
               }else if("IN".equals(instruction)){
                 // Input Character To Register from Device puts into r = 0..3
                 int [] one_msg = null;
@@ -1141,9 +1190,7 @@ public class CPU {
                 }
                 setRegisterValue("IOWAIT",one_msg);
                 
-                
-                System.out.print("In ");
-                System.out.println(R);
+                System.out.print("IN | Register1:" + R);
                 //PRINT_FLAG.setRegisterValue(one_msg);
                 
             }else if("OUT".equals(instruction)){
@@ -1168,8 +1215,7 @@ public class CPU {
                 setRegisterValue("PRINT_FLAG",one_msg);
                 System.out.println(Arrays.toString(PRINT_FLAG.getRegisterValue()));
                 
-                System.out.print("Out ");
-                System.out.println(R);
+                System.out.print("OUT | Register1:" + R);
             
             }else if("CHK".equals(instruction)){
                 // Input Character To Register from Device r = 0..3
