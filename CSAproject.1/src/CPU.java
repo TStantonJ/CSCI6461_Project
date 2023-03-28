@@ -1610,6 +1610,52 @@ public class CPU {
         }
     }
     
+    /* 
+    Function to load the CARD.txt file into memeory
+    IN: N/A
+    OUT: N/A
+    */
+    public void loadCardIntoMemory() throws FileNotFoundException, IOException{
+        
+        // Set up for input
+        String path_var = System.getProperty("user.dir") + "/CARD.txt";
+        FileInputStream fstream = new FileInputStream(path_var);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        // Start loading card into memory at row 1000
+        int current_row = 1000;
+        String strLine;
+        while ((strLine = br.readLine()) != null)   {
+           // Split line by Character and create int array the size of the line
+            String[] tokens = strLine.split("");
+            int[] ascii_ints = new int[tokens.length];
+
+            // Convert every character to its int ascii value
+            for (int i = 0; i<tokens.length; i++){
+                char character = strLine.charAt(i); // This gives the character 'a'
+                ascii_ints[i] = (int) character; // ascii is now 97.
+            }
+
+            // Convert every int ascii to binary ascii
+            int[][] ascii_binary = new int[tokens.length][16];
+            int row = 0;
+            for (int k = 0; k<tokens.length; k++){
+                String item = Integer.toString(ascii_ints[k]);
+                System.out.println(item);
+
+
+                ascii_binary[k] = intToBinaryArrayFixed(item);
+            }
+            
+            // Load each character into memory
+            for(int l = 0; l<ascii_binary.length; l++){
+                System.out.println(Arrays.toString(ascii_binary[l]));
+                setMemoryValue(current_row,ascii_binary[l]);
+                current_row += 1;
+            }
+        }
+    }
+    
      /* 
     Function to convert a hex value to int
     IN: String representing the hex value
