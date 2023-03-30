@@ -368,7 +368,26 @@ public class CPU {
                 
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
+                int[] cur_CC = getRegisterValue("CC");
+                new_PC = null;
                 
+                if (cur_CC[R] == 1){
+                    cur_PC = getRegisterValue("PC");
+                    trans_PC = EA;
+                    new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
+                    setRegisterValue("PC", new_PC);
+                    inc_PC = false;
+                }
+                
+                System.out.print("JCC | Conditio Bit:" + R);
+                if (inc_PC){
+                    System.out.println(" Not JUMP");
+                }else{
+                    System.out.print(" Is  JUMP");
+                }
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" EA location: " + EA);
                 
             }else if("JMA".equals(instruction)){
                 // Unconditional JUMP to address=EA and unset PC increment flag
@@ -414,6 +433,24 @@ public class CPU {
              
             }else if("RFS".equals(instruction)){
                 // Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field.
+                // Store prev R0
+                int[] previous_R0 = getRegisterValue("GPR0");
+                
+                // Set R0 = immediate
+                int[] new_R0 = intToBinaryArrayFixed(Integer.toBinaryString(Addr));
+                setRegisterValue("GPR0", new_R0);
+                
+                // Set PC to R3, record old PC
+                cur_PC = getRegisterValue("PC");
+                new_PC = getRegisterValue("GPR3");
+                setRegisterValue("PC",new_PC);
+                
+                inc_PC = false;
+                
+                System.out.print("RFS  |");
+                System.out.print(" PC Before:" + binaryToInt(cur_PC) + Arrays.toString(cur_PC));
+                System.out.print(" PC After:" + binaryToInt(new_PC) + Arrays.toString(new_PC));
+                System.out.println(" OPTIONAL RETURN CODE:" + binaryToInt(new_R0) + Arrays.toString(new_R0));
                 
             }else if("SOB".equals(instruction)){
                 // Subtract One and Branch. R = 0..3
@@ -1679,6 +1716,7 @@ public class CPU {
         binary_holder = binary_holder.replace(",", "");
         binary_holder = binary_holder.replace(" ", "");
         ret_val = Integer.parseInt(binary_holder, 2);
+        
         return ret_val;
     }
     
