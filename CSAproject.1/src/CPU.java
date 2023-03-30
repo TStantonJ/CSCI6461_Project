@@ -314,7 +314,7 @@ public class CPU {
                 System.out.print("JZ  | Register:" + R);
 
                 if (inc_PC){
-                    System.out.println(" Not Zero");
+                    System.out.print(" Not Zero");
                 }else{
                     System.out.print(" Is  Zero");
                 }
@@ -358,7 +358,7 @@ public class CPU {
                 
                 System.out.print("JNE  | Register:" + R);
                 if (inc_PC){
-                    System.out.println(" Not Equal");
+                    System.out.print(" Not Equal");
                 }else{
                     System.out.print(" Is  Equal");
                 }
@@ -369,10 +369,10 @@ public class CPU {
             }else if("JCC".equals(instruction)){
                 // JUMP if condition code
                 int[] cur_CC = getRegisterValue("CC");
-                new_PC = null;
+                cur_PC = getRegisterValue("PC");
+                new_PC = cur_PC;
                 
                 if (cur_CC[R] == 1){
-                    cur_PC = getRegisterValue("PC");
                     trans_PC = EA;
                     new_PC = intToBinaryArrayShort(Integer.toBinaryString(trans_PC));
                     setRegisterValue("PC", new_PC);
@@ -381,7 +381,7 @@ public class CPU {
                 
                 System.out.print("JCC | Conditio Bit:" + R);
                 if (inc_PC){
-                    System.out.println(" Not JUMP");
+                    System.out.print(" Not JUMP");
                 }else{
                     System.out.print(" Is  JUMP");
                 }
@@ -534,7 +534,7 @@ public class CPU {
                 }
                 System.out.print("JGE  | Register:" + R);
                 if (inc_PC){
-                    System.out.println(" Not Greater than");
+                    System.out.print(" Not Greater than");
                 }else{
                     System.out.print(" Is  Greater than");
                 }

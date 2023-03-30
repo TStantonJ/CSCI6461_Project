@@ -45,7 +45,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     }
     
     // Main loop of the program that runs every 500 mil
-    int delay = 500; //milliseconds
+    int delay = 50; //milliseconds
     ActionListener mainLoop = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             
