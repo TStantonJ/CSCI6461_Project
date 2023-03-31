@@ -1329,7 +1329,6 @@
         <Component class="javax.swing.JButton" name="KeyboardReadButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Store"/>
-            <Property name="actionCommand" type="java.lang.String" value="Store"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KeyboardReadButtonActionPerformed"/>

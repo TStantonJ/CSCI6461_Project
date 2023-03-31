@@ -36,7 +36,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0};
     boolean run_check = false;
     String search = "";
-    String[] search_text = new String[1];
+    String search_text = "";
     
     /* 
     Function that runs the gui and CPU
@@ -86,12 +86,11 @@ public class MachineSimulator extends javax.swing.JFrame {
                     if (main_CPU.getRegisterValue("HLT")[0] == 2){
                         // This reads in the CARD.txt
                         
-                        loadTextIntoMemory();
+                        
+                        proccessText();
                         // Put your search function that searches through search_text for search here.
 
                         // This prints to the console printer
-                        PrinterTextArea.append("\nTest");
-                        System.out.println(Arrays.toString(search_text));
                     } 
                     
                     run_check = false;
@@ -1260,6 +1259,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
         int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
         main_CPU.setRegisterValue("PC",default_PC_loc);
+        
+        loadTextIntoMemory();
     }//GEN-LAST:event_IPLLoadButtonActionPerformed
 
     private void toggle9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggle9ActionPerformed
@@ -1610,13 +1611,30 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
 
         // Convert the StringBuilder to a String and store it in a variable
-        String paragraph = stringBuilder.toString();
+        search_text = stringBuilder.toString();
+        PrinterTextArea.append("Loaded from CARD.txt:\n");
+        PrinterTextArea.append(search_text);
 
-        // Print the paragraph
-        search_text = new String[paragraph.length];
-        System.out.println(paragraph);
     }
     
+    public void proccessText() {
+        String word = search;
+        
+        PrinterTextArea.append("Search for: "+search+"\n");
+        // Split the paragraph into an array of words
+        String[] words = search_text.split(" ");
+
+        // Loop through each word in the array
+        for (int i = 0; i < words.length; i++) {
+
+            // If the word is found, print a message and break out of the loop
+            if (words[i].equalsIgnoreCase(word)) {
+                PrinterTextArea.append("The word '" + word + "' was found at position " + i + ".");
+                break;
+            }
+        }
+    }
+
     
     /* 
     Function to format int[] values for display on the GUI

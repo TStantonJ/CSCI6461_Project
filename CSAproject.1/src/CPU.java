@@ -1248,11 +1248,12 @@ public class CPU {
                         setRegisterValue("KEYBOARD",getRegisterValue("GPR3"));
                         break;
                 }
+                /*
                 int [] one_msg = new int[]{1};
                 System.out.println(Arrays.toString(one_msg));
                 setRegisterValue("PRINT_FLAG",one_msg);
                 System.out.println(Arrays.toString(PRINT_FLAG.getRegisterValue()));
-                
+                */
                 System.out.print("OUT | Register1:" + R);
             
             }else if("CHK".equals(instruction)){
