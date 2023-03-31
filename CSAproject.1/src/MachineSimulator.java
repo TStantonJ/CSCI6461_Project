@@ -13,7 +13,12 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.Timer;
 import java.util.Arrays;
@@ -29,7 +34,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0};
     boolean run_check = false;
-    
+    String search = "";
+    String[] search_text = new String[1];
     
     /* 
     Function that runs the gui and CPU
@@ -76,6 +82,20 @@ public class MachineSimulator extends javax.swing.JFrame {
                     run_check = false;
                     int [] msg = new int[]{0};
                     main_CPU.setRegisterValue("HLT",msg);
+                    
+                    // Make program 2 here
+                    
+                    // This reads in the CARD.txt
+                    try {
+                        loadTextIntoMemory();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    // Put your search function that searches through search_text for search here.
+                    
+                    // This prints to the console printer
+                    PrinterTextArea.append("\nTest");
+                    System.out.println(Arrays.toString(search_text));
                 }
             }
         }
@@ -1503,6 +1523,38 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
         return String.valueOf(a);
     }
+    
+        
+    public void loadTextIntoMemory() throws FileNotFoundException, IOException{
+        // Set up for input
+        String path_var = System.getProperty("user.dir") + "/CARD.txt";
+        FileInputStream fstream = new FileInputStream(path_var);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        
+        // Start loading card into memory at row 1000
+        int current_row = 1000;
+        String strLine;
+        while ((strLine = br.readLine()) != null)   {
+            
+            
+           // Split line by Character and create int array the size of the line
+            String[] tokens = strLine.split("");
+            
+            int new_len = search_text.length + tokens.length;
+            String[] tmp = new String[new_len];
+            
+            int j = 0;
+            for (int i = search_text.length; i<new_len; i++){
+                tmp[i] = tokens[j];
+            }
+            System.arraycopy(search_text, 0, tmp, 0, search_text.length);
+            
+            
+            
+            
+        }
+    }  
     
     /* 
     Function to format int[] values for display on the GUI

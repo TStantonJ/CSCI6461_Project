@@ -1263,6 +1263,9 @@ public class CPU {
                 int [] msg = new int[]{1};
                 HLT.setRegisterValue(msg);
                 System.out.println("HLT");
+                
+              
+                
             
             }
              
@@ -1647,26 +1650,8 @@ public class CPU {
             }
         }
         
-        loadTextIntoMemory();
     }
-    
-    public void loadTextIntoMemory() throws FileNotFoundException, IOException{
-        // Set up for input
-        String path_var = System.getProperty("user.dir") + "/CARD.txt";
-        FileInputStream fstream = new FileInputStream(path_var);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        
-        // Start loading card into memory at row 1000
-        int current_row = 1000;
-        String strLine;
-        while ((strLine = br.readLine()) != null)   {
-           // Split line by Character and create int array the size of the line
-            String[] tokens = strLine.split("");
-            
-            
-        }
-    }    
+  
     /* 
     Function to load the CARD.txt file into memeory
     IN: N/A
