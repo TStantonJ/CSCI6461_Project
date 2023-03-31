@@ -571,6 +571,7 @@ public class CPU {
                     case 3:
                         register_array = getRegisterValue("GPR3");
                         memory_array = getMemoryValue(EA);
+                        System.out.print(" Memory value at "+ EA +":" + binaryToInt(memory_array) + Arrays.toString(memory_array));
                         final_array = addBinaryArrays(register_array,memory_array);
                         setRegisterValue("GPR3",final_array);
                         break;
@@ -1645,8 +1646,27 @@ public class CPU {
                 setMemoryValue(row,value);
             }
         }
+        
+        loadTextIntoMemory();
     }
     
+    public void loadTextIntoMemory() throws FileNotFoundException, IOException{
+        // Set up for input
+        String path_var = System.getProperty("user.dir") + "/CARD.txt";
+        FileInputStream fstream = new FileInputStream(path_var);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        
+        // Start loading card into memory at row 1000
+        int current_row = 1000;
+        String strLine;
+        while ((strLine = br.readLine()) != null)   {
+           // Split line by Character and create int array the size of the line
+            String[] tokens = strLine.split("");
+            
+            
+        }
+    }    
     /* 
     Function to load the CARD.txt file into memeory
     IN: N/A
@@ -1878,7 +1898,7 @@ public class CPU {
     OUT: Int of the converted value
     */
     public int[] intToBinaryArrayShortFixed(String int_value){
-        System.out.println(int_value);
+        //System.out.println(int_value);
         short int_int = Short.parseShort(int_value);
         int[] ret_val = new int[12];
         
@@ -1939,8 +1959,31 @@ public class CPU {
     public int[] addBinaryArrays(int[] in_array_1, int[] in_array_2){
         int converted_array_1 = binaryToInt(in_array_1);
         int converted_array_2 = binaryToInt(in_array_2);
-
+        // Convert array 1 to negative number if msb is 1
+        if (in_array_1[0] ==1){
+            System.out.println("array 1:" + Arrays.toString(in_array_1));
+            in_array_1[0] = 0;
+            converted_array_1 = binaryToInt(in_array_1);
+            converted_array_1 = -converted_array_1;
+            in_array_1[0] = 1;
+            System.out.println("array 1:" + converted_array_1);
+            System.out.println("array 2:" + converted_array_2);
+        }
+        // Convert array 2 to negative number if msb is 1
+        
+        if (in_array_2[0] ==1){
+            System.out.println("array 2" + Arrays.toString(in_array_2)+in_array_2.length);
+            System.out.println("array 2:" + converted_array_2);
+            in_array_2[0] = 0;
+            converted_array_2 = binaryToInt(in_array_2);
+            converted_array_2 = -converted_array_2;
+            in_array_2[0] = 1;
+            System.out.println("array 1:" + converted_array_1);
+            System.out.println("array 2:" + converted_array_2);
+        }
         int converted_out_array = converted_array_1 + converted_array_2;
+        
+        
         
         int[] out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
         
@@ -1948,22 +1991,28 @@ public class CPU {
     }
     
     /* 
-    Function to add two binary arrays together
+    Function to SUB two binary arrays together
     IN: Registers contents to be subtracted
     OUT: Register content added together
     */
     public int[] subtractBinaryArrays(int[] in_array_1, int[] in_array_2){
-        int converted_array_1 = binaryToInt(in_array_1);
-        int converted_array_2 = binaryToInt(in_array_2);
+        short  converted_array_1 = (short) binaryToInt(in_array_1);
+        short converted_array_2 = (short) binaryToInt(in_array_2);
         int[] out_array = null;
         if(converted_array_1 != 0){
             int converted_out_array = converted_array_1 - converted_array_2;
             out_array = intToBinaryArray(Integer.toBinaryString(converted_out_array));
+            if (converted_out_array < 0){
+                //System.out.println(Arrays.toString(out_array));
+            }
         }else{
             if (in_array_2[0] == 1){
                 int[] tmp = Arrays.copyOf(in_array_2,16);
+                System.out.println();
+                System.out.println(binaryToInt(tmp));
                 tmp[0] = 0;
-                converted_array_2 = binaryToInt(tmp);
+                converted_array_2 = (short) binaryToInt(tmp);
+                System.out.println(binaryToInt(tmp));
             }
             int converted_out_array = -converted_array_2;
             System.out.println(converted_out_array);
