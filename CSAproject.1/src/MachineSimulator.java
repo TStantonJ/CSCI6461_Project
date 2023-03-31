@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -78,24 +79,24 @@ public class MachineSimulator extends javax.swing.JFrame {
             if (run_check){
                 main_CPU.execute("single");
                 // If running, check if halt flag is raised
-                if (main_CPU.getRegisterValue("HLT")[0] == 1){
+                if (main_CPU.getRegisterValue("HLT")[0] == 1 || main_CPU.getRegisterValue("HLT")[0] == 2){
+                    
+                    
+                    // Make program 2 here
+                    if (main_CPU.getRegisterValue("HLT")[0] == 2){
+                        // This reads in the CARD.txt
+                        
+                        loadTextIntoMemory();
+                        // Put your search function that searches through search_text for search here.
+
+                        // This prints to the console printer
+                        PrinterTextArea.append("\nTest");
+                        System.out.println(Arrays.toString(search_text));
+                    } 
+                    
                     run_check = false;
                     int [] msg = new int[]{0};
                     main_CPU.setRegisterValue("HLT",msg);
-                    
-                    // Make program 2 here
-                    
-                    // This reads in the CARD.txt
-                    try {
-                        loadTextIntoMemory();
-                    } catch (IOException ex) {
-                        Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    // Put your search function that searches through search_text for search here.
-                    
-                    // This prints to the console printer
-                    PrinterTextArea.append("\nTest");
-                    System.out.println(Arrays.toString(search_text));
                 }
             }
         }
@@ -207,6 +208,9 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         PrinterTextArea = new javax.swing.JTextArea();
+        KeyboardReadButton = new javax.swing.JButton();
+        ConsoleTextField = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1022,6 +1026,12 @@ public class MachineSimulator extends javax.swing.JFrame {
                         .addGap(31, 31, 31))))
         );
 
+        KeyboardTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeyboardTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel28.setText("Console Printer");
 
@@ -1031,6 +1041,23 @@ public class MachineSimulator extends javax.swing.JFrame {
         PrinterTextArea.setColumns(20);
         PrinterTextArea.setRows(5);
         jScrollPane1.setViewportView(PrinterTextArea);
+
+        KeyboardReadButton.setText("Store");
+        KeyboardReadButton.setActionCommand("Store");
+        KeyboardReadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeyboardReadButtonActionPerformed(evt);
+            }
+        });
+
+        ConsoleTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsoleTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel30.setText("Item Stored");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1045,9 +1072,16 @@ public class MachineSimulator extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(KeyboardReadButton))
+                    .addComponent(ConsoleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1061,7 +1095,12 @@ public class MachineSimulator extends javax.swing.JFrame {
                             .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(KeyboardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(KeyboardReadButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ConsoleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -1367,6 +1406,20 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_toggle0ActionPerformed
 
+    private void KeyboardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeyboardTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KeyboardTextFieldActionPerformed
+
+    private void KeyboardReadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeyboardReadButtonActionPerformed
+        // TODO add your handling code here:
+        search = KeyboardTextField.getText();
+        ConsoleTextField.setText(search);
+    }//GEN-LAST:event_KeyboardReadButtonActionPerformed
+
+    private void ConsoleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsoleTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsoleTextFieldActionPerformed
+
     /* 
     Function to Update Values of the registers
     IN: N/A
@@ -1523,38 +1576,47 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
         return String.valueOf(a);
     }
-    
-        
-    public void loadTextIntoMemory() throws FileNotFoundException, IOException{
-        // Set up for input
-        String path_var = System.getProperty("user.dir") + "/CARD.txt";
-        FileInputStream fstream = new FileInputStream(path_var);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        
-        // Start loading card into memory at row 1000
-        int current_row = 1000;
-        String strLine;
-        while ((strLine = br.readLine()) != null)   {
-            
-            
-           // Split line by Character and create int array the size of the line
-            String[] tokens = strLine.split("");
-            
-            int new_len = search_text.length + tokens.length;
-            String[] tmp = new String[new_len];
-            
-            int j = 0;
-            for (int i = search_text.length; i<new_len; i++){
-                tmp[i] = tokens[j];
+     
+
+
+    public void loadTextIntoMemory() {
+
+        // The path of the text file to read
+        String filePath = System.getProperty("user.dir") + "/CARD.txt";
+
+        // A StringBuilder to store the contents of the file
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            // Create a FileReader object to read the file
+            FileReader fileReader = new FileReader(filePath);
+
+            // Create a BufferedReader object to read the FileReader object
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            // Read each line of the file and append it to the StringBuilder
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append("\n"); // Add a newline character after each line
             }
-            System.arraycopy(search_text, 0, tmp, 0, search_text.length);
-            
-            
-            
-            
+
+            // Close the BufferedReader and FileReader objects
+            bufferedReader.close();
+            fileReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }  
+
+        // Convert the StringBuilder to a String and store it in a variable
+        String paragraph = stringBuilder.toString();
+
+        // Print the paragraph
+        search_text = new String[paragraph.length];
+        System.out.println(paragraph);
+    }
+    
     
     /* 
     Function to format int[] values for display on the GUI
@@ -1605,6 +1667,7 @@ public class MachineSimulator extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CCTextField;
+    private javax.swing.JTextField ConsoleTextField;
     private javax.swing.JButton GPR0LoadButton;
     private javax.swing.JTextField GPR0TextField;
     private javax.swing.JButton GPR1LoadButton;
@@ -1623,6 +1686,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JTextField IXR2TextField;
     private javax.swing.JButton IXR3LoadButton;
     private javax.swing.JTextField IXR3TextField;
+    private javax.swing.JButton KeyboardReadButton;
     private javax.swing.JTextField KeyboardTextField;
     private javax.swing.JButton LoadLoadButton;
     private javax.swing.JButton MARLoadButton;
@@ -1671,6 +1735,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

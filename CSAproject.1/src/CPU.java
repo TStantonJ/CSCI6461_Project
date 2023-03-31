@@ -1260,7 +1260,7 @@ public class CPU {
                 // TODO: 
               
               }else if("HLT".equals(instruction)){
-                int [] msg = new int[]{1};
+                int [] msg = new int[]{2};
                 HLT.setRegisterValue(msg);
                 System.out.println("HLT");
                 
