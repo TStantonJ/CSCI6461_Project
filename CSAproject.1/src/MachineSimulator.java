@@ -37,6 +37,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     boolean run_check = false;
     String search = "";
     String search_text = "";
+    int count=1;
     
     /* 
     Function that runs the gui and CPU
@@ -77,22 +78,23 @@ public class MachineSimulator extends javax.swing.JFrame {
             }
             // Check if machine is set to run
             if (run_check){
+           
                 main_CPU.execute("single");
                 // If running, check if halt flag is raised
                 if (main_CPU.getRegisterValue("HLT")[0] == 1 || main_CPU.getRegisterValue("HLT")[0] == 2){
                     
-                    
                     // Make program 2 here
                     if (main_CPU.getRegisterValue("HLT")[0] == 2){
                         // This reads in the CARD.txt
-                        
-                        
+                      
                         proccessText();
+                     
+             
                         // Put your search function that searches through search_text for search here.
 
                         // This prints to the console printer
-                    } 
-                    
+                   
+                    }
                     run_check = false;
                     int [] msg = new int[]{0};
                     main_CPU.setRegisterValue("HLT",msg);
@@ -441,6 +443,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel12.setText("MFR");
 
         PCTextfField.setText("jTextField8");
+        PCTextfField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PCTextfFieldActionPerformed(evt);
+            }
+        });
 
         MARTextField.setText("jTextField9");
 
@@ -580,6 +587,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         GPR0TextField.setText("jTextField1");
 
         GPR1TextField.setText("jTextField2");
+        GPR1TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GPR1TextFieldActionPerformed(evt);
+            }
+        });
 
         GPR2TextField.setText("jTextField3");
 
@@ -1042,7 +1054,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         jScrollPane1.setViewportView(PrinterTextArea);
 
         KeyboardReadButton.setText("Store");
-        KeyboardReadButton.setActionCommand("Store");
         KeyboardReadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KeyboardReadButtonActionPerformed(evt);
@@ -1250,7 +1261,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     }//GEN-LAST:event_STPLoadButtonActionPerformed
 
     private void IPLLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IPLLoadButtonActionPerformed
-        // TODO add your handling code here:
+        
+// TODO add your handling code here:
         try {
             // TODO add your handling code here:
             main_CPU.loadFileIntoMemory();
@@ -1259,7 +1271,12 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
         int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
         main_CPU.setRegisterValue("PC",default_PC_loc);
-        
+         PrinterTextArea.append("Loading from CARD.txt:\n");
+         try {
+        Thread.sleep(1000); // wait for 100 milliseconds
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
         loadTextIntoMemory();
     }//GEN-LAST:event_IPLLoadButtonActionPerformed
 
@@ -1420,6 +1437,14 @@ public class MachineSimulator extends javax.swing.JFrame {
     private void ConsoleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsoleTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsoleTextFieldActionPerformed
+
+    private void PCTextfFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCTextfFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PCTextfFieldActionPerformed
+
+    private void GPR1TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GPR1TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GPR1TextFieldActionPerformed
 
     /* 
     Function to Update Values of the registers
@@ -1611,30 +1636,66 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
 
         // Convert the StringBuilder to a String and store it in a variable
+        
+       
+//         PrinterTextArea.append("Loaded from CARD.txt:\n");
         search_text = stringBuilder.toString();
-        PrinterTextArea.append("Loaded from CARD.txt:\n");
-        PrinterTextArea.append(search_text);
+        
+       
+       PrinterTextArea.append(search_text);
+         
+
 
     }
     
     public void proccessText() {
+        
         String word = search;
         
         PrinterTextArea.append("Search for: "+search+"\n");
         // Split the paragraph into an array of words
         String[] words = search_text.split(" ");
+ 
+    boolean found = false;
+    for (int i = 0; i < words.length; i++) {
+        int decimalValue = i;
+               String binaryValue = decimalToBinary16(decimalValue);
+                int[] binaryArray = new int[binaryValue.length()];
 
-        // Loop through each word in the array
-        for (int i = 0; i < words.length; i++) {
+                for (int j = 0; j < binaryValue.length(); j++) {
+                    binaryArray[j] = Character.getNumericValue(binaryValue.charAt(j));
+                }
+            int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+            main_CPU.setRegisterValue("GPR1", binaryArray);
 
-            // If the word is found, print a message and break out of the loop
-            if (words[i].equalsIgnoreCase(word)) {
+            int[] start_register_value = main_CPU.getRegisterValue("GPR1");
+            int[] new_register_value = null;
+            // If the word is found, print a message and set the "found" flag to true
+            if(words[i].equalsIgnoreCase(word)) {
                 PrinterTextArea.append("The word '" + word + "' was found at position " + i + ".");
+                found = true;
                 break;
-            }
         }
     }
+    // If the word was not found, print a message
+    if (!found) {
+        PrinterTextArea.append("The word '" + word + "' was not found.");
+        int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            main_CPU.setRegisterValue("GPR1", one_array);
+    }
 
+    }
+public static String decimalToBinary16(int decimal) {
+    String binary = Integer.toBinaryString(decimal);
+    int length = binary.length();
+    if (length > 16) {
+        throw new IllegalArgumentException("Decimal value is too large for a 16-bit binary value.");
+    } else if (length < 16) {
+        // pad the binary string with leading zeros if it is shorter than 16 bits
+        binary = String.format("%0" + (16 - length) + "d", 0) + binary;
+    }
+    return binary;
+}
     
     /* 
     Function to format int[] values for display on the GUI
