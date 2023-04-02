@@ -1654,7 +1654,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         
         PrinterTextArea.append("Search for: "+search+"\n");
         // Split the paragraph into an array of words
-        String[] words = search_text.split(" ");
+        String[] words = search_text.replaceAll("[.]", "").split(" ");
  
     boolean found = false;
     for (int i = 0; i < words.length; i++) {
