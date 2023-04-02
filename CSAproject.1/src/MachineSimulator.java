@@ -1655,16 +1655,16 @@ public class MachineSimulator extends javax.swing.JFrame {
         PrinterTextArea.append("Search for: "+search+"\n");
         // Split the paragraph into an array of words
         String[] words = search_text.replaceAll("[.]", "").split(" ");
- 
-    boolean found = false;
-    for (int i = 0; i < words.length; i++) {
-        int decimalValue = i;
-               String binaryValue = decimalToBinary16(decimalValue);
-                int[] binaryArray = new int[binaryValue.length()];
+        
+        boolean found = false;
+        for (int i = 0; i < words.length; i++) {
+            int decimalValue = i;
+            String binaryValue = decimalToBinary16(decimalValue);
+            int[] binaryArray = new int[binaryValue.length()];
 
-                for (int j = 0; j < binaryValue.length(); j++) {
-                    binaryArray[j] = Character.getNumericValue(binaryValue.charAt(j));
-                }
+            for (int j = 0; j < binaryValue.length(); j++) {
+                binaryArray[j] = Character.getNumericValue(binaryValue.charAt(j));
+            }
             int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
             main_CPU.setRegisterValue("GPR1", binaryArray);
 
@@ -1675,7 +1675,7 @@ public class MachineSimulator extends javax.swing.JFrame {
                 PrinterTextArea.append("The word '" + word + "' was found at position " + i + ".");
                 found = true;
                 break;
-        }
+            }
     }
     // If the word was not found, print a message
     if (!found) {
