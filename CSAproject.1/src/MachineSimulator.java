@@ -1623,10 +1623,21 @@ public class MachineSimulator extends javax.swing.JFrame {
         PrinterTextArea.append("Search for: "+search+"\n");
         // Split the paragraph into an array of words
         String[] words = search_text.split(" ");
-
+        
+        // Reset GPR1
+        int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+        main_CPU.setRegisterValue("GPR1", one_array);
+        
+        int[] start_register_value = main_CPU.getRegisterValue("GPR1");
+        int[] new_register_value = null;
+        
         // Loop through each word in the array
         for (int i = 0; i < words.length; i++) {
-
+            int tmp_int = main_CPU.binaryToInt(main_CPU.getRegisterValue("GPR1"));
+            tmp_int = tmp_int + 1;
+            new_register_value = main_CPU.intToBinaryArrayFixed(Integer.toString(tmp_int));
+            main_CPU.setRegisterValue("GPR1", new_register_value);
+            
             // If the word is found, print a message and break out of the loop
             if (words[i].equalsIgnoreCase(word)) {
                 PrinterTextArea.append("The word '" + word + "' was found at position " + i + ".");
