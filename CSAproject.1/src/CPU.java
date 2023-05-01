@@ -21,6 +21,7 @@ public class CPU {
     Register MAR = new Register(12);
     Register MBR = new Register(16);
     Register MFR = new Register(4);
+    Register TYPE = new Register(1);
     Register X1 = new Register(16);
     Register X2 = new Register(16);
     Register X3 = new Register(16);
@@ -28,9 +29,13 @@ public class CPU {
     Register GPR1 = new Register(16);
     Register GPR2 = new Register(16);
     Register GPR3 = new Register(16);
+    Register FR0 = new Register(16);
+    Register FR1 = new Register(16);
+    
     
     Register PRINTER = new Register(16);
     Register KEYBOARD = new Register(16);
+    
     
     Register HLT = new Register(1);
     Register WAIT = new Register(1);
@@ -811,6 +816,15 @@ public class CPU {
                 System.out.print(" Answer stored in R: " + answer_loc_1 + " and R: " + answer_loc_2);
                 System.out.print(" First Value:" + binaryToInt(RX_value_0) + Arrays.toString(RX_value_0));
                 System.out.println(" Second Value:" + binaryToInt(RX_value_1) + Arrays.toString(RX_value_1));
+            }else if("FADD".equals(instruction)){
+                int[] memory_array = getMemoryValue(EA);
+                int memory_value = binaryToInt(memory_array);
+                int[] fr;
+                if(R==0){
+                    fr = getFRValue(0);
+                }else{
+                    fr = getFRValue(1);
+                }
                 
             }else if("TRR".equals(instruction)){
                 // Test if contents  of register RX equals contents of register RY. 
@@ -1261,8 +1275,17 @@ public class CPU {
                 // TODO: 
               
               }else if("HLT".equals(instruction)){
-                int [] msg = new int[]{2};
-                HLT.setRegisterValue(msg);
+                if (TYPE.getRegisterValue()[0] == 1){
+                    int [] msg = new int[]{1};
+                    HLT.setRegisterValue(msg);
+                }else if(TYPE.getRegisterValue()[0] == 2){
+                    int [] msg = new int[]{2};
+                    HLT.setRegisterValue(msg);
+                }else{
+                    int [] msg = new int[]{3};
+                    HLT.setRegisterValue(msg);
+                }
+                
                 System.out.println("HLT");
                 
               
@@ -1497,6 +1520,8 @@ public class CPU {
             ret_value = MBR.getRegisterValue();
         }else if("MFR".equals(register)){
             ret_value = MFR.getRegisterValue();
+        }else if("TYPE".equals(register)){
+            ret_value = TYPE.getRegisterValue();
         }else if("X1".equals(register)){
             ret_value = X1.getRegisterValue();
         }else if("X2".equals(register)){
@@ -1511,6 +1536,10 @@ public class CPU {
             ret_value = GPR2.getRegisterValue();
         }else if("GPR3".equals(register)){
             ret_value = GPR3.getRegisterValue();
+        }else if("FR0".equals(register)){
+            ret_value = FR0.getRegisterValue();
+        }else if("FR1".equals(register)){
+            ret_value = FR1.getRegisterValue();
         }else if("PRINTER".equals(register)){
             ret_value = PRINTER.getRegisterValue();
         }else if("KEYBOARD".equals(register)){
@@ -1551,6 +1580,8 @@ public class CPU {
             MBR.setRegisterValue(value);
         }else if("MFR".equals(register)){
             MFR.setRegisterValue(value);
+        }else if("TYPE".equals(register)){
+            TYPE.setRegisterValue(value);
         }else if("X1".equals(register)){
             X1.setRegisterValue(value);
         }else if("X2".equals(register)){
@@ -1565,6 +1596,10 @@ public class CPU {
             GPR2.setRegisterValue(value);
         }else if("GPR3".equals(register)){
             GPR3.setRegisterValue(value);
+        }else if("FR0".equals(register)){
+            FR0.setRegisterValue(value);
+        }else if("FR1".equals(register)){
+            FR1.setRegisterValue(value);
         }else if("PRINTER".equals(register)){
             PRINTER.setRegisterValue(value);
         }else if("KEYBOARD".equals(register)){
@@ -1624,9 +1659,22 @@ public class CPU {
     IN: N/A
     OUT: N/A
     */
-    public void loadFileIntoMemory() throws FileNotFoundException, IOException{
+    public void loadFileIntoMemory(int type) throws FileNotFoundException, IOException{
+        String path_var = "";
+        if (type == 0){
+            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            int [] msg = new int[]{1};
+            TYPE.setRegisterValue(msg);
+        }else if(type == 1){
+            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            int [] msg = new int[]{2};
+            TYPE.setRegisterValue(msg);
+        }else{
+            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            int [] msg = new int[]{3};
+            TYPE.setRegisterValue(msg);
+        }
         
-        String path_var = System.getProperty("user.dir") + "/IPL.txt";
         FileInputStream fstream = new FileInputStream(path_var);
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -1697,6 +1745,29 @@ public class CPU {
                 current_row += 1;
             }
         }
+    }
+    
+     /* 
+    Function to convert a FR Register to int
+    IN: In representing the FR register
+    OUT: Int of the converted value
+    */
+    public int[] getFRValue(int FR){
+        int[] FRarr;
+        if (FR == 0){
+            FRarr = FR0.getRegisterValue();
+        }else{
+            FRarr = FR1.getRegisterValue();
+        }
+        
+        int[] exp = Arrays.copyOfRange(FRarr, 1, 7);
+        int[] man = Arrays.copyOfRange(FRarr, 7, 16);
+        
+        int exp_int = binaryToInt(exp);
+        int man_int = binaryToInt(man);
+        int sign = FRarr[0];
+        int[] ret = new int[]{exp_int,man_int,sign};
+        return ret;
     }
     
      /* 

@@ -35,7 +35,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     int[] in_button_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0};
     boolean run_check = false;
-    String search = "";
+    String[] search = new String[]{""};
     String search_text = "";
     
     /* 
@@ -79,18 +79,13 @@ public class MachineSimulator extends javax.swing.JFrame {
             if (run_check){
                 main_CPU.execute("single");
                 // If running, check if halt flag is raised
-                if (main_CPU.getRegisterValue("HLT")[0] == 1 || main_CPU.getRegisterValue("HLT")[0] == 2){
+                if (main_CPU.getRegisterValue("HLT")[0] == 1 || main_CPU.getRegisterValue("HLT")[0] == 2||
+                        main_CPU.getRegisterValue("HLT")[0] == 3){
                     
-                    
-                    // Make program 2 here
-                    if (main_CPU.getRegisterValue("HLT")[0] == 2){
+                    if (main_CPU.getRegisterValue("HLT")[0] == 3 ||
+                            main_CPU.getRegisterValue("HLT")[0] == 2){
                         // This reads in the CARD.txt
-                        
-                        
                         proccessText();
-                        // Put your search function that searches through search_text for search here.
-
-                        // This prints to the console printer
                     } 
                     
                     run_check = false;
@@ -175,6 +170,12 @@ public class MachineSimulator extends javax.swing.JFrame {
         IXR2LoadButton = new javax.swing.JButton();
         IXR3LoadButton = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        FR1TextField = new javax.swing.JTextField();
+        FR1LoadButton = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        FR0TextField = new javax.swing.JTextField();
+        FR0LoadButton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         Mem_2ValueTextField = new javax.swing.JTextField();
         Mem_1ValueTextField = new javax.swing.JTextField();
@@ -202,6 +203,8 @@ public class MachineSimulator extends javax.swing.JFrame {
         HaltButton = new javax.swing.JToggleButton();
         LoadLoadButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JToggleButton();
+        Program1LoadButton = new javax.swing.JButton();
+        Program2LoadButton = new javax.swing.JButton();
         KeyboardTextField = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -571,7 +574,7 @@ public class MachineSimulator extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(CCTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -661,6 +664,30 @@ public class MachineSimulator extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel26.setText("Register Value");
 
+        jLabel31.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel31.setText("FR1");
+
+        FR1TextField.setText("jTextField1");
+
+        FR1LoadButton.setLabel("Load");
+        FR1LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FR1LoadButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel32.setText("FR0");
+
+        FR0TextField.setText("jTextField1");
+
+        FR0LoadButton.setLabel("Load");
+        FR0LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FR0LoadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -668,6 +695,19 @@ public class MachineSimulator extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel31)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(FR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(FR1LoadButton))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel32)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(FR0TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(FR0LoadButton)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -756,7 +796,17 @@ public class MachineSimulator extends javax.swing.JFrame {
                     .addComponent(IXR3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(IXR3LoadButton))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FR0TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FR0LoadButton)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FR1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FR1LoadButton)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         Mem_2ValueTextField.setText("jTextField1");
@@ -940,53 +990,81 @@ public class MachineSimulator extends javax.swing.JFrame {
             }
         });
 
+        Program1LoadButton.setText("Progam 1");
+        Program1LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Program1LoadButtonActionPerformed(evt);
+            }
+        });
+
+        Program2LoadButton.setText("Program 2");
+        Program2LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Program2LoadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Program2LoadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Program1LoadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(STPLoadButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(STLoadButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(LoadLoadButton))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(HaltButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RunButton))))
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(IPLLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(291, Short.MAX_VALUE)))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(Program1LoadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Program2LoadButton))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(STPLoadButton)
+                            .addComponent(STLoadButton)
+                            .addComponent(LoadLoadButton))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(ResetButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RunButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(HaltButton)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(IPLLoadButton)
-                    .addGap(18, 18, 18)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(STPLoadButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(STLoadButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(LoadLoadButton))
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(HaltButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(RunButton))))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(IPLLoadButton)
-                        .addComponent(STPLoadButton)
-                        .addComponent(STLoadButton)
-                        .addComponent(LoadLoadButton))
-                    .addGap(21, 21, 21)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(SingleStepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(ResetButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(RunButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(HaltButton)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(119, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1012,8 +1090,8 @@ public class MachineSimulator extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1042,7 +1120,6 @@ public class MachineSimulator extends javax.swing.JFrame {
         jScrollPane1.setViewportView(PrinterTextArea);
 
         KeyboardReadButton.setText("Store");
-        KeyboardReadButton.setActionCommand("Store");
         KeyboardReadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KeyboardReadButtonActionPerformed(evt);
@@ -1112,13 +1189,13 @@ public class MachineSimulator extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -1253,7 +1330,7 @@ public class MachineSimulator extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            main_CPU.loadFileIntoMemory();
+            main_CPU.loadFileIntoMemory(3);
         } catch (IOException ex) {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1334,7 +1411,23 @@ public class MachineSimulator extends javax.swing.JFrame {
             in_button_array[3] = 0;
         }
     }//GEN-LAST:event_toggle12ActionPerformed
-
+    
+    public void proccessNumber() {
+        int close = -9999999;
+        int close_i = 999;
+        for(int i = 0; i < search.length-2;i++){
+            if(i==0){
+                close = Math.abs(Integer.parseInt(search[i])-Integer.parseInt(search[20]));
+                close_i = 0;
+            }else if (Math.abs(Integer.parseInt(search[i])-Integer.parseInt(search[20])) < Math.abs(close)){
+                close = Math.abs(Integer.parseInt(search[i])-Integer.parseInt(search[20]));
+                close_i = i;
+            }
+        }
+        PrinterTextArea.append("Number is:");
+        PrinterTextArea.append(search[close_i]);
+    }
+    
     private void toggle14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggle14ActionPerformed
         // TODO add your handling code here:
         if (in_button_array[1] == 0){
@@ -1380,6 +1473,11 @@ public class MachineSimulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_toggle3ActionPerformed
 
+    public void loadtextIntoMemory(){
+        // The path of the text file to read
+        PrinterTextArea.append("Load 21 numbers one at a time. Number 21 is the search value.\n Then run.\n");
+    }
+    
     private void toggle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggle2ActionPerformed
         // TODO add your handling code here:
         if (in_button_array[13] == 0){
@@ -1413,13 +1511,63 @@ public class MachineSimulator extends javax.swing.JFrame {
 
     private void KeyboardReadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeyboardReadButtonActionPerformed
         // TODO add your handling code here:
-        search = KeyboardTextField.getText();
-        ConsoleTextField.setText(search);
+        if (search.length > 1){
+            
+            search[search.length - 1] = KeyboardTextField.getText();
+            int[] newMAR = main_CPU.intToBinaryArrayFixed(Integer.toString(800+search.length));
+            int[] newMBR = main_CPU.intToBinaryArrayFixed(search[search.length - 1]);
+            main_CPU.setRegisterValue("MAR",newMAR);
+            main_CPU.setRegisterValue("MBR",newMBR);
+            search = Arrays.copyOf(search, search.length + 1);
+            System.out.println(Arrays.toString(search));
+            System.out.println(search.length);
+        }else{
+            search[0] = KeyboardTextField.getText();
+            search = Arrays.copyOf(search, search.length + 1);
+        }
+        
+        ConsoleTextField.setText(Arrays.toString(search));
     }//GEN-LAST:event_KeyboardReadButtonActionPerformed
 
     private void ConsoleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsoleTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsoleTextFieldActionPerformed
+
+    private void Program1LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Program1LoadButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            main_CPU.loadFileIntoMemory(1);
+        } catch (IOException ex) {
+            Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
+        main_CPU.setRegisterValue("PC",default_PC_loc);
+        
+        loadtextIntoMemory();
+    }//GEN-LAST:event_Program1LoadButtonActionPerformed
+
+    private void Program2LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Program2LoadButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            main_CPU.loadFileIntoMemory(2);
+        } catch (IOException ex) {
+            Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
+        main_CPU.setRegisterValue("PC",default_PC_loc);
+        
+        loadTextIntoMemory();
+    }//GEN-LAST:event_Program2LoadButtonActionPerformed
+
+    private void FR1LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FR1LoadButtonActionPerformed
+       main_CPU.setRegisterValue("FR1", Arrays.copyOfRange(in_button_array, 0, 16));
+    }//GEN-LAST:event_FR1LoadButtonActionPerformed
+
+    private void FR0LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FR0LoadButtonActionPerformed
+        main_CPU.setRegisterValue("FR0", Arrays.copyOfRange(in_button_array, 0, 16));
+    }//GEN-LAST:event_FR0LoadButtonActionPerformed
 
     /* 
     Function to Update Values of the registers
@@ -1469,6 +1617,12 @@ public class MachineSimulator extends javax.swing.JFrame {
         // Update GPR3
         tmp_array = main_CPU.getRegisterValue("GPR3");
         GPR3TextField.setText(formatText(tmp_array));
+        // Update FR0
+        tmp_array = main_CPU.getRegisterValue("FR0");
+        FR0TextField.setText(formatText(tmp_array));
+        // Update FR1
+        tmp_array = main_CPU.getRegisterValue("FR1");
+        FR1TextField.setText(formatText(tmp_array));
     }
     
     /* 
@@ -1616,34 +1770,61 @@ public class MachineSimulator extends javax.swing.JFrame {
         PrinterTextArea.append(search_text);
 
     }
+
     
     public void proccessText() {
-        String word = search;
+        String word = search[0];
         
-        PrinterTextArea.append("Search for: "+search+"\n");
+        if (main_CPU.getRegisterValue("HLT")[0] == 2){
+            proccessNumber();
+            return;
+        }  
+        
+        PrinterTextArea.append("Search for: "+search[0]+"\n");
+        System.out.println(word);
+        System.out.println(search_text);
         // Split the paragraph into an array of words
-        String[] words = search_text.split(" ");
-        
-        // Reset GPR1
-        int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
-        main_CPU.setRegisterValue("GPR1", one_array);
-        
-        int[] start_register_value = main_CPU.getRegisterValue("GPR1");
-        int[] new_register_value = null;
-        
-        // Loop through each word in the array
+        String[] words = search_text.replaceAll("[.]", "").split(" ");
+        boolean found = false;
         for (int i = 0; i < words.length; i++) {
-            int tmp_int = main_CPU.binaryToInt(main_CPU.getRegisterValue("GPR1"));
-            tmp_int = tmp_int + 1;
-            new_register_value = main_CPU.intToBinaryArrayFixed(Integer.toString(tmp_int));
-            main_CPU.setRegisterValue("GPR1", new_register_value);
-            
-            // If the word is found, print a message and break out of the loop
-            if (words[i].equalsIgnoreCase(word)) {
+            int decimalValue = i;
+            String binaryValue = decimalToBinary16(decimalValue);
+            int[] binaryArray = new int[binaryValue.length()];
+
+            for (int j = 0; j < binaryValue.length(); j++) {
+                binaryArray[j] = Character.getNumericValue(binaryValue.charAt(j));
+            }
+            int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+            main_CPU.setRegisterValue("GPR1", binaryArray);
+
+            int[] start_register_value = main_CPU.getRegisterValue("GPR1");
+            int[] new_register_value = null;
+            // If the word is found, print a message and set the "found" flag to true
+            if(words[i].equalsIgnoreCase(word)) {
                 PrinterTextArea.append("The word '" + word + "' was found at position " + i + ".");
+                found = true;
                 break;
             }
         }
+        // If the word was not found, print a message
+        if (!found) {
+            PrinterTextArea.append("The word '" + word + "' was not found.");
+            int[] one_array = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                main_CPU.setRegisterValue("GPR1", one_array);
+        }
+        System.out.println("done");
+    }
+    
+    public static String decimalToBinary16(int decimal) {
+        String binary = Integer.toBinaryString(decimal);
+        int length = binary.length();
+        if (length > 16) {
+            throw new IllegalArgumentException("Decimal value is too large for a 16-bit binary value.");
+        } else if (length < 16) {
+            // pad the binary string with leading zeros if it is shorter than 16 bits
+            binary = String.format("%0" + (16 - length) + "d", 0) + binary;
+        }
+        return binary;
     }
 
     
@@ -1697,6 +1878,10 @@ public class MachineSimulator extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CCTextField;
     private javax.swing.JTextField ConsoleTextField;
+    private javax.swing.JButton FR0LoadButton;
+    private javax.swing.JTextField FR0TextField;
+    private javax.swing.JButton FR1LoadButton;
+    private javax.swing.JTextField FR1TextField;
     private javax.swing.JButton GPR0LoadButton;
     private javax.swing.JTextField GPR0TextField;
     private javax.swing.JButton GPR1LoadButton;
@@ -1736,6 +1921,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JButton PCLoadButton;
     private javax.swing.JTextField PCTextfField;
     private javax.swing.JTextArea PrinterTextArea;
+    private javax.swing.JButton Program1LoadButton;
+    private javax.swing.JButton Program2LoadButton;
     private javax.swing.JToggleButton ResetButton;
     private javax.swing.JButton RunButton;
     private javax.swing.JButton STLoadButton;
@@ -1765,6 +1952,8 @@ public class MachineSimulator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
