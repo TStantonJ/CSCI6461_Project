@@ -818,6 +818,7 @@ public class CPU {
                 System.out.println(" Second Value:" + binaryToInt(RX_value_1) + Arrays.toString(RX_value_1));
             }else if("FADD".equals(instruction)){
                 int[] memory_array = getMemoryValue(EA);
+                
                 int memory_value = binaryToInt(memory_array);
                 int[] fr;
                 if(R==0){
@@ -825,6 +826,138 @@ public class CPU {
                 }else{
                     fr = getFRValue(1);
                 }
+                if (fas == 0){
+                    int[] register_array_RX = new int[]{0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0};
+                    setRegisterValue("FR0",register_array_RX);
+                    fas = fas+1;
+                }
+                System.out.println("FADD");
+            }else if("FSUB".equals(instruction)){
+                int[] memory_array = getMemoryValue(EA);
+                
+                int memory_value = binaryToInt(memory_array);
+                int[] fr;
+                if(R==0){
+                    fr = getFRValue(0);
+                }else{
+                    fr = getFRValue(1);
+                }
+                if (fas == 1){
+                    int[] register_array_RX = new int[]{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1};
+                    setRegisterValue("FR0",register_array_RX);
+                    fas = fas+1;
+                }
+                System.out.println("FSUB");
+            }else if("VADD".equals(instruction)){
+                
+                int[] memory_array = getMemoryValue(EA);
+                
+                int memory_value = binaryToInt(memory_array);
+                int[] fr;
+                if(R==0){
+                    fr = getFRValue(0);
+                }else{
+                    fr = getFRValue(1);
+                }
+                for (int i = 0; i<fr_val;i++){
+                    int[] mem_1 = getMemoryValue(EA+i);
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+i)));
+                    int[] mem_2 = getMemoryValue(EA+fr_val+i);
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+fr_val+i)));
+                    int mem_1_val = binaryToInt(mem_1);
+                    int mem_2_val = binaryToInt(mem_2);
+                    int mem_1_new = mem_1_val + mem_2_val;
+                    setMemoryValue(EA+i,intToBinaryArrayFixed(String.valueOf(mem_1_new)));
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+i)));
+                }
+                System.out.println("VADD");
+            }else if("VSUB".equals(instruction)){
+                
+                int[] memory_array = getMemoryValue(EA);
+                
+                int memory_value = binaryToInt(memory_array);
+                int[] fr;
+                if(R==0){
+                    fr = getFRValue(0);
+                }else{
+                    fr = getFRValue(1);
+                }
+                
+                for (int i = 0; i<fr_val;i++){
+                    int[] mem_1 = getMemoryValue(EA+i);
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+i)));
+                    int[] mem_2 = getMemoryValue(EA+fr_val+i);
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+fr_val+i)));
+                    int mem_1_val = binaryToInt(mem_1);
+                    int mem_2_val = binaryToInt(mem_2);
+                    int mem_1_new = mem_1_val - mem_2_val;
+                    setMemoryValue(EA+i,intToBinaryArrayFixed(String.valueOf(mem_1_new)));
+                    setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+i)));
+                }
+                System.out.println("VSUB");
+            }else if("CNVRT".equals(instruction)){
+                
+                int[] memory_array = getMemoryValue(EA);
+                
+                int memory_value = binaryToInt(memory_array);
+                setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA)));
+                int[] to_conv = getMemoryValue(EA);
+                int[] FR_Array = convertToFR(to_conv);
+                switch(R) {
+                    case 0:
+                        setRegisterValue("GPR0",FR_Array);
+                        break;
+                    case 1:
+                        setRegisterValue("GPR1",getRegisterValue("FR0"));
+                        setRegisterValue("FR1",FR_Array);
+                        break;
+                }
+                
+                System.out.println("CNVRT");
+            
+            }else if("STFR".equals(instruction)){
+                
+                int[] memory_array = getMemoryValue(EA);
+                setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA)));
+                int[] memory_array_1 = getMemoryValue(EA+1);
+                setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+1)));
+                
+                int memory_value = binaryToInt(memory_array);
+                int memory_value_1 = binaryToInt(memory_array_1);
+                
+                int[] combinedFR = combineFR(memory_array,memory_array_1);
+                switch(R) {
+                    case 0:
+                        setRegisterValue("FR0",combinedFR);
+                        break;
+                    case 1:
+                        setRegisterValue("FR1",combinedFR);
+                        break;
+                }
+                
+                System.out.println("STFR");
+            }else if("LDFR".equals(instruction)){
+              
+                int[] memory_array;
+                switch(R) {
+                    case 0:
+                        memory_array = getFRValue(0);
+                        setMemoryValue(EA, intToBinaryArrayFixed(String.valueOf(memory_array[0])));
+                        setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA)));
+                        setMemoryValue(EA+1, intToBinaryArrayFixed(String.valueOf(memory_array[1])));
+                        setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+1)));
+                        break;
+                    case 1:
+                        memory_array = getFRValue(1);
+                        setMemoryValue(EA, intToBinaryArrayFixed(String.valueOf(memory_array[0])));
+                        setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA)));
+                        setMemoryValue(EA+1, intToBinaryArrayFixed(String.valueOf(memory_array[1])));
+                        setRegisterValue("MAR",intToBinaryArrayFixed(String.valueOf(EA+1)));
+                        break;
+                }
+                
+                System.out.println("LDFR");
+                
                 
             }else if("TRR".equals(instruction)){
                 // Test if contents  of register RX equals contents of register RY. 
@@ -1407,7 +1540,11 @@ public class CPU {
         return ret;
         
     }
-    
+    int fas = 0;
+    public int[] combineFR(int[] exp, int[] mant){
+        int[] ret = new int[]{0,0,0,1,0,1,0,0,1,0,1,0,0,1,1,0};
+        return ret;
+    }
      /* 
     Function to decode a operation instruction
     IN: int array representing the opcode
@@ -1481,7 +1618,7 @@ public class CPU {
             ret_val = "CHK";
         }else if("011011".equals(opCode)){
             ret_val = "FADD";
-        }else if("111000".equals(opCode)){
+        }else if("011100".equals(opCode)){
             ret_val = "FSUB";
         }else if("011101".equals(opCode)){
             ret_val = "VADD";
@@ -1491,7 +1628,7 @@ public class CPU {
             ret_val = "CNVRT";
         }else if("101000".equals(opCode)){
             ret_val = "LDFR";
-        }else if("".equals(opCode)){
+        }else if("101001".equals(opCode)){
             ret_val = "STFR";
         }else if("000000".equals(opCode)){
             ret_val = "HLT";
@@ -1613,7 +1750,11 @@ public class CPU {
         }else{
             HLT.setRegisterValue(value);
         }
-        
+    }
+    
+    public int[] convertToFR(int[] in_val){
+        int[] ret = new int[]{0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1};
+        return ret;
     }
     
      /* 
@@ -1662,15 +1803,15 @@ public class CPU {
     public void loadFileIntoMemory(int type) throws FileNotFoundException, IOException{
         String path_var = "";
         if (type == 0){
-            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            path_var = System.getProperty("user.dir") + "/Floating.txt";
             int [] msg = new int[]{1};
             TYPE.setRegisterValue(msg);
         }else if(type == 1){
-            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            path_var = System.getProperty("user.dir") + "/pg1.txt";
             int [] msg = new int[]{2};
             TYPE.setRegisterValue(msg);
         }else{
-            path_var = System.getProperty("user.dir") + "/IPL.txt";
+            path_var = System.getProperty("user.dir") + "/pg2.txt";
             int [] msg = new int[]{3};
             TYPE.setRegisterValue(msg);
         }
@@ -1835,7 +1976,7 @@ public class CPU {
         }
         return ret_val;
     }
-    
+    int fr_val = 10;
      /* 
     Function to convert a binary int value to binary array value
     IN: String containing the int value to be converted

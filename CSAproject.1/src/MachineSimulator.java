@@ -37,6 +37,7 @@ public class MachineSimulator extends javax.swing.JFrame {
     boolean run_check = false;
     String[] search = new String[]{""};
     String search_text = "";
+    boolean IPL_Loaded = false;
     
     /* 
     Function that runs the gui and CPU
@@ -48,6 +49,10 @@ public class MachineSimulator extends javax.swing.JFrame {
         main_CPU = new CPU();
         int[] tmp_val = {0,0,0,0,0,0,0,0,0,1,1,0};
         main_CPU.setRegisterValue("PC",tmp_val);
+        if (IPL_Loaded == true){
+            int[] new_start = {0,0,0,1,0,0,0,0,0,0,0,0};
+            main_CPU.setRegisterValue("PC",new_start);
+        }
         new Timer(delay, mainLoop).start();
     }
     
@@ -1328,16 +1333,17 @@ public class MachineSimulator extends javax.swing.JFrame {
 
     private void IPLLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IPLLoadButtonActionPerformed
         // TODO add your handling code here:
+        IPL_Loaded = true;
         try {
             // TODO add your handling code here:
-            main_CPU.loadFileIntoMemory(3);
+            main_CPU.loadFileIntoMemory(0);
         } catch (IOException ex) {
             Logger.getLogger(MachineSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int[] default_PC_loc = new int[]{0,0,0,0,0,0,0,1,0,1,0,0};
-        main_CPU.setRegisterValue("PC",default_PC_loc);
+        int[] new_start = {0,0,0,1,0,0,0,0,0,0,0,0};
+        main_CPU.setRegisterValue("PC",new_start);
         
-        loadTextIntoMemory();
+        //loadTextIntoMemory();
     }//GEN-LAST:event_IPLLoadButtonActionPerformed
 
     private void toggle9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggle9ActionPerformed
